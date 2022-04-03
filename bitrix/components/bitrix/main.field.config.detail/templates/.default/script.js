@@ -361,6 +361,8 @@
 	      setTimeout(function () {
 	        _this5.saveButton.setWaiting(false);
 
+	        main_core.Dom.removeClass(_this5.saveButton.getContainer(), 'ui-btn-wait');
+
 	        if (_this5.deleteButton) {
 	          _this5.deleteButton.setWaiting(false);
 
@@ -606,7 +608,7 @@
 	      var userTypeId = this.getSelectedUserTypeId();
 
 	      if (userTypeId === 'enumeration') {
-	        listTab.style.display = 'block';
+	        listTab.style.display = 'flex';
 	      } else {
 	        listTab.style.display = 'none';
 	      }

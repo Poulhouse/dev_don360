@@ -24,6 +24,7 @@ import type { EntityOptions } from '../entity/entity-options';
 import type { ItemId } from '../item/item-id';
 import type { PopupOptions } from 'main.popup';
 import type { FooterOptions, FooterContent } from './footer/footer-content';
+import type { ItemNodeOptions } from '../item/item-node-options';
 
 class LoadState
 {
@@ -1413,6 +1414,7 @@ export default class Dialog extends EventEmitter
 				forceBindPosition: true
 			},
 			autoHide: this.isAutoHide(),
+			autoHideHandler: this.handleAutoHide.bind(this),
 			closeByEsc: this.shouldHideByEsc(),
 			cacheable: this.isCacheable(),
 			events: {
@@ -1610,8 +1612,26 @@ export default class Dialog extends EventEmitter
 					const recentItems = response.data.dialog.recentItems;
 					if (Type.isArray(recentItems))
 					{
+						const nodeOptionsMap: Map<Item, ItemNodeOptions> = new Map();
+						const itemsOptions: ItemOptions[] = response.data.dialog.items;
+						if (Type.isArray(itemsOptions))
+						{
+							itemsOptions.forEach((itemOptions: ItemOptions) => {
+								if (itemOptions.nodeOptions)
+								{
+									const item = this.getItem(itemOptions);
+									if (item)
+									{
+										nodeOptionsMap.set(item, itemOptions.nodeOptions);
+									}
+								}
+							});
+						}
+
 						const items = recentItems.map((recentItem: ItemId) => {
-							return this.getItem(recentItem);
+							const item = this.getItem(recentItem);
+
+							return [item, nodeOptionsMap.get(item)];
 						});
 
 						this.getRecentTab().getRootNode().addItems(items);
@@ -1897,6 +1917,30 @@ export default class Dialog extends EventEmitter
 		});
 
 		this.observeTabOverlapping();
+	}
+
+	/**
+	 * @private
+	 */
+	handleAutoHide(event: MouseEvent): void
+	{
+		const target = event.target;
+		const el = this.getPopup().getPopupContainer();
+		if (target === el || el.contains(target))
+		{
+			return false;
+		}
+
+		if (
+			this.isTagSelectorOutside()
+			&& target === this.getTagSelector().getTextBox()
+			&& Type.isStringFilled(this.getTagSelector().getTextBoxValue())
+		)
+		{
+			return false;
+		}
+
+		return true;
 	}
 
 	/**

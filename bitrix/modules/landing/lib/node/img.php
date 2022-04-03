@@ -27,6 +27,7 @@ class Img extends \Bitrix\Landing\Node
 	{
 		$doc = $block->getDom();
 		$resultList = $doc->querySelectorAll($selector);
+		$files = null;
 
 		foreach ($data as $pos => $value)
 		{
@@ -38,6 +39,15 @@ class Img extends \Bitrix\Landing\Node
 			$id = isset($value['id']) ? intval($value['id']) : 0;
 			$id2x = isset($value['id2x']) ? intval($value['id2x']) : 0;
 			$isLazy = isset($value['isLazy']) && $value['isLazy'] === 'Y';
+
+			if ($src)
+			{
+				$src = str_replace('http://', 'https://', $src);
+			}
+			if ($src2x)
+			{
+				$src2x = str_replace('http://', 'https://', $src2x);
+			}
 
 			if (isset($value['url']))
 			{
@@ -55,7 +65,6 @@ class Img extends \Bitrix\Landing\Node
 				// check permissions to this file ids
 				if ($id || $id2x)
 				{
-					static $files = null;
 					if ($files === null)
 					{
 						$files = File::getFilesFromBlock($block->getId());
@@ -124,7 +133,7 @@ class Img extends \Bitrix\Landing\Node
 					$resultList[$pos]->setAttribute('style', $style);
 
 					// for lazyload
-					if($isLazy)
+					if ($isLazy)
 					{
 						$resultList[$pos]->setAttribute('data-lazy-bg', 'Y');
 						if($lazyOrigSrc = $value['lazyOrigSrc'])

@@ -3,9 +3,7 @@
 	if (window["FCList"])
 		return;
 
-	var safeEditing = true, // Why?
-		safeEditingCurrentObj = null,  // Why?
-		quoteData = null,
+	var quoteData = null,
 		repo = {
 			listById : new Map(),
 			listByXmlId : new Map()
@@ -344,8 +342,7 @@
 			scrSpy.watchNode(this.node.main);
 
 			this.initNavigationEvents();
-			if (this.params["SHOW_POST_FORM"] === "Y")
-				this.initPostFormActivity();
+			this.initPostFormActivity();
 
 			for (var ii = 0; ii < this.bindEvents.length; ii++)
 			{
@@ -389,24 +386,48 @@
 			}
 		},
 		initPostFormActivity : function() {
-			this.privateEvents["onReply"] = this.reply.bind(this);
+
 			this.privateEvents["onAct"] = this.act.bind(this);
+
+			if (this.params['SHOW_POST_FORM'] !== 'Y')
+			{
+				return
+			}
+
+			this.privateEvents["onReply"] = this.reply.bind(this);
 			this.privateEvents["onQuote"] = this.quote.bind(this);
 
 			this.hideWriter = this.hideWriter.bind(this);
 			this.quoteShow = this.quoteShow.bind(this);
 
-			this.bindEvents.unshift([
-				this.eventNode,
-				"mouseup",
-				this.privateEvents["onQuote"]
-			]);
-			// dnd
-			this.bindEvents.unshift([
-				this.node.formHolder,
-				"dragenter",
-				this.reply.bind(this)
-			]);
+			this.bindEvents.unshift([this.eventNode, "mouseup", this.privateEvents["onQuote"]]);
+			//region dnd
+			var timerListenEnter = 0;
+			var stopListenEnter = function() {
+				if (timerListenEnter > 0)
+				{
+					clearTimeout(timerListenEnter);
+					timerListenEnter = 0;
+				}
+				this.node.formHolder.classList.remove('feed-com-add-box-dnd-over')
+			}.bind(this);
+			var fireDragEnter = function() {
+				stopListenEnter();
+				this.reply.apply(this, arguments);
+			}.bind(this);
+			var startListenEnter = function() {
+				if (timerListenEnter <= 0)
+				{
+					timerListenEnter = setTimeout(fireDragEnter, 3000);
+					this.node.formHolder.classList.add('feed-com-add-box-dnd-over')
+				}
+			}.bind(this);
+			this.bindEvents.unshift([this.node.main, "dragover", startListenEnter]);
+			this.bindEvents.unshift([this.node.main, "dragenter", startListenEnter]);
+			this.bindEvents.unshift([this.node.main, "dragleave", stopListenEnter]);
+			this.bindEvents.unshift([this.node.main, "dragexit", stopListenEnter]);
+			this.bindEvents.unshift([this.node.main, "drop", stopListenEnter]);
+			//region
 		},
 		url : {
 			activity : '/bitrix/components/bitrix/main.post.list/activity.php'
@@ -533,7 +554,6 @@
 					}
 					else
 					{
-						safeEditingCurrentObj = safeEditing;
 						BX.onCustomEvent(
 							window,
 							"OnUCQuote",
@@ -541,7 +561,7 @@
 								this.ENTITY_XML_ID,
 								params["author"],
 								params["text"],
-								safeEditingCurrentObj
+								true
 							]
 						);
 					}
@@ -800,9 +820,8 @@
 			}
 			else
 			{
-				safeEditingCurrentObj = safeEditing;
 				var eventResult = {caught : false};
-				BX.onCustomEvent(window, "OnUCReply", [this.ENTITY_XML_ID, author.id, author.name, safeEditingCurrentObj, eventResult]);
+				BX.onCustomEvent(window, "OnUCReply", [this.ENTITY_XML_ID, author.id, author.name, true, eventResult]);
 			}
 		},
 		getPlaceholder : function(messageId) {
@@ -1186,7 +1205,11 @@
 			return true;
 		},
 		act : function(url, id, act) {
-			if (url.substr(0, 1) !== '/')
+			if (
+				this.ajax["processComment"] !== true
+				&& BX.type.isNotEmptyString(url)
+				&& url.substr(0, 1) !== '/'
+			)
 			{
 				try { eval(url); return false; }
 				catch(e) {}
@@ -1263,7 +1286,21 @@
 
 			var onfailure = function(data){
 				this.closeWait(id);
-				this.showError(id, data);
+
+				var errorText = data;
+
+				if (BX.type.isNotEmptyObject(data))
+				{
+					if (BX.type.isArray(data.errors) && BX.type.isNotEmptyString(data.errors[0].message))
+					{
+						errorText = data.errors[0].message;
+					}
+					else if (BX.type.isNotEmptyObject(data.data) && BX.type.isNotEmptyString(data.data.message))
+					{
+						errorText = data.data.message;
+					}
+				}
+				this.showError(id, errorText);
 			}.bind(this);
 
 			if (this.ajax["processComment"] === true)
@@ -1918,27 +1955,98 @@
 			});
 		}
 
+		var entityXmlId = el.getAttribute('bx-mpl-post-entity-xml-id');
 		if (
-			el.getAttribute("bx-mpl-createtask-show") == "Y"
-			&& typeof oLF != "undefined"
+			el.getAttribute('bx-mpl-edit-show') == 'Y'
+			&& BX.Tasks
+			&& BX.Tasks.ResultAction
+			&& entityXmlId.indexOf('TASK_') === 0
+			&& BX.Tasks.ResultAction.getInstance().canCreateResult(+/\d+/.exec(entityXmlId))
 		)
 		{
-			var
-				commentEntityType = el.getAttribute("bx-mpl-comment-entity-type"),
-				postEntityType = el.getAttribute("bx-mpl-post-entity-type");
+			var taskId = +/\d+/.exec(entityXmlId);
+			var result = BX.Tasks.ResultManager.getInstance().getResult(taskId);
+
+			if (
+				result
+				&& result.context === 'task'
+				&& result.canUnsetAsResult
+				&& result.canUnsetAsResult(parseInt(ID, 10))
+			)
+			{
+				panels.push({
+					text : BX.message("BPC_MES_REMOVE_TASK_RESULT"),
+					onclick : function() {
+						BX.Tasks.ResultAction.getInstance().deleteFromComment(ID);
+						this.popupWindow.close();
+						return false;
+					}
+				});
+			}
+			else if (
+				result
+				&& result.context === 'task'
+				&& result.canSetAsResult
+				&& result.canSetAsResult(parseInt(ID, 10))
+			)
+			{
+				panels.push({
+					text : BX.message("BPC_MES_CREATE_TASK_RESULT"),
+					onclick : function() {
+						BX.Tasks.ResultAction.getInstance().createFromComment(ID);
+						this.popupWindow.close();
+						return false;
+					}
+				});
+			}
+		}
+
+		if (
+			el.getAttribute('bx-mpl-createtask-show') === 'Y'
+			&& !BX.type.isUndefined(BX.Livefeed)
+		)
+		{
+			var commentEntityType = el.getAttribute('bx-mpl-comment-entity-type');
+			var postEntityType = el.getAttribute('bx-mpl-post-entity-type');
 
 			panels.push({
-				text : BX.message("BPC_MES_CREATE_TASK"),
+				text : BX.message('BPC_MES_CREATE_TASK'),
 				onclick : function() {
-					oLF.createTask({
-						postEntityType: (BX.type.isNotEmptyString(postEntityType) ? postEntityType : "BLOG_POST"),
-						entityType: (BX.type.isNotEmptyString(commentEntityType) ? commentEntityType : "BLOG_COMMENT"),
-						entityId: ID
+					BX.Livefeed.TaskCreator.create({
+						postEntityType: (BX.type.isNotEmptyString(postEntityType) ? postEntityType : 'BLOG_POST'),
+						entityType: (BX.type.isNotEmptyString(commentEntityType) ? commentEntityType : 'BLOG_COMMENT'),
+						entityId: ID,
 					});
 					this.popupWindow.close();
 					return false;
 				}
 			});
+		}
+
+		if (
+			el.getAttribute('bx-mpl-createsubtask-show') === 'Y'
+			&& !BX.type.isUndefined(BX.Livefeed)
+		)
+		{
+			var postEntityXmlId = el.getAttribute('bx-mpl-post-entity-xml-id');
+
+			var matches = postEntityXmlId.match(/^TASK_(\d+)$/i);
+			if (matches)
+			{
+				panels.push({
+					text : BX.message('BPC_MES_CREATE_SUBTASK'),
+					onclick : function() {
+						BX.Livefeed.TaskCreator.create({
+							postEntityType: postEntityType,
+							entityType: commentEntityType,
+							entityId: ID,
+							parentTaskId: parseInt(matches[1]),
+						});
+						this.popupWindow.close();
+						return false;
+					}
+				});
+			}
 		}
 
 		if (panels.length > 0) {
@@ -2173,13 +2281,17 @@
 				authorStyle = " feed-com-name-extranet";
 			}
 			var commentText = res["POST_MESSAGE_TEXT"].replace(/\001/gi, "").replace(/#/gi, "\001");
+			res.AUX_LIVE_PARAMS = (BX.type.isPlainObject(res.AUX_LIVE_PARAMS) ? res.AUX_LIVE_PARAMS : {});
 
 			if (
 				!!res.AUX
-				&& BX.util.in_array(res['AUX'], ['createentity', 'createtask', 'fileversion'])
+				&& (
+					BX.util.in_array(res.AUX, ['createentity', 'createtask', 'fileversion'])
+					|| (res.AUX === 'TASKINFO' && BX.type.isNotEmptyObject(res.AUX_LIVE_PARAMS))
+				)
 			)
 			{
-				commentText = BX.CommentAux.getLiveText(res.AUX, (!!res.AUX_LIVE_PARAMS ? res.AUX_LIVE_PARAMS : {} ));
+				commentText = BX.CommentAux.getLiveText(res.AUX, res.AUX_LIVE_PARAMS);
 			}
 
 			replacement = {
@@ -2233,6 +2345,13 @@
 					&& params["RIGHTS"]["CREATETASK"] == "Y"
 						? "Y"
 						: "N"
+				),
+				"CREATESUBTASK_SHOW" : (
+					(!res.AUX || res.AUX.length <= 0)
+					&& BX.type.isNotEmptyString(params.RIGHTS.CREATESUBTASK)
+					&& params.RIGHTS.CREATESUBTASK === "Y"
+						? 'Y'
+						: 'N'
 				),
 				"BEFORE_HEADER" : res["BEFORE_HEADER"],
 				"BEFORE_ACTIONS" : res["BEFORE_ACTIONS"],
@@ -2713,7 +2832,7 @@
 	BX.ready(function() {
 		//region for pull events
 		BX.addCustomEvent(window, "onPullEvent-unicomments", function(command, params) {
-			if (params["AUX"] && !BX.util.in_array(params["AUX"], [ 'createentity', 'createtask', 'fileversion', 'TASKINFO' ]) ||
+			if (params["AUX"] && !BX.util.in_array(params["AUX"].toLowerCase(), BX.CommentAux.getLiveTypesList()) ||
 				getActiveEntitiesByXmlId(params["ENTITY_XML_ID"]).size <= 0)
 			{
 				return;

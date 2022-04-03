@@ -1,5 +1,6 @@
 <?php
-return array (
+
+return array (
   'utf_mode' => 
   array (
     'value' => true,
@@ -45,9 +46,9 @@
       array (
         'className' => '\\Bitrix\\Main\\DB\\MysqliConnection',
         'host' => 'localhost',
-        'database' => 'u001_don360',
-        'login' => 'u001_don360',
-        'password' => 'u001_don360',
+        'database' => 'bx_don360',
+        'login' => 'bitrix',
+        'password' => '230993kpss!',
         'options' => 2.0,
       ),
     ),

@@ -9569,7 +9569,7 @@
 	  }, {
 	    key: "isFile",
 	    value: function isFile(value) {
-	      return Type.isBlob(value) && Type.isNumber(value.lastModified) && Type.isString(value.name);
+	      return Type.isBlob(value) && Type.isString(value.name) && (Type.isNumber(value.lastModified) || Type.isObjectLike(value.lastModifiedDate));
 	    }
 	    /**
 	     * Checks that value is FormData
@@ -13264,6 +13264,142 @@
 	        message(id);
 	      }
 	    }
+	    /**
+	     * Gets plural message by id and number
+	     * @param {string} messageId
+	     * @param {number} value
+	     * @param {object} [replacements]
+	     * @return {?string}
+	     */
+
+	  }, {
+	    key: "getMessagePlural",
+	    value: function getMessagePlural(messageId, value) {
+	      var replacements = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+	      var result = '';
+
+	      if (Type.isNumber(value)) {
+	        if (this.hasMessage("".concat(messageId, "_PLURAL_").concat(this.getPluralForm(value)))) {
+	          result = this.getMessage("".concat(messageId, "_PLURAL_").concat(this.getPluralForm(value)), replacements);
+	        } else {
+	          result = this.getMessage("".concat(messageId, "_PLURAL_1"), replacements);
+	        }
+	      } else {
+	        result = this.getMessage(messageId, replacements);
+	      }
+
+	      return result;
+	    }
+	    /**
+	     * Gets language plural form id by number
+	     * see http://docs.translatehouse.org/projects/localization-guide/en/latest/l10n/pluralforms.html
+	     * @param {number} value
+	     * @param {string} [languageId]
+	     * @return {?number}
+	     */
+
+	  }, {
+	    key: "getPluralForm",
+	    value: function getPluralForm(value, languageId) {
+	      var pluralForm;
+
+	      if (!Type.isStringFilled(languageId)) {
+	        languageId = message('LANGUAGE_ID');
+	      }
+
+	      if (value < 0) {
+	        value = -1 * value;
+	      }
+
+	      switch (languageId) {
+	        case 'ar':
+	          pluralForm = value !== 1 ? 1 : 0;
+	          /*
+	          				if (value === 0)
+	          				{
+	          					pluralForm = 0;
+	          				}
+	          				else if (value === 1)
+	          				{
+	          					pluralForm = 1;
+	          				}
+	          				else if (value === 2)
+	          				{
+	          					pluralForm = 2;
+	          				}
+	          				else if (
+	          					value % 100 >= 3
+	          					&& value % 100 <= 10
+	          				)
+	          				{
+	          					pluralForm = 3;
+	          				}
+	          				else if (value % 100 >= 11)
+	          				{
+	          					pluralForm = 4;
+	          				}
+	          				else
+	          				{
+	          					pluralForm = 5;
+	          				}
+	           */
+
+	          break;
+
+	        case 'br':
+	        case 'fr':
+	        case 'tr':
+	          pluralForm = value > 1 ? 1 : 0;
+	          break;
+
+	        case 'de':
+	        case 'en':
+	        case 'hi':
+	        case 'it':
+	        case 'la':
+	          pluralForm = value !== 1 ? 1 : 0;
+	          break;
+
+	        case 'ru':
+	        case 'ua':
+	          if (value % 10 === 1 && value % 100 !== 11) {
+	            pluralForm = 0;
+	          } else if (value % 10 >= 2 && value % 10 <= 4 && (value % 100 < 10 || value % 100 >= 20)) {
+	            pluralForm = 1;
+	          } else {
+	            pluralForm = 2;
+	          }
+
+	          break;
+
+	        case 'pl':
+	          if (value === 1) {
+	            pluralForm = 0;
+	          } else if (value % 10 >= 2 && value % 10 <= 4 && (value % 100 < 10 || value % 100 >= 20)) {
+	            pluralForm = 1;
+	          } else {
+	            pluralForm = 2;
+	          }
+
+	          break;
+
+	        case 'id':
+	        case 'ja':
+	        case 'ms':
+	        case 'sc':
+	        case 'tc':
+	        case 'th':
+	        case 'vn':
+	          pluralForm = 0;
+	          break;
+
+	        default:
+	          pluralForm = 1;
+	          break;
+	      }
+
+	      return pluralForm;
+	    }
 	  }]);
 	  return Loc;
 	}();
@@ -14347,9 +14483,13 @@
 
 	var _Symbol$iterator;
 
+	function _classPrivateMethodInitSpec(obj, privateSet) { _checkPrivateRedeclaration(obj, privateSet); privateSet.add(obj); }
+
+	function _checkPrivateRedeclaration(obj, privateCollection) { if (privateCollection.has(obj)) { throw new TypeError("Cannot initialize the same private elements twice on an object"); } }
+
 	function _classPrivateMethodGet(receiver, privateSet, fn) { if (!privateSet.has(receiver)) { throw new TypeError("attempted to get private field on non-instance"); } return fn; }
 
-	var _searchIndexToInsert = new WeakSet();
+	var _searchIndexToInsert = /*#__PURE__*/new WeakSet();
 
 	_Symbol$iterator = Symbol.iterator;
 
@@ -14358,7 +14498,7 @@
 	    var comparator = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
 	    babelHelpers.classCallCheck(this, OrderedArray);
 
-	    _searchIndexToInsert.add(this);
+	    _classPrivateMethodInitSpec(this, _searchIndexToInsert);
 
 	    babelHelpers.defineProperty(this, "comparator", null);
 	    babelHelpers.defineProperty(this, "items", []);
@@ -14496,7 +14636,7 @@
 	  return OrderedArray;
 	}();
 
-	var _searchIndexToInsert2 = function _searchIndexToInsert2(value) {
+	function _searchIndexToInsert2(value) {
 	  var low = 0;
 	  var high = this.items.length;
 
@@ -14511,7 +14651,7 @@
 	  }
 
 	  return low;
-	};
+	}
 
 	var ZIndexComponent = /*#__PURE__*/function (_EventEmitter) {
 	  babelHelpers.inherits(ZIndexComponent, _EventEmitter);
@@ -14785,7 +14925,9 @@
 	  return ZIndexStack;
 	}();
 
-	function _classStaticPrivateMethodGet(receiver, classConstructor, method) { if (receiver !== classConstructor) { throw new TypeError("Private static access of wrong provenance"); } return method; }
+	function _classStaticPrivateMethodGet(receiver, classConstructor, method) { _classCheckPrivateStaticAccess(receiver, classConstructor); return method; }
+
+	function _classCheckPrivateStaticAccess(receiver, classConstructor) { if (receiver !== classConstructor) { throw new TypeError("Private static access of wrong provenance"); } }
 
 	/**
 	 * @memberof BX
@@ -14866,7 +15008,7 @@
 	  return ZIndexManager;
 	}();
 
-	var _getParentNode = function _getParentNode(element) {
+	function _getParentNode(element) {
 	  var suppressWarnings = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
 	  if (!Type.isElementNode(element)) {
@@ -14884,7 +15026,7 @@
 	  }
 
 	  return element.parentNode;
-	};
+	}
 
 	babelHelpers.defineProperty(ZIndexManager, "stacks", new WeakMap());
 
@@ -18112,7 +18254,14 @@
 			back_url = null;
 		}
 
-		var topWindow = BX.PageObject.getRootWindow();
+		var topWindow = (function() {
+			if (BX.PageObject && BX.PageObject.getRootWindow)
+			{
+				return BX.PageObject.getRootWindow();
+			}
+
+			return window.top;
+		})();
 		var new_href = back_url || topWindow.location.href;
 
 		var hashpos = new_href.indexOf('#'), hash = '';
@@ -20257,11 +20406,13 @@ BX.ajax.promise = function(config)
 	{
 		result.fulfill(data);
 	};
-	config.onfailure = function(reason, data)
+	config.onfailure = function(reason, httpStatus, config)
 	{
 		result.reject({
 			reason: reason,
-			data: data
+			data: httpStatus,
+			ajaxConfig: config,
+			xhr: config.xhr
 		});
 	};
 
@@ -20522,6 +20673,18 @@ var buildAjaxPromiseToRestoreCsrf = function(config, withoutRestoringCsrf)
 		return response;
 	}).catch(function(data) {
 		var ajaxReject = new BX.Promise();
+
+		var originalJsonResponse;
+		if (BX.type.isPlainObject(data) && data.xhr && data.xhr.responseText)
+		{
+			try
+			{
+				originalJsonResponse = JSON.parse(data.xhr.responseText);
+				data = originalJsonResponse;
+			}
+			catch (err)
+			{}
+		}
 
 		if (BX.type.isPlainObject(data) && data.status && data.hasOwnProperty('data'))
 		{

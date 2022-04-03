@@ -92,6 +92,7 @@ this.BX.Landing.UI = this.BX.Landing.UI || {};
 	    _this.property = main_core.Type.isString(_this.data.property) ? _this.data.property : '';
 	    _this.style = Reflect.has(_this.data, 'style') ? _this.data.style : '';
 	    _this.cache = new main_core.Cache.MemoryCache();
+	    _this.contentRoot = Reflect.has(_this.data, 'contentRoot') ? _this.data.contentRoot : null;
 	    var onValueChange = _this.data.onValueChange;
 	    _this.onValueChangeHandler = main_core.Type.isFunction(onValueChange) ? onValueChange : function () {};
 	    _this.onPaste = _this.onPaste.bind(babelHelpers.assertThisInitialized(_this));
@@ -110,10 +111,7 @@ this.BX.Landing.UI = this.BX.Landing.UI || {};
 	      main_core.Dom.addClass(_this.layout, _this.className);
 	    }
 
-	    if (main_core.Type.isString(_this.descriptionText) && _this.descriptionText !== '') {
-	      _this.description = BaseField.createDescription(_this.descriptionText);
-	      main_core.Dom.append(_this.description, _this.layout);
-	    }
+	    _this.setDescription(_this.descriptionText);
 
 	    if (_this.data.disabled === true) {
 	      _this.disable();
@@ -123,6 +121,11 @@ this.BX.Landing.UI = this.BX.Landing.UI || {};
 
 	    _this.init();
 
+	    if (_this.data.help) {
+	      BX.Dom.append(top.BX.UI.Hint.createNode(_this.data.help), _this.header);
+	      top.BX.UI.Hint.init(BX.Landing.UI.Panel.StylePanel.getInstance().layout);
+	    }
+
 	    return _this;
 	  }
 
@@ -130,6 +133,28 @@ this.BX.Landing.UI = this.BX.Landing.UI || {};
 	    key: "setTitle",
 	    value: function setTitle(title) {
 	      this.header.innerHTML = main_core.Text.encode(title);
+	    }
+	  }, {
+	    key: "getDescription",
+	    value: function getDescription() {
+	      return this.layout.querySelector('.landing-ui-field-description');
+	    }
+	  }, {
+	    key: "setDescription",
+	    value: function setDescription(description) {
+	      if (main_core.Type.isString(description) && description !== '') {
+	        this.descriptionText = description;
+	        this.description = BaseField.createDescription(this.descriptionText);
+	        main_core.Dom.remove(this.getDescription());
+	        main_core.Dom.append(this.description, this.layout);
+	      }
+	    }
+	  }, {
+	    key: "removeDescription",
+	    value: function removeDescription() {
+	      main_core.Dom.remove(this.getDescription());
+	      this.description = null;
+	      this.descriptionText = '';
 	    }
 	  }, {
 	    key: "createInput",
@@ -210,6 +235,7 @@ this.BX.Landing.UI = this.BX.Landing.UI || {};
 	        compatData: [this.getValue()]
 	      });
 	      this.emit('change', event);
+	      this.emit('onChange', event);
 	    }
 	  }, {
 	    key: "enable",
@@ -228,6 +254,9 @@ this.BX.Landing.UI = this.BX.Landing.UI || {};
 	    key: "reset",
 	    value: function reset() {}
 	  }, {
+	    key: "onFrameLoad",
+	    value: function onFrameLoad() {}
+	  }, {
 	    key: "clone",
 	    value: function clone(data) {
 	      return new this.constructor(main_core.Runtime.clone(data || this.data));
@@ -241,6 +270,38 @@ this.BX.Landing.UI = this.BX.Landing.UI || {};
 	    key: "setLayoutClass",
 	    value: function setLayoutClass(className) {
 	      main_core.Dom.addClass(this.layout, className);
+	    }
+	    /**
+	     * If field has inline style-properties (f.e. css variables) - get name of them
+	    	 * @returns {string[]}
+	     */
+
+	  }, {
+	    key: "getInlineProperties",
+	    value: function getInlineProperties() {
+	      return [];
+	    }
+	    /**
+	     * If field need match computed styles by node - get name of style properties
+	     * @returns {string[]}
+	     */
+
+	  }, {
+	    key: "getComputedProperties",
+	    value: function getComputedProperties() {
+	      // todo: get from typeSetting
+	      return [];
+	    }
+	    /**
+	     * If field work with pseudo element - return them (f.e. :after)
+	     * @returns {?string}
+	     */
+
+	  }, {
+	    key: "getPseudoElement",
+	    value: function getPseudoElement() {
+	      // todo: from type settings
+	      return null;
 	    }
 	  }]);
 	  return BaseField;

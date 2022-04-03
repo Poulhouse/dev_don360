@@ -7,11 +7,13 @@ use Bitrix\Catalog;
 use Bitrix\Catalog\Component\ImageInput;
 use Bitrix\Catalog\v2\IoC\ServiceContainer;
 use Bitrix\Crm\Order\Import\Instagram;
+use Bitrix\Crm;
 use Bitrix\Currency;
 use Bitrix\Iblock;
 use Bitrix\Iblock\Grid\ActionType;
 use Bitrix\Main;
 use Bitrix\Main\Loader;
+use Bitrix\Main\Web\Json;
 
 require_once($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_admin_before.php");
 Loader::includeModule("iblock");
@@ -22,7 +24,6 @@ IncludeModuleLangFile($_SERVER["DOCUMENT_ROOT"].BX_ROOT."/modules/main/interface
 $bBizproc = Loader::includeModule("bizproc");
 $bWorkflow = Loader::includeModule("workflow");
 $bFileman = Loader::includeModule("fileman");
-$bExcel = isset($_REQUEST["mode"]) && ($_REQUEST["mode"] == "excel");
 $dsc_cookie_name = Main\Config\Option::get('main', 'cookie_name', 'BITRIX_SM')."_DSC";
 
 /** @global CAdminPage $adminPage */
@@ -109,6 +110,8 @@ $pageConfig = array(
 	'ALLOW_USER_EDIT' => true,
 
 	'SLIDER_CRM' => false,
+	'DEFAULT_ACTION_TYPE' => CAdminUiListRow::LINK_TYPE_URL,
+	'SKIP_URL_MODIFICATION' => false,
 );
 switch ($urlBuilder->getId())
 {
@@ -122,6 +125,17 @@ switch ($urlBuilder->getId())
 		$pageConfig['ALLOW_EXTERNAL_LINK'] = false;
 		$pageConfig['ALLOW_USER_EDIT'] = false;
 		$pageConfig['SLIDER_CRM'] = $urlBuilder->isSliderMode();
+		$pageConfig['DEFAULT_ACTION_TYPE'] = CAdminUiListRow::LINK_TYPE_SLIDER;
+		break;
+	case 'INVENTORY':
+		$pageConfig['LIST_ID_PREFIX'] = 'tbl_product_admin_';
+		$pageConfig['CHECK_NEW_CARD'] = true;
+		$pageConfig['SHOW_NAVCHAIN'] = false;
+		$pageConfig['CONTEXT_PATH'] = '/shop/settings/cat_product_admin.php'; // TODO: temporary hack
+		$pageConfig['CATALOG'] = true;
+		$pageConfig['ALLOW_EXTERNAL_LINK'] = false;
+		$pageConfig['ALLOW_USER_EDIT'] = false;
+		$pageConfig['DEFAULT_ACTION_TYPE'] = CAdminUiListRow::LINK_TYPE_SLIDER;
 		break;
 	case 'CATALOG':
 		$pageConfig['LIST_ID_PREFIX'] = 'tbl_product_admin_';
@@ -184,8 +198,8 @@ if ($useElementTranslit)
 }
 $changeUserByActive = Main\Config\Option::get('iblock', 'change_user_by_group_active_modify') === 'Y';
 
-define("MODULE_ID", "iblock");
-define("ENTITY", "CIBlockDocument");
+const MODULE_ID = "iblock";
+const ENTITY = "CIBlockDocument";
 define("DOCUMENT_TYPE", "iblock_".$IBLOCK_ID);
 
 $bCatalog = Loader::includeModule("catalog");
@@ -240,10 +254,22 @@ if ($bCatalog)
 	}
 	if ($bCatalog)
 	{
-		$pageConfig['USE_NEW_CARD'] = (
-			$pageConfig['CHECK_NEW_CARD']
-			&& Catalog\Config\State::isProductCardSliderEnabled()
-		);
+		if ($pageConfig['CHECK_NEW_CARD'])
+		{
+			switch ($urlBuilder->getId())
+			{
+				case 'SHOP':
+				case 'INVENTORY':
+					$pageConfig['USE_NEW_CARD'] = Catalog\Config\State::isProductCardSliderEnabled();
+					break;
+				case 'CRM':
+					if (Loader::includeModule('crm'))
+					{
+						$pageConfig['USE_NEW_CARD'] = Crm\Settings\LayoutSettings::getCurrent()->isFullCatalogEnabled();
+					}
+					break;
+			}
+		}
 		if ($pageConfig['USE_NEW_CARD'])
 		{
 			$pageConfig['LIST_ID'] .= '.NEW';
@@ -321,6 +347,14 @@ if ($boolSKU)
 }
 
 $sTableID = $pageConfig['LIST_ID_PREFIX'].md5($pageConfig['LIST_ID']);
+if ($pageConfig['SLIDER_CRM'])
+{
+	$sTableID .= '_slider_' . $urlBuilder->getId();
+	$gridOptions = new Bitrix\Main\Grid\Options($sTableID);
+	$gridOptions->resetView('default');
+	unset($gridOptions);
+}
+
 $oSort = new CAdminUiSorting($sTableID, "timestamp_x", "desc");
 global $by, $order;
 if (!isset($by))
@@ -333,6 +367,8 @@ if ($by == 'CATALOG_TYPE')
 
 $lAdmin = new CAdminUiList($sTableID, $oSort);
 $lAdmin->bMultipart = true;
+
+$bExcel = $lAdmin->isExportMode();
 
 $groupParams = array(
 	'ENTITY_ID' => $sTableID,
@@ -974,6 +1010,7 @@ if($bCatalog)
 			"align" => "left",
 			"column_sort" => 200,
 			"width" => 420,
+			"sort" => "NAME",
 		];
 	}
 
@@ -981,15 +1018,21 @@ if($bCatalog)
 	{
 		$arHeader[] = array(
 			"id" => "CATALOG_QUANTITY",
-			"content" => GetMessage("IBEL_CATALOG_QUANTITY_EXT"),
+			"content" => ($pageConfig["USE_NEW_CARD"]
+				? GetMessage("IBEL_CATALOG_QUANTITY_NEW_CARD")
+				: GetMessage("IBEL_CATALOG_QUANTITY_EXT")
+			),
 			"title" => "",
 			"align" => "right",
-			"sort" => "QUANTITY",
+			"sort" => ($pageConfig["USE_NEW_CARD"] ? "" : "QUANTITY"),
 			"column_sort" => 400,
 		);
 		$arHeader[] = array(
 			"id" => "CATALOG_QUANTITY_RESERVED",
-			"content" => GetMessage("IBEL_CATALOG_QUANTITY_RESERVED"),
+			"content" => ($pageConfig["USE_NEW_CARD"]
+				? GetMessage("IBEL_CATALOG_QUANTITY_RESERVED_NEW_CARD")
+				: GetMessage("IBEL_CATALOG_QUANTITY_RESERVED")
+			),
 			"align" => "right",
 		);
 		$arHeader[] = array(
@@ -2279,7 +2322,7 @@ if ($arID = $lAdmin->GroupAction())
 }
 CJSCore::Init(array('date'));
 
-if (isset($_REQUEST["mode"]) && $_REQUEST["mode"] == "excel")
+if ($bExcel)
 {
 	$arNavParams = false;
 }
@@ -2391,7 +2434,7 @@ $selectedSkuMap = [];
 
 if (
 	$boolSKU
-	&& Catalog\Config\Feature::isCommonProductProcessingEnabled()
+	&& $pageConfig['USE_NEW_CARD']
 )
 {
 	/** @var \Bitrix\Catalog\Component\SkuTree $skuTree */
@@ -2429,9 +2472,11 @@ if (!empty($elementIds))
 		if ($boolSKU && $skuTree)
 		{
 			$pageSkuIds = [];
+			$skuTreeFormatted = [];
 			$pageProductSkuTree = $skuTree->load($pageIds);
 			foreach ($pageProductSkuTree as $productId => $item)
 			{
+				$offers = [];
 				if (!empty($item['OFFERS']))
 				{
 					$offerIds = array_column($item['OFFERS'], 'ID');
@@ -2444,13 +2489,27 @@ if (!empty($elementIds))
 					{
 						$pageSkuIds[$productId] = reset($offerIds);
 					}
+
+					foreach ($item['OFFERS'] as $offer)
+					{
+						$offers[] = array_intersect_key(
+							$offer,
+							array_flip(['TREE', 'ID'])
+						);
+					}
 				}
+
+				$skuTreeFormatted[$productId] = [
+					'EXISTING_VALUES' => $item['EXISTING_VALUES'],
+					'OFFERS' => $offers,
+					'IBLOCK_ID' => $IBLOCK_ID,
+				];
 			}
 			$selectedSkuMap += $pageSkuIds;
 
 			if ($isUsedNewProductField)
 			{
-				$productSkuTree += $pageProductSkuTree;
+				$productSkuTree += $skuTreeFormatted;
 				if (!empty($pageSkuIds))
 				{
 					$fieldsToSelect = $skuFields;
@@ -2559,9 +2618,14 @@ foreach (array_keys($rawRows) as $rowId)
 
 		if (isset($arSelectedFieldsMap['CATALOG_TYPE']))
 		{
+			$hideSkuCatalog = (
+					$arRes['CATALOG_TYPE'] == \Bitrix\Catalog\ProductTable::TYPE_SKU
+					|| $arRes['CATALOG_TYPE'] == \Bitrix\Catalog\ProductTable::TYPE_EMPTY_SKU
+				)
+				&& !$showCatalogWithOffers
+			;
 			if (
-				$arRes['CATALOG_TYPE'] == \Bitrix\Catalog\ProductTable::TYPE_SKU
-				|| $arRes['CATALOG_TYPE'] == \Bitrix\Catalog\ProductTable::TYPE_EMPTY_SKU
+				$hideSkuCatalog
 				|| $arRes['CATALOG_TYPE'] == \Bitrix\Catalog\ProductTable::TYPE_SET
 			)
 			{
@@ -2569,11 +2633,7 @@ foreach (array_keys($rawRows) as $rowId)
 					$arRes['CATALOG_QUANTITY_RESERVED'] = '';
 			}
 			if (
-				(
-					$arRes['CATALOG_TYPE'] == \Bitrix\Catalog\ProductTable::TYPE_SKU
-					|| $arRes['CATALOG_TYPE'] == \Bitrix\Catalog\ProductTable::TYPE_EMPTY_SKU
-				)
-				&& !$showCatalogWithOffers
+				$hideSkuCatalog
 			)
 			{
 				if (isset($arRes['CATALOG_QUANTITY']))
@@ -2607,6 +2667,10 @@ foreach (array_keys($rawRows) as $rowId)
 
 	$arRes["edit_url"] = $urlBuilder->getElementDetailUrl($arRes_orig['ID'], $elementUrlParams);
 	$arRows[$itemId] = $row = $lAdmin->AddRow($itemId, $arRes, $arRes["edit_url"], GetMessage("IBEL_A_EDIT"));
+	$row->setConfig([
+		CAdminUiListRow::DEFAULT_ACTION_TYPE_FIELD => $pageConfig['DEFAULT_ACTION_TYPE'],
+		CAdminUiListRow::SKIP_URL_MODIFY_FIELD => $pageConfig['SKIP_URL_MODIFICATION'],
+	]);
 
 	if ($row->arRes['VAT_ID'] === null)
 	{
@@ -3239,10 +3303,6 @@ $iblockElementAdd = $boolIBlockElementAdd;
 if (!empty($productLimits))
 {
 	$boolIBlockElementAdd = false;
-	if (!method_exists('\Bitrix\Catalog\Config\Feature', 'getProductLimitHelpLink'))
-	{
-		$iblockElementAdd = false;
-	}
 }
 
 $arElementOps = CIBlockElementRights::UserHasRightTo(
@@ -4585,17 +4645,8 @@ else
 Main\Page\Asset::getInstance()->addJs('/bitrix/js/iblock/iblock_edit.js');
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_admin_after.php");
 
-if ($urlBuilder->isSliderMode())
-{
-	if((!isset($_REQUEST["mode"]) || $_REQUEST["mode"]=='list' || $_REQUEST["mode"]=='frame'))
-	{
-		?><style>
-	body { background: none repeat 0 0 transparent; }
-</style><?php
-	}
-}
 //We need javascript not in excel mode
-if((!isset($_REQUEST["mode"]) || $_REQUEST["mode"]=='list' || $_REQUEST["mode"]=='frame') && $bCatalog && $bCurrency)
+if (($lAdmin->isPageMode() || $lAdmin->isAjaxMode()) && $bCatalog && $bCurrency)
 {
 	?><script type="text/javascript">
 		top.arCatalogShowedGroups = [];
@@ -4699,18 +4750,13 @@ if (!empty($productLimits))
 	Loader::includeModule('ui');
 	Main\UI\Extension::load("ui.alerts");
 	?><div class="ui-alert ui-alert-warning">
-	<span class="ui-alert-message"><?=GetMessage(
-		'IBEL_LIST_ERR_PRODUCT_LIMIT',
-		[
-			'#COUNT#' => $productLimits['COUNT'],
-			'#LIMIT#' => $productLimits['LIMIT']
-		]
-	); ?></span>
+	<span class="ui-alert-message"><?php echo $productLimits['MESSAGE']; ?></span>
 	</div><?
 }
 $lAdmin->EndPrologContent();
 
-if (Loader::includeModule('crm') && Instagram::isAvailable() && Instagram::isActiveStatus())
+$enableInstagram = Loader::includeModule('crm') && Instagram::isAvailable() && Instagram::isActiveStatus();
+if ($enableInstagram)
 {
 	$lAdmin->setFilterPresets([
 		'import_instagram' => [
@@ -4721,9 +4767,7 @@ if (Loader::includeModule('crm') && Instagram::isAvailable() && Instagram::isAct
 }
 
 $lAdmin->DisplayFilter($filterFields);
-$lAdmin->DisplayList([
-	'SKIP_URL_MODIFICATION' => true
-]);
+$lAdmin->DisplayList();
 if($bWorkFlow || $bBizproc):
 	echo BeginNote();?>
 	<span class="adm-lamp adm-lamp-green"></span> - <?echo GetMessage("IBLOCK_GREEN_ALT")?><br>
@@ -4732,25 +4776,8 @@ if($bWorkFlow || $bBizproc):
 	<?echo EndNote();
 endif;
 
-$sliderPath = \Bitrix\Main\Context::getCurrent()->getRequest()->get('slider_path');
-if (!empty($sliderPath))
-{
-	?><script>window.history.replaceState({}, '', '<?=CUtil::JSEscape('?' . $arParams['PAGE_PARAMS'])?>');</script><?
-	if (
-		preg_match('/^\/(shop|crm)\/catalog\/[0-9]+\/product\/[0-9]+\/variation\/[0-9]+\/$/', $sliderPath)
-		|| preg_match('/^\/(shop|crm)\/catalog\/[0-9]+\/product\/[0-9]+\/$/', $sliderPath))
-	{
-		?>
-		<script>
-			BX.ready(function () {
-				BX.SidePanel.Instance.open(
-					'<?=CUtil::JSEscape($sliderPath)?>'
-				);
-			});
-		</script>
-		<?
-	}
-}
+$urlBuilder->showDetailPageSlider();
+
 if ($pageConfig['IBLOCK_EDIT'] && CIBlockRights::UserHasRightTo($IBLOCK_ID, $IBLOCK_ID, "iblock_edit"))
 {
 	echo
@@ -4763,12 +4790,12 @@ if ($pageConfig['IBLOCK_EDIT'] && CIBlockRights::UserHasRightTo($IBLOCK_ID, $IBL
 	;
 }
 
-if ($publicMode && !$bExcel && Loader::includeModule('crm'))
+if ($publicMode && !$bExcel && $enableInstagram)
 {
 	$APPLICATION->IncludeComponent('bitrix:crm.order.import.instagram.observer', '');
 }
 
-if ($bCatalog && !$isChangeVariationRequest && Catalog\Config\Feature::isCommonProductProcessingEnabled())
+if ($bCatalog && !$isChangeVariationRequest && $pageConfig['USE_NEW_CARD'])
 {
 	$listData = [
 		'gridId' => $sTableID,
