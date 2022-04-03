@@ -7,7 +7,7 @@ if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)
 use \Bitrix\Landing\Manager;
 use \Bitrix\Landing\Site;
 use \Bitrix\Landing\Landing;
-use Bitrix\Landing\Site\Type;
+use \Bitrix\Landing\Site\Type;
 use \Bitrix\Landing\Syspage;
 use \Bitrix\Landing\Hook;
 use \Bitrix\Landing\Rights;
@@ -15,6 +15,7 @@ use \Bitrix\Main\EventManager;
 use \Bitrix\Main\ModuleManager;
 use \Bitrix\Landing\Source\Selector;
 use \Bitrix\Landing\PublicAction\Demos;
+use \Bitrix\Main\UI\Extension;
 
 \CBitrixComponent::includeComponentClass('bitrix:landing.base');
 
@@ -65,7 +66,7 @@ class LandingViewComponent extends LandingBaseComponent
 				]);
 				$url = $uriPreview->getUri();
 			}
-			\localRedirect($url, true);
+			\localRedirect($this->getTimestampUrl($url), true);
 		}
 
 		\Bitrix\Landing\Landing::setPreviewMode(false);
@@ -75,6 +76,16 @@ class LandingViewComponent extends LandingBaseComponent
 		);
 
 		return false;
+	}
+
+	/**
+	 * Set auto publication flag to user option.
+	 * @param string $check Auto publication flag (Y / N).
+	 * @return void
+	 */
+	protected function actionChangeAutoPublication(string $check): void
+	{
+		\CUserOptions::setOption('landing', 'auto_publication', ($check === 'Y') ? 'Y' : 'N');
 	}
 
 	/**
@@ -119,16 +130,20 @@ class LandingViewComponent extends LandingBaseComponent
 	 */
 	protected function getTopPanelConfig(Landing $landing, array $site, array $rights)
 	{
+		$uiInstalled = \Bitrix\Main\Loader::includeModule('ui');
 		return [
 			'type' => $this->arParams['TYPE'],
 			'id' => $landing->getId(),
-			'url' => $landing->getPublicUrl(),
+			'url' => $this->arResult['~LANDING_FULL_URL'] ?? $landing->getPublicUrl(),
 			'siteId' => $landing->getSiteId(),
 			'siteTitle' => $site['TITLE'],
 			'active' => $landing->isActive(),
 			'draftMode' => $this->arParams['DRAFT_MODE'] == 'Y',
 			'title' => $landing->getTitle(),
 			'specialType' => $this->arResult['SPECIAL_TYPE'],
+			'autoPublicationEnabled' =>
+				$this->arResult['SPECIAL_TYPE'] === Site\Type::PSEUDO_SCOPE_CODE_FORMS ||
+				\CUserOptions::getOption('landing', 'auto_publication', 'Y') === 'Y',
 			'pagesCount' => $this->getPagesCount(
 				$landing->getSiteId()
 			),
@@ -150,7 +165,21 @@ class LandingViewComponent extends LandingBaseComponent
 				'public' => in_array(
 					Rights::ACCESS_TYPES['public'],
 					$rights
-				)
+				) && $this->arResult['FAKE_PUBLICATION']
+			],
+			'helperFrameOpenUrl' => !$uiInstalled ? null : \CHTTP::urlAddParams(\Bitrix\UI\Util::getHelpdeskUrl(true) . '/widget2/', [
+				'url' => urlencode(
+					(Manager::isHttps() ? 'https://' : 'http://') .
+					Manager::getHttpHost() .
+					Manager::getApplication()->getCurPageParam()
+				),
+				'user_id' => Manager::getUserId(),
+				'is_cloud' => ModuleManager::isModuleInstalled('bitrix24') ? '1' : '0',
+				'action' => 'open'
+			]),
+			'helpCodes' => [
+				'form_general' => \Bitrix\Landing\Help::getHelpData('FORM_GENERAL', 'ru'),
+				'widget_general' => \Bitrix\Landing\Help::getHelpData('WIDGET_GENERAL', 'ru')
 			]
 		];
 	}
@@ -241,15 +270,38 @@ class LandingViewComponent extends LandingBaseComponent
 				{
 					foreach ($areas as $aId)
 					{
+						if (isset($publicIds[$aId]))
+						{
+							continue;
+						}
 						$landingArea = Landing::createInstance($aId, [
 							'skip_blocks' => true
 						]);
+						$meta = $landingArea->getMeta();
+						if ($meta['ACTIVE'] != 'Y')
+						{
+							$meta['PUBLIC'] = 'N';
+						}
+						if ($meta['PUBLIC'] == 'Y')
+						{
+							$publicIds[$aId] = true;
+							continue;
+						}
 						if (
 							$landingArea->exist() &&
 							$landingArea->publication()
 						)
 						{
 							$publicIds[$aId] = true;
+						}
+						else
+						{
+							$error = $landingArea->getError()->getFirstError();
+							$this->addError(
+								$error->getCode(),
+								$error->getMessage()
+							);
+							return false;
 						}
 					}
 				}
@@ -297,9 +349,19 @@ class LandingViewComponent extends LandingBaseComponent
 	/**
 	 * Publication all landing in site of current landing.
 	 * @param int $id Landing id.
-	 * @return boolean
+	 * @return bool
 	 */
-	protected function actionPublicationAll($id)
+	protected function actionPublicationGlobal(int $id): bool
+	{
+		return $this->actionPublicationAll($id);
+	}
+
+	/**
+	 * Publication all landing in site of current landing.
+	 * @param int $id Landing id.
+	 * @return bool
+	 */
+	protected function actionPublicationAll(int $id): bool
 	{
 		$landing = Landing::createInstance($id, [
 			'skip_blocks' => true
@@ -513,6 +575,36 @@ class LandingViewComponent extends LandingBaseComponent
 		return 'last';
 	}
 
+	protected function getCrmFormEditorData(): ?array
+	{
+		static $formEditorData = null;
+
+		if (!is_array($formEditorData) && \Bitrix\Main\Loader::includeModule('crm'))
+		{
+			$landing = $this->arResult['LANDING'];
+			$res = \Bitrix\Crm\WebForm\Internals\LandingTable::getList([
+				'select' => [
+					'FORM_ID'
+				],
+				'filter' => [
+					'LANDING_ID' => $landing->getId()
+				]
+			]);
+			if ($row = $res->fetch())
+			{
+				$formEditorData = \Bitrix\Landing\PublicAction\Form::getEditorData(
+					$row['FORM_ID']
+				)->getResult();
+			}
+			else
+			{
+				$formEditorData = [];
+			}
+		}
+
+		return $formEditorData;
+	}
+
 	/**
 	 * Handler on view landing.
 	 * @return void
@@ -534,30 +626,22 @@ class LandingViewComponent extends LandingBaseComponent
 				$isStore = \Bitrix\Landing\Manager::isStoreEnabled();
 				$options = $event->getParameter('options');
 				$meta = $landing->getMeta();
+				$options['url'] = $arResult['~LANDING_FULL_URL'] ?? $landing->getPublicUrl();
 				$options['folder_id'] = $landing->getFolderId();
 				$options['version'] = Manager::getVersion();
 				$options['default_section'] = $this->getCurrentBlockSection($type);
 				$options['specialType'] = $this->arResult['SPECIAL_TYPE'];
+				$options['tplCode'] = $meta['TPL_CODE'] ?: null;
 				$options['params'] = (array)$params['PARAMS'];
 				$options['params']['type'] = $params['TYPE'];
 				$options['params']['draftMode'] = $params['DRAFT_MODE'] == 'Y';
 				$options['params']['sef_url']['design_block'] = $arResult['TOP_PANEL_CONFIG']['urls']['designBlock'];
-				if ($options['specialType'] === Type::PSEUDO_SCOPE_CODE_FORMS)
+				if (
+					$options['specialType'] === Type::PSEUDO_SCOPE_CODE_FORMS &&
+					\Bitrix\Main\Loader::includeModule('crm')
+				)
 				{
-					$res = \Bitrix\Crm\WebForm\Internals\LandingTable::getList([
-						'select' => [
-							'FORM_ID'
-						],
-						'filter' => [
-							'LANDING_ID' => $landing->getId()
-						]
-					]);
-					if ($row = $res->fetch())
-					{
-						$options['formEditorData'] = \Bitrix\Landing\PublicAction\Form::getEditorData(
-							$row['FORM_ID']
-						)->getResult();
-					}
+					$options['formEditorData'] = $this->getCrmFormEditorData();
 				}
 				if ($options['params']['draftMode'])
 				{
@@ -580,18 +664,34 @@ class LandingViewComponent extends LandingBaseComponent
 				$options['helps'] = [
 					'DYNAMIC_BLOCKS' => \Bitrix\Landing\Help::getHelpUrl('DYNAMIC_BLOCKS')
 				];
+				// features
 				$options['features'] = [];
+				if (
+					($type === 'KNOWLEDGE' || $type === 'GROUP') &&
+					\Bitrix\Main\Loader::includeModule('disk')
+				)
+				{
+					Extension::load('file_dialog');
+					$options['features'][] = 'diskFile';
+				}
+				// rights
 				$options['rights'] = Rights::getOperationsForSite(
 					$landing->getSiteId()
 				);
+				// placements
 				$options['placements'] = array(
 					'blocks' => array(),
 					'image' => array()
 				);
 				$options['hooks'] = array(
 					'YACOUNTER' => array(),
-					'GACOUNTER' => array()
+					'GACOUNTER' => array(),
+					'B24BUTTON' => array()
 				);
+				if (!Manager::isB24())
+				{
+					unset($options['hooks']['B24BUTTON']);
+				}
 				$options['lastModified'] = isset($meta['DATE_MODIFY'])
 					? $meta['DATE_MODIFY']->getTimestamp()
 					: null;
@@ -683,6 +783,18 @@ class LandingViewComponent extends LandingBaseComponent
 					}
 				}
 				unset($hookFields);
+				// resolve button24's id
+				if (isset($options['hooks']['B24BUTTON']['CODE']) && $options['hooks']['B24BUTTON']['CODE'] !== 'N')
+				{
+					foreach (Hook\Page\B24button::getButtonsData() as $button)
+					{
+						if (strpos($button['SCRIPT'], $options['hooks']['B24BUTTON']['CODE']) !== false)
+						{
+							$options['hooks']['B24BUTTON']['ID'] = $button['ID'];
+							break;
+						}
+					}
+				}
 				// get system pages
 				foreach (Syspage::get($landing->getSiteId()) as $code => $page)
 				{
@@ -893,20 +1005,24 @@ class LandingViewComponent extends LandingBaseComponent
 
 		$urls = [];
 		$curUrl = $replaceParamUrl('landing_view');
+		$sessId = bitrix_sessid();
 		$urlsConfig = [
 			'publication' => [
 				'param' => $landing->getId(),
 				'code' => $landing->getXmlId(),
-				'site_code' => $site['XML_ID']
+				'site_code' => $site['XML_ID'],
+				'sessid' => $sessId
 			],
 			'publicationAll' => [
 				'param' => $landing->getId(),
 				'site_id' => $landing->getSiteId(),
 				'code' => $landing->getXmlId(),
-				'site_code' => $site['XML_ID']
+				'site_code' => $site['XML_ID'],
+				'sessid' => $sessId
 			],
-			'unpublic' => [
+			'publicationGlobal' => [
 				'param' => $landing->getId(),
+				'site_id' => $landing->getSiteId(),
 				'code' => $landing->getXmlId(),
 				'site_code' => $site['XML_ID']
 			],
@@ -914,13 +1030,13 @@ class LandingViewComponent extends LandingBaseComponent
 				'landing_mode' => 'preview',
 				'param' => $landing->getId(),
 				'code' => $landing->getXmlId(),
-				'site_code' => $site['XML_ID']
+				'site_code' => $site['XML_ID'],
+				'sessid' => $sessId
 			]
 		];
 		foreach ($urlsConfig as $code => $config)
 		{
 			$config['action'] = $code;
-			$config['sessid'] = bitrix_sessid();
 			$uri = new \Bitrix\Main\Web\Uri($curUrl);
 			$uri->addParams($config);
 			$urls[$code] = $uri;
@@ -1036,6 +1152,8 @@ class LandingViewComponent extends LandingBaseComponent
 			$this->checkParam('DRAFT_MODE', 'N');
 			$this->checkParam('PARAMS', array());
 
+			$this->forceUpdateNewFolders($this->arParams['SITE_ID']);
+
 			Type::setScope(
 				$this->arParams['TYPE']
 			);
@@ -1044,8 +1162,12 @@ class LandingViewComponent extends LandingBaseComponent
 			Landing::setEditMode();
 			$landing = Landing::createInstance($this->arParams['LANDING_ID']);
 
+			$this->arResult['AUTO_PUBLICATION_ENABLED'] = \CUserOptions::getOption('landing', 'auto_publication', 'Y') === 'Y';
 			$this->arResult['SUCCESS_SAVE'] = $this->request('success') === 'Y';
 			$this->arResult['LANDING'] = $landing;
+			$this->arResult['FAKE_PUBLICATION'] = !$this->arResult['AUTO_PUBLICATION_ENABLED']
+			                                      || ($this->arParams['DRAFT_MODE'] === 'Y')
+			                                      || $landing->fakePublication();
 			$this->arResult['~LANDING_FULL_URL'] = $landing->getPublicUrl(
 				false,
 				true,
@@ -1057,10 +1179,29 @@ class LandingViewComponent extends LandingBaseComponent
 
 			if ($landing->exist())
 			{
-				$this->arResult['SPECIAL_TYPE'] = $this->getSpecialTypeSite($landing->getSiteId());
+				$this->arResult['SPECIAL_TYPE'] = $this->getSpecialTypeSiteByLanding($landing);
+
+				// tmp fix for checking crm rights
+				if ($this->arResult['SPECIAL_TYPE'] === \Bitrix\Landing\Site\Type::PSEUDO_SCOPE_CODE_FORMS)
+				{
+					if (\Bitrix\Main\Loader::includeModule('crm'))
+					{
+						if (!\Bitrix\Crm\WebForm\Manager::checkWritePermission())
+						{
+							$this->addError('LANDING_ERROR_PAGE_NOT_FOUND', '', true);
+							parent::executeComponent();
+							return;
+						}
+					}
+					$this->checkFormInLanding($landing);
+				}
+
 				$this->arResult['SITES_COUNT'] = $this->getSitesCount();
 				$this->arResult['PAGES_COUNT'] = $this->getPagesCount($landing->getSiteId());
 				$this->arResult['SITE'] = $this->getSites(array(
+					'select' => array(
+						'DOMAIN_NAME' => 'DOMAIN.DOMAIN'
+					),
 					'filter' => array(
 						'ID' => $landing->getSiteId()
 					)
@@ -1154,12 +1295,30 @@ class LandingViewComponent extends LandingBaseComponent
 				);
 				$this->arResult['TOP_PANEL_CONFIG']['placements'] = $this->arResult['PLACEMENTS_SETTINGS'];
 
+				if (\Bitrix\Main\Loader::includeModule('bitrix24'))
+				{
+					$this->arResult['LICENSE'] = \CBitrix24::getLicenseType();
+				}
+
+				if ($this->arResult['SPECIAL_TYPE'] == Site\Type::PSEUDO_SCOPE_CODE_FORMS)
+				{
+					$crmFormEditorData = $this->getCrmFormEditorData();
+					if (
+						isset($crmFormEditorData['formOptions'])
+						&& is_array($crmFormEditorData['formOptions'])
+						&& isset($crmFormEditorData['formOptions']['name'])
+					)
+					{
+						$this->arResult['FORM_NAME'] = $crmFormEditorData['formOptions']['name'];
+					}
+				}
+
 				$this->onLandingView();
 				$this->onEpilog();
 			}
 			else
 			{
-				$this->addError('NOT_FOUND', 'Page not found', true);
+				$this->addError('LANDING_ERROR_PAGE_NOT_FOUND', '', true);
 			}
 
 

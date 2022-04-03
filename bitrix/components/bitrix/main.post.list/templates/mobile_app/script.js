@@ -670,7 +670,7 @@
 				container = BX.create("DIV", {
 					attrs : {
 						id : ("record-" + id.join('-') + '-cover'),
-						className : "feed-com-block-cover",
+						className : "feed-com-block-cover post-comment-active-progress",
 						"bx-mpl-xml-id" : this.getXmlId(),
 						"bx-mpl-entity-id" : id[1],
 						"bx-mpl-read-status" : "old"
@@ -948,6 +948,33 @@
 						});
 					}
 				});
+			}
+
+			if (
+				commentNode.getAttribute('bx-mpl-edit-show') == 'Y'
+				&& BX.Tasks
+				&& BX.Tasks.ResultAction
+				&& entityXmlId.indexOf('TASK_') === 0
+				&& BX.Tasks.ResultAction.getInstance().canCreateResult(+/\d+/.exec(entityXmlId))
+			)
+			{
+				var taskId = +/\d+/.exec(entityXmlId);
+				var result = BX.Tasks.ResultManager.getInstance().getResult(taskId);
+
+				if (
+					result
+					&& result.context === 'task'
+					&& result.canSetAsResult
+					&& result.canSetAsResult(id)
+				)
+				{
+					menuItems.push({
+						title: BX.message('BPC_MES_RESULT'),
+						callback: function() {
+							BX.Tasks.ResultAction.getInstance().createFromComment(id);
+						}
+					});
+				}
 			}
 		};
 

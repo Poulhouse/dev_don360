@@ -7,11 +7,10 @@
         {{ activeStep.text }}
       </div>
       <ul class="steps-list" >
-        <li v-for="(step, idx) in steps"
-            :key="step.id"
+        <li v-for="(step, idx) in steps" :key="step.id"
             @click="setActive(idx)"
             :class="['steps-item', {'active': activeIndex === idx}, {'done': activeIndex > idx}]"
-        ><span>{{ idx + 1 }}</span> {{ step.title }}</li>
+        ><span>{{ idx + 1 }}</span>{{ step.title }}</li>
       </ul>
       <div v-if="isActive">
         <button class="btn" @click="prev()" :disabled="prevDisabled">Назад</button>

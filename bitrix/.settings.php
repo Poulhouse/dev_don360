@@ -1,5 +1,5 @@
 <?php
-return array (
+return array (
   'utf_mode' => 
   array (
     'value' => true,
@@ -45,9 +45,9 @@
       array (
         'className' => '\\Bitrix\\Main\\DB\\MysqliConnection',
         'host' => 'localhost',
-        'database' => 'u001_don360',
-        'login' => 'u001_don360',
-        'password' => 'u001_don360',
+        'database' => 'bx_don360',
+        'login' => 'bitrix',
+        'password' => '230993kpss!',
         'options' => 2.0,
       ),
     ),
@@ -57,7 +57,7 @@
   array (
     'value' => 
     array (
-      'crypto_key' => 'afd449f90f6089d07b2c93f0bbab4772',
+      'crypto_key' => '7264300fe4ac4875dd4e2b88d74e1c35',
     ),
     'readonly' => true,
   ),

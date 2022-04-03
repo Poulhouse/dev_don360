@@ -1005,6 +1005,7 @@ class CUserTypeManager
 			if($arUserType)
 			{
 				$user_type_id = $arUserType["USER_TYPE_ID"];
+				$arUserField += $arUserType;
 			}
 		}
 
@@ -1585,7 +1586,7 @@ class CUserTypeManager
 		{
 			foreach($value as $v)
 			{
-				if($v <> '')
+				if((string)$v <> '')
 					return true;
 			}
 
@@ -1593,7 +1594,7 @@ class CUserTypeManager
 		}
 		else
 		{
-			if($value <> '')
+			if((string)$value <> '')
 				return true;
 			else
 				return false;
@@ -1907,7 +1908,7 @@ class CUserTypeManager
 
 						if(
 							(is_array($value) && (implode("", $value) <> ''))
-							|| ((!is_array($value)) && ($value <> ''))
+							|| ((!is_array($value)) && ((string)$value <> ''))
 						)
 						{
 							$html .= '<tr><td>' . call_user_func_array(
@@ -2552,7 +2553,7 @@ class CUserTypeManager
 						{
 							if(
 								(is_array($value) && (implode("", $value) <> ''))
-								|| ((!is_array($value)) && ($value <> ''))
+								|| ((!is_array($value)) && ((string)$value <> ''))
 							)
 							{
 								$bFound = true;
@@ -2742,7 +2743,7 @@ class CUserTypeManager
 								{
 									if(
 										(is_array($value) && (implode("", $value) <> ''))
-										|| ((!is_array($value)) && ($value <> ''))
+										|| ((!is_array($value)) && ((string)$value <> ''))
 									)
 									{
 										$bFound = true;
@@ -2849,7 +2850,7 @@ class CUserTypeManager
 							if(is_callable(array($arUserField["USER_TYPE"]["CLASS_NAME"], "onbeforesave")))
 								$value = call_user_func_array(array($arUserField["USER_TYPE"]["CLASS_NAME"], "onbeforesave"), array($arUserField, $value, $user_id));
 
-							if($value <> '')
+							if((string)$value <> '')
 							{
 								switch($arInsertType[$arUserField["ID"]]["BASE_TYPE"])
 								{
@@ -3153,16 +3154,21 @@ class CUserTypeManager
 				case 'int':
 				case 'enum':
 				case 'file':
-					$field = new Entity\IntegerField($fieldName, $fieldParameters);
+					$field = (new Entity\IntegerField($fieldName, $fieldParameters))
+						->configureNullable();
 					break;
 				case 'double':
-					$field = new Entity\FloatField($fieldName, $fieldParameters);
+					$field = (new Entity\FloatField($fieldName, $fieldParameters))
+						->configureNullable();
 					break;
 				case 'string':
-					$field = new Entity\StringField($fieldName, $fieldParameters);
+					$field = (new Entity\StringField($fieldName, $fieldParameters))
+						->configureNullable();
 					break;
 				case 'datetime':
-					$field = new Entity\DatetimeField($fieldName, $fieldParameters);
+					$field = (new Entity\DatetimeField($fieldName, $fieldParameters))
+						->configureNullable()
+						->configureUseTimezone($arUserField['SETTINGS']['USE_TIMEZONE'] == 'Y');
 					break;
 				default:
 					throw new \Bitrix\Main\ArgumentException(sprintf(
@@ -3487,7 +3493,7 @@ class CUserFieldEnum
 		$salt = RandString(8);
 		foreach($values as $key => $value)
 		{
-			if(strncmp($key, "n", 1) === 0 && $value["DEL"] != "Y" && $value["VALUE"] <> '')
+			if(strncmp($key, "n", 1) === 0 && $value["DEL"] != "Y" && (string)$value["VALUE"] <> '')
 			{
 				if($value["XML_ID"] == '')
 				{
@@ -3523,7 +3529,7 @@ class CUserFieldEnum
 			if(array_key_exists($arEnum["ID"], $values))
 			{
 				$value = $values[$arEnum["ID"]];
-				if($value["VALUE"] == '' || $value["DEL"] == "Y")
+				if((string)$value["VALUE"] == '' || $value["DEL"] == "Y")
 				{
 				}
 				elseif(
@@ -3574,7 +3580,7 @@ class CUserFieldEnum
 
 		foreach($values as $key => $value)
 		{
-			if(strncmp($key, "n", 1) === 0 && $value["DEL"] != "Y" && $value["VALUE"] <> '')
+			if(strncmp($key, "n", 1) === 0 && $value["DEL"] != "Y" && (string)$value["VALUE"] <> '')
 			{
 				if($value["XML_ID"] == '')
 					$value["XML_ID"] = md5($value["VALUE"]);
@@ -3595,7 +3601,7 @@ class CUserFieldEnum
 			if(array_key_exists($arEnum["ID"], $values))
 			{
 				$value = $values[$arEnum["ID"]];
-				if($value["VALUE"] == '' || $value["DEL"] == "Y")
+				if((string)$value["VALUE"] == '' || $value["DEL"] == "Y")
 				{
 					$DB->Query("DELETE FROM b_user_field_enum WHERE ID = " . $arEnum["ID"], false, "FILE: " . __FILE__ . "<br>LINE: " . __LINE__);
 				}

@@ -52,19 +52,24 @@
 	      this.parent = parent;
 	      this.actions = eval(actions);
 	      this.types = eval(types);
-	      BX.addCustomEvent(window, 'Dropdown::change', BX.proxy(function (id, event, item, dataItem) {
-	        this.isPanelControl(BX(id)) && this._dropdownChange(id, event, item, dataItem);
-	      }, this));
-	      BX.addCustomEvent(window, 'Dropdown::load', BX.proxy(function (id, event, item, dataItem) {
-	        this.isPanelControl(BX(id)) && this._dropdownChange(id, event, item, dataItem);
-	      }, this));
+	      BX.addCustomEvent(window, 'Dropdown::change', BX.proxy(this._dropdownEventHandle, this));
+	      BX.addCustomEvent(window, 'Dropdown::load', BX.proxy(this._dropdownEventHandle, this));
 	      var panel = this.getPanel();
 	      BX.bind(panel, 'change', BX.delegate(this._checkboxChange, this));
 	      BX.bind(panel, 'click', BX.delegate(this._clickOnButton, this));
-	      BX.addCustomEvent(window, 'Grid::updated', function () {
-	        var cancelButton = BX('grid_cancel_button');
-	        cancelButton && BX.fireEvent(BX.firstChild(cancelButton), 'click');
-	      });
+	      BX.addCustomEvent(window, 'Grid::updated', BX.proxy(this._gridUpdatedEventHandle, this));
+	    },
+	    destroy: function destroy() {
+	      BX.removeCustomEvent(window, 'Dropdown::change', BX.proxy(this._dropdownEventHandle, this));
+	      BX.removeCustomEvent(window, 'Dropdown::load', BX.proxy(this._dropdownEventHandle, this));
+	      BX.removeCustomEvent(window, 'Grid::updated', BX.proxy(this._gridUpdatedEventHandle, this));
+	    },
+	    _gridUpdatedEventHandle: function _gridUpdatedEventHandle() {
+	      var cancelButton = BX('grid_cancel_button');
+	      cancelButton && BX.fireEvent(BX.firstChild(cancelButton), 'click');
+	    },
+	    _dropdownEventHandle: function _dropdownEventHandle(id, event, item, dataItem) {
+	      this.isPanelControl(BX(id)) && this._dropdownChange(id, event, item, dataItem);
 	    },
 	    resetForAllCheckbox: function resetForAllCheckbox() {
 	      var checkbox = this.getForAllCheckbox();
@@ -119,7 +124,7 @@
 	      return node.tagName === 'SELECT';
 	    },
 	    createDropdown: function createDropdown(data, relative) {
-	      var container = this.createContainer(data.ID, relative);
+	      var container = this.createContainer(data.ID, relative, {});
 	      var dropdown = BX.create('div', {
 	        props: {
 	          className: 'main-dropdown main-grid-panel-control',
@@ -143,7 +148,7 @@
 	      return container;
 	    },
 	    createCheckbox: function createCheckbox(data, relative) {
-	      var checkbox = this.createContainer(data.ID, relative);
+	      var checkbox = this.createContainer(data.ID, relative, {});
 	      var inner = BX.create('span', {
 	        props: {
 	          className: 'main-grid-checkbox-container'
@@ -200,7 +205,7 @@
 	     * @returns {*}
 	     */
 	    createText: function createText(data, relative) {
-	      var container = this.createContainer(data.ID, relative);
+	      var container = this.createContainer(data.ID, relative, {});
 	      var title = BX.type.isNotEmptyString(data["TITLE"]) ? data["TITLE"] : "";
 
 	      if (title !== "") {
@@ -230,7 +235,9 @@
 	      return container;
 	    },
 	    createHidden: function createHidden(data, relative) {
-	      var container = this.createContainer(data.ID, relative);
+	      var container = this.createContainer(data.ID, relative, {
+	        CLASS: 'main-grid-panel-hidden-control-container'
+	      });
 	      container.appendChild(BX.create('input', {
 	        props: {
 	          id: data.ID + '_control',
@@ -260,7 +267,7 @@
 	      }
 
 	      this.prepareButton();
-	      var container = this.createContainer(data.ID, relative);
+	      var container = this.createContainer(data.ID, relative, {});
 	      container.appendChild(this.button);
 	      return container;
 	    },
@@ -302,7 +309,7 @@
 	     * @returns {*}
 	     */
 	    createLink: function createLink(data, relative) {
-	      var container = this.createContainer(data.ID, relative);
+	      var container = this.createContainer(data.ID, relative, {});
 	      var link = BX.create('a', {
 	        props: {
 	          className: 'main-grid-link' + (data.CLASS ? ' ' + data.CLASS : ''),
@@ -318,7 +325,9 @@
 	      return container;
 	    },
 	    createCustom: function createCustom(data, relative) {
-	      var container = this.createContainer(data.ID, relative);
+	      var container = this.createContainer(data.ID, relative, {
+	        CLASS: 'main-grid-panel-hidden-control-container'
+	      });
 	      var custom = BX.create('div', {
 	        props: {
 	          className: 'main-grid-panel-custom' + (data.CLASS ? ' ' + data.CLASS : '')
@@ -328,12 +337,13 @@
 	      container.appendChild(custom);
 	      return container;
 	    },
-	    createContainer: function createContainer(id, relative) {
+	    createContainer: function createContainer(id, relative, options) {
 	      id = id.replace('_control', '');
 	      relative = relative.replace('_control', '');
+	      options = options || {};
 	      return BX.create('span', {
 	        props: {
-	          className: this.parent.settings.get('classPanelControlContainer'),
+	          className: this.parent.settings.get('classPanelControlContainer') + (options.CLASS ? ' ' + options.CLASS : ''),
 	          id: id
 	        },
 	        attrs: {
@@ -396,7 +406,7 @@
 	      return BX.type.isPlainObject(controlObject) && 'TYPE' in controlObject && 'ID' in controlObject;
 	    },
 	    createDate: function createDate(data, relative) {
-	      var container = this.createContainer(data.ID, relative);
+	      var container = this.createContainer(data.ID, relative, {});
 	      var date = BX.decl({
 	        block: 'main-ui-date',
 	        mix: ['main-grid-panel-date'],
@@ -3018,7 +3028,8 @@
 	        this.popup = new BX.PopupWindow(this.getPopupId(), null, {
 	          autoHide: true,
 	          overlay: 0.3,
-	          width: 400,
+	          minWidth: 400,
+	          maxWidth: 800,
 	          contentNoPaddings: true,
 	          closeByEsc: true,
 	          buttons: [new BX.PopupWindowButton({
@@ -3069,7 +3080,10 @@
 	  BX.Grid.Pagesize.prototype = {
 	    init: function init(parent) {
 	      this.parent = parent;
-	      BX.addCustomEvent('Dropdown::change', BX.delegate(this.onChange, this));
+	      BX.addCustomEvent('Dropdown::change', BX.proxy(this.onChange, this));
+	    },
+	    destroy: function destroy() {
+	      BX.removeCustomEvent('Dropdown::change', BX.proxy(this.onChange, this));
 	    },
 	    onChange: function onChange(id, event, item, dataValue, value) {
 	      var self = this;
@@ -3384,12 +3398,22 @@
 	      this.panel = this.getPanel();
 	      this.bindOnRowsEvents();
 	    },
+	    destroy: function destroy() {
+	      this.unbindOnRowsEvents();
+	    },
 	    bindOnRowsEvents: function bindOnRowsEvents() {
-	      BX.addCustomEvent('Grid::thereSelectedRows', BX.delegate(this._onThereSelectedRows, this));
-	      BX.addCustomEvent('Grid::allRowsSelected', BX.delegate(this._onThereSelectedRows, this));
-	      BX.addCustomEvent('Grid::noSelectedRows', BX.delegate(this._onNoSelectedRows, this));
-	      BX.addCustomEvent('Grid::allRowsUnselected', BX.delegate(this._onNoSelectedRows, this));
-	      BX.addCustomEvent('Grid::updated', BX.delegate(this._onNoSelectedRows, this));
+	      BX.addCustomEvent('Grid::thereSelectedRows', BX.proxy(this._onThereSelectedRows, this));
+	      BX.addCustomEvent('Grid::allRowsSelected', BX.proxy(this._onThereSelectedRows, this));
+	      BX.addCustomEvent('Grid::noSelectedRows', BX.proxy(this._onNoSelectedRows, this));
+	      BX.addCustomEvent('Grid::allRowsUnselected', BX.proxy(this._onNoSelectedRows, this));
+	      BX.addCustomEvent('Grid::updated', BX.proxy(this._onNoSelectedRows, this));
+	    },
+	    unbindOnRowsEvents: function unbindOnRowsEvents() {
+	      BX.removeCustomEvent('Grid::thereSelectedRows', BX.proxy(this._onThereSelectedRows, this));
+	      BX.removeCustomEvent('Grid::allRowsSelected', BX.proxy(this._onThereSelectedRows, this));
+	      BX.removeCustomEvent('Grid::noSelectedRows', BX.proxy(this._onNoSelectedRows, this));
+	      BX.removeCustomEvent('Grid::allRowsUnselected', BX.proxy(this._onNoSelectedRows, this));
+	      BX.removeCustomEvent('Grid::updated', BX.proxy(this._onNoSelectedRows, this));
 	    },
 	    bindOnWindowEvents: function bindOnWindowEvents() {
 	      BX.bind(window, 'resize', BX.proxy(this._onResize, this));
@@ -3979,7 +4003,10 @@
 	    },
 	    _onRightClick: function _onRightClick(event) {
 	      event.preventDefault();
-	      this.showActionsMenu(event);
+
+	      if (!this.isHeadChild()) {
+	        this.showActionsMenu(event);
+	      }
 	    },
 	    getDefaultAction: function getDefaultAction() {
 	      return BX.data(this.getNode(), 'default-action');
@@ -4728,11 +4755,6 @@
 	      if (event) {
 	        this.getActionsMenu().popupWindow.popupContainer.style.top = event.pageY - 25 + BX.PopupWindow.getOption("offsetTop") + "px";
 	        this.getActionsMenu().popupWindow.popupContainer.style.left = event.pageX + 20 + BX.PopupWindow.getOption("offsetLeft") + "px";
-	      } else {
-	        var popupWindow = this.actionsMenu.getPopupWindow();
-	        var pos = BX.pos(this.getActionsButton());
-	        BX.style(popupWindow.getPopupContainer(), 'top', pos.top - 20 + 'px');
-	        BX.style(popupWindow.getPopupContainer(), 'left', pos.left + 25 + 'px');
 	      }
 	    },
 	    closeActionsMenu: function closeActionsMenu() {
@@ -4788,10 +4810,13 @@
 
 	      return result;
 	    },
+	    isSelectable: function isSelectable() {
+	      return !this.isEdit() || this.parent.getParam('ALLOW_EDIT_SELECTION');
+	    },
 	    select: function select() {
 	      var checkbox;
 
-	      if (!this.isEdit() && (this.parent.getParam('ADVANCED_EDIT_MODE') || !this.parent.getRows().hasEditable())) {
+	      if (this.isSelectable() && (this.parent.getParam('ADVANCED_EDIT_MODE') || !this.parent.getRows().hasEditable())) {
 	        checkbox = this.getCheckbox();
 
 	        if (checkbox) {
@@ -4806,7 +4831,7 @@
 	      }
 	    },
 	    unselect: function unselect() {
-	      if (!this.isEdit()) {
+	      if (this.isSelectable()) {
 	        BX.removeClass(this.getNode(), this.settings.get('classCheckedRow'));
 	        this.bindNodes.forEach(function (row) {
 	          BX.removeClass(row, this.settings.get('classCheckedRow'));
@@ -4945,6 +4970,7 @@
 	              return label;
 	            });
 	            var labelsContainer = BX.Tag.render(_templateObject5(), labels);
+	            BX.Dom.clean(container);
 	            var oldLabelsContainer = container.querySelector('.main-grid-labels');
 
 	            if (BX.Type.isDomNode(oldLabelsContainer)) {
@@ -6269,6 +6295,11 @@
 	      classSettingsWindowShow: 'main-grid-settings-window-show',
 	      classSettingsWindowSelectAll: 'main-grid-settings-window-select-all',
 	      classSettingsWindowUnselectAll: 'main-grid-settings-window-unselect-all',
+	      classSettingsWindowSearchSectionsWrapper: 'main-grid-settings-window-search-section-wrapper',
+	      classSettingsWindowSearchActiveSectionIcon: 'main-grid-settings-window-search-section-item-icon-active',
+	      classSettingsWindowSearchSectionInput: 'main-grid-settings-window-search-section-input',
+	      classSettingsWindowSearchSectionItemHidden: 'main-grid-settings-window-list-item-hidden',
+	      classSettingsWindowSearchSectionItemVisible: 'main-grid-settings-window-list-item-visible',
 	      classSettingsButton: 'main-grid-interface-settings-icon',
 	      classSettingsButtonActive: 'main-grid-interface-settings-icon-active',
 	      classSettingsWindowClose: 'main-grid-settings-window-actions-item-close',
@@ -6334,6 +6365,12 @@
 	  };
 	})();
 
+	function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
+
+	function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+	function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 	(function () {
 
 	  BX.namespace('BX.Grid');
@@ -6351,6 +6388,8 @@
 	    this.applyButton = null;
 	    this.resetButton = null;
 	    this.cancelButton = null;
+	    this.filterSections = null;
+	    this.filterSectionsSearchInput = null;
 	    this.init(parent);
 	    BX.onCustomEvent(window, 'BX.Grid.SettingsWindow:init', [this]);
 	  };
@@ -6847,18 +6886,111 @@
 	        });
 	        this.getItems().forEach(function (item) {
 	          BX.bind(item.getNode(), 'click', BX.delegate(this.onItemClick, this));
+	          BX.bind(item.getNode(), 'animationend', this.onAnimationEnd.bind(this, item.getNode()));
 	        }, this);
 	        BX.bind(this.getResetButton(), 'click', BX.proxy(this.onResetButtonClick, this));
 	        BX.bind(this.getApplyButton(), 'click', BX.proxy(this.onApplyButtonClick, this));
 	        BX.bind(this.getCancelButton(), 'click', BX.proxy(this.popup.close, this.popup));
 	        BX.bind(this.getSelectAllButton(), 'click', BX.delegate(this.onSelectAll, this));
 	        BX.bind(this.getUnselectAllButton(), 'click', BX.delegate(this.onUnselectAll, this));
+
+	        if (this.parent.arParams['COLUMNS_ALL_WITH_SECTIONS'] && Object.keys(this.parent.arParams['COLUMNS_ALL_WITH_SECTIONS']).length) {
+	          this.prepareFilterSections();
+	        }
+
+	        if (this.parent.arParams['ENABLE_FIELDS_SEARCH']) {
+	          this.prepareFilterSectionsSearchInput();
+	        }
 	      }
 
 	      return this.popup;
 	    },
 	    onItemClick: function onItemClick() {
 	      this.adjustActionButtonsState();
+	    },
+	    onAnimationEnd: function onAnimationEnd(node) {
+	      node.style.display = BX.Dom.hasClass(node, this.parent.settings.get('classSettingsWindowSearchSectionItemHidden')) ? 'none' : 'inline-block';
+	    },
+	    prepareFilterSections: function prepareFilterSections() {
+	      var filterSections = this.getFilterSections();
+
+	      var _iterator = _createForOfIteratorHelper(filterSections),
+	          _step;
+
+	      try {
+	        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+	          var item = _step.value;
+	          BX.bind(item, 'click', this.onFilterSectionClick.bind(this, item));
+	        }
+	      } catch (err) {
+	        _iterator.e(err);
+	      } finally {
+	        _iterator.f();
+	      }
+	    },
+
+	    /**
+	     * Gets all filter section items
+	     * @return {HTMLCollection}
+	     */
+	    getFilterSections: function getFilterSections() {
+	      if (!this.filterSections) {
+	        var _wrapper$children;
+
+	        var wrapper = BX.Grid.Utils.getByClass(this.getPopup().contentContainer, this.parent.settings.get('classSettingsWindowSearchSectionsWrapper'), true);
+	        this.filterSections = (_wrapper$children = wrapper.children) !== null && _wrapper$children !== void 0 ? _wrapper$children : new HTMLCollection();
+	      }
+
+	      return this.filterSections;
+	    },
+	    onFilterSectionClick: function onFilterSectionClick(item) {
+	      var activeClass = this.parent.settings.get('classSettingsWindowSearchActiveSectionIcon');
+	      var sectionId = item.dataset.uiGridFilterSectionButton;
+	      var section = document.querySelectorAll("[data-ui-grid-filter-section='" + sectionId + "']");
+
+	      if (BX.Dom.hasClass(item.firstChild, activeClass)) {
+	        BX.Dom.removeClass(item.firstChild, activeClass);
+	        BX.Dom.hide(section[0]);
+	      } else {
+	        BX.Dom.addClass(item.firstChild, activeClass);
+	        BX.Dom.show(section[0]);
+	      }
+	    },
+	    prepareFilterSectionsSearchInput: function prepareFilterSectionsSearchInput() {
+	      var input = this.getFilterSectionsSearchInput();
+	      BX.bind(input, 'input', this.onFilterSectionSearchInput.bind(this));
+	      BX.bind(input.previousElementSibling, 'click', this.onFilterSectionSearchInputClear.bind(this));
+	    },
+	    getFilterSectionsSearchInput: function getFilterSectionsSearchInput() {
+	      if (!this.filterSectionsSearchInput) {
+	        this.filterSectionsSearchInput = BX.Grid.Utils.getByClass(this.getPopup().contentContainer, this.parent.settings.get('classSettingsWindowSearchSectionInput'), true);
+	      }
+
+	      return this.filterSectionsSearchInput;
+	    },
+	    onFilterSectionSearchInput: function onFilterSectionSearchInput() {
+	      var search = this.filterSectionsSearchInput.value;
+
+	      if (search.length) {
+	        search = search.toLowerCase();
+	      }
+
+	      this.items.forEach(function (item) {
+	        var title = item.lastTitle.toLowerCase();
+
+	        if (search.length && title.indexOf(search) === -1) {
+	          BX.Dom.removeClass(item.getNode(), this.parent.settings.get('classSettingsWindowSearchSectionItemVisible'));
+	          BX.Dom.addClass(item.getNode(), this.parent.settings.get('classSettingsWindowSearchSectionItemHidden'));
+	        } else {
+	          BX.Dom.removeClass(item.getNode(), this.parent.settings.get('classSettingsWindowSearchSectionItemHidden'));
+	          BX.Dom.addClass(item.getNode(), this.parent.settings.get('classSettingsWindowSearchSectionItemVisible'));
+	          item.getNode().style.display = 'inline-block';
+	        }
+	      }.bind(this));
+	    },
+	    onFilterSectionSearchInputClear: function onFilterSectionSearchInputClear() {
+	      this.filterSectionsSearchInput.value = '';
+	      this.onFilterSectionSearchInput();
 	    },
 
 	    /**
@@ -8035,6 +8167,8 @@
 	   * @param {string} arParams.CONFIRM_MESSAGE
 	   * @param {string} arParams.CONFIRM_FOR_ALL_MESSAGE
 	   * @param {string} arParams.CONFIRM_RESET_MESSAGE
+	   * @param {object} arParams.COLUMNS_ALL_WITH_SECTIONS
+	   * @param {boolean} arParams.ENABLE_FIELDS_SEARCH
 	   * @param {string} arParams.RESET_DEFAULT
 	   * @param {object} userOptions
 	   * @param {object} userOptionsActions
@@ -8166,12 +8300,16 @@
 	      BX.removeCustomEvent(window, 'Grid::unselectRows', BX.proxy(this._onUnselectRows, this));
 	      BX.removeCustomEvent(window, 'Grid::allRowsUnselected', BX.proxy(this._onUnselectRows, this));
 	      BX.removeCustomEvent(window, 'Grid::headerPinned', BX.proxy(this.bindOnCheckAll, this));
+	      BX.removeCustomEvent(window, 'Grid::updated', BX.proxy(this._onGridUpdated, this));
 	      this.getPinHeader() && this.getPinHeader().destroy();
 	      this.getFader() && this.getFader().destroy();
 	      this.getResize() && this.getResize().destroy();
 	      this.getColsSortable() && this.getColsSortable().destroy();
 	      this.getRowsSortable() && this.getRowsSortable().destroy();
 	      this.getSettingsWindow() && this.getSettingsWindow().destroy();
+	      this.getActionsPanel() && this.getActionsPanel().destroy();
+	      this.getPinPanel() && this.getPinPanel().destroy();
+	      this.getPageSize() && this.getPageSize().destroy();
 	    },
 	    _onFrameResize: function _onFrameResize() {
 	      BX.onCustomEvent(window, 'Grid::resize', [this]);
@@ -8365,6 +8503,8 @@
 	      if (this.getParam('ALLOW_PIN_HEADER')) {
 	        this.getPinHeader()._onGridUpdate();
 	      }
+
+	      BX.onCustomEvent(window, 'Grid::resize', [this]);
 	    },
 	    editSelectedSave: function editSelectedSave() {
 	      var data = {
@@ -8559,6 +8699,9 @@
 	     */
 	    getActionsPanel: function getActionsPanel() {
 	      return this.actionPanel;
+	    },
+	    getPinPanel: function getPinPanel() {
+	      return this.pinPanel;
 	    },
 	    getApplyButton: function getApplyButton() {
 	      return BX.Grid.Utils.getByClass(this.getContainer(), this.settings.get('classPanelButton'), true);
@@ -8771,6 +8914,18 @@
 	        }, true, false);
 
 	        if (cell && self.isSortableHeader(cell) && !self.preventSortableClick) {
+	          var onBeforeSortEvent = new BX.Event.BaseEvent({
+	            data: {
+	              grid: self,
+	              columnName: BX.data(cell, 'name')
+	            }
+	          });
+	          BX.Event.EventEmitter.emit('BX.Main.grid:onBeforeSort', onBeforeSortEvent);
+
+	          if (onBeforeSortEvent.isDefaultPrevented()) {
+	            return;
+	          }
+
 	          self.preventSortableClick = false;
 
 	          self._clickOnSortableHeader(cell, event);
@@ -8979,7 +9134,6 @@
 	            self.bindOnRowEvents();
 	            self.bindOnMoreButtonEvents();
 	            self.bindOnClickPaginationLinks();
-	            self.bindOnClickHeader();
 	            self.bindOnCheckAll();
 	            self.updateCounterDisplayed();
 	            self.updateCounterSelected();
@@ -9323,7 +9477,6 @@
 	          self.bindOnRowEvents();
 	          self.bindOnMoreButtonEvents();
 	          self.bindOnClickPaginationLinks();
-	          self.bindOnClickHeader();
 	          self.bindOnCheckAll();
 	          self.updateCounterDisplayed();
 	          self.updateCounterSelected();
@@ -9361,7 +9514,6 @@
 	        self.bindOnRowEvents();
 	        self.bindOnMoreButtonEvents();
 	        self.bindOnClickPaginationLinks();
-	        self.bindOnClickHeader();
 	        self.bindOnCheckAll();
 	        self.updateCounterDisplayed();
 	        self.updateCounterSelected();
@@ -9857,5 +10009,5 @@
 	  };
 	})();
 
-}((this.window = this.window || {}),BX.Event,BX,BX));
+}((this.window = this.window || {}),BX.Event,BX.UI,BX));
 //# sourceMappingURL=script.js.map

@@ -1,4 +1,10 @@
-<?if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
+<?php
+
+if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)
+{
+	die();
+}
+
 /**
  * @var array $arResult
  * @var array $arParams
@@ -16,7 +22,12 @@ global $USER;
 \Bitrix\Main\Page\Asset::getInstance()->addString('<link href="'.CUtil::GetAdditionalFileURL('/bitrix/js/ui/icons/base/ui.icons.base.css').'" type="text/css" rel="stylesheet" />');
 \Bitrix\Main\Page\Asset::getInstance()->addString('<link href="'.CUtil::GetAdditionalFileURL('/bitrix/js/ui/icons/b24/ui.icons.b24.css').'" type="text/css" rel="stylesheet" />');
 
-CUtil::InitJSCore(array("uploader", "date", "fx", "ls")); // does not work
+$extensionsList = [ 'uploader', 'date', 'fx', 'ls' ];
+if (CModule::IncludeModule('socialnetwork'))
+{
+	$extensionsList[] = 'comment_aux';
+}
+CUtil::InitJSCore($extensionsList); // does not work
 
 $prefixNode = $arParams["ENTITY_XML_ID"].'-'.$arParams["EXEMPLAR_ID"];
 $eventNodeId = $prefixNode."_main";
@@ -96,7 +107,9 @@ ob_start();
 	</div>
 	#AFTER_RECORD#<?
 	?><script>BX.ready(function() { BX.onCustomEvent(BX('<?=$eventNodeIdTemplate?>'), 'OnUCCommentIsInDOM', ['#ID#', BX('<?=$eventNodeIdTemplate?>')]);});</script><?
-?></div><? // post-comment-block
+?></div>
+<!--RCRD_END_#FULL_ID#-->
+<? // post-comment-block
 $template = preg_replace("/[\t\n]/", "", ob_get_clean());
 
 ob_start();
