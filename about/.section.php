@@ -1,6 +1,6 @@
 <?
 $sSectionName = "О компании";
-$arDirProperties = Array(
-
+$arDirProperties = array(
+   "description" => "Когда она достигла первых холмов италийских гор."
 );
 ?>
