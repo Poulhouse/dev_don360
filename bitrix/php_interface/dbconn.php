@@ -22,3 +22,5 @@ define("BX_DISABLE_INDEX_PAGE", true);
 
 define("BX_UTF", true);
 mb_internal_encoding("UTF-8");
+date_default_timezone_set("Europe/Moscow");
+define('BX_CRONTAB_SUPPORT', true);

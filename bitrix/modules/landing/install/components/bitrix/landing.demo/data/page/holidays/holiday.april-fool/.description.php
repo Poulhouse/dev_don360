@@ -80,7 +80,7 @@ return [
 							<a href="#block@block[19.6.features_two_cols_with_bg_pattern]" class="landing-block-node-menu-list-item-link nav-link p-0 g-font-size-13" target="_self">Products</a>
 						</li>
 						<li class="landing-block-node-menu-list-item nav-item g-mx-20--lg g-mb-7 g-mb-0--lg">
-							<a href="#block@block[04.7.one_col_fix_with_title_and_text_2]" class="landing-block-node-menu-list-item-link nav-link p-0 g-font-size-13" target="_self">portfolio</a>
+							<a href="#block@block[04.7.one_col_fix_with_title_and_text_2]" class="landing-block-node-menu-list-item-link nav-link p-0 g-font-size-13" target="_self">main</a>
 						</li>
 						
 						
