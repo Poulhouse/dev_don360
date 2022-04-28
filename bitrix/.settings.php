@@ -1,5 +1,4 @@
 <?php
-
 return array (
   'utf_mode' => 
   array (
@@ -58,7 +57,7 @@ return array (
   array (
     'value' => 
     array (
-      'crypto_key' => 'afd449f90f6089d07b2c93f0bbab4772',
+      'crypto_key' => '7264300fe4ac4875dd4e2b88d74e1c35',
     ),
     'readonly' => true,
   ),
