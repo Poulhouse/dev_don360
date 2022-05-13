@@ -5,6 +5,9 @@
 *.txt
 .tpl
 .well-known/
+/bitrix/managed_cache/
+/bitrix/cache/
+/bitrix/backup/
 /import/
 /gitpull/
 *.back*
