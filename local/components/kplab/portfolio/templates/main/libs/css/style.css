@@ -45,11 +45,11 @@ body .pos-static {
     background-color: var(--card_bg_black);
 }
 
-.banners-big__title {
+.banners-big__title h1{
     font-weight: bold;
     margin: 0;
 }
-.banners-big__title--middle {
+.banners-big__title--middle h1{
     font-size: 56px;
     line-height: 66px;
 }

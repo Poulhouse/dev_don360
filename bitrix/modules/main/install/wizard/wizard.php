@@ -1,4 +1,4 @@
-<?
+<?php
 if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true)
 	die();
 
@@ -140,7 +140,7 @@ class AgreementStep extends CWizardStep
 
 	function ShowStep()
 	{
-		$this->content = '<br /><iframe name="license_text" src="/license.php" width="100%" height="250" border="0" frameBorder="1" scrolling="yes"></iframe><br /><br />';
+		$this->content = '<br /><iframe name="license_text" src="/bitrix/legal/license.php" width="100%" height="250" border="0" frameBorder="1" scrolling="yes"></iframe><br /><br />';
 		$this->content .= $this->ShowCheckboxField("agree_license", "Y", Array("id" => "agree_license_id", "tabindex" => "1"));
 		$this->content .= '&nbsp;<label for="agree_license_id">'.InstallGetMessage("LICENSE_AGREE_PROMT").'</label>';
 
@@ -305,7 +305,7 @@ class AgreementStep4VM extends CWizardStep
 
 	function ShowStep()
 	{
-		$this->content = '<iframe name="license_text" src="/license.php" width="100%" height="250" border="0" frameBorder="1" scrolling="yes"></iframe><br /><br />';
+		$this->content = '<iframe name="license_text" src="/bitrix/legal/license.php" width="100%" height="250" border="0" frameBorder="1" scrolling="yes"></iframe><br /><br />';
 		$this->content .= $this->ShowCheckboxField("agree_license", "Y", Array("id" => "agree_license_id", "tabindex" => "1"));
 		$this->content .= '&nbsp;<label for="agree_license_id">'.InstallGetMessage("LICENSE_AGREE_PROMT").'</label>';
 		$this->content .= '<script type="text/javascript">setTimeout(function() {document.getElementById("agree_license_id").focus();}, 500);</script>';
@@ -1875,10 +1875,9 @@ class CreateDBStep extends CWizardStep
 		}
 
 		$after_connNew = "<"."?php\n".
-			"$"."connection = \\Bitrix\\Main\\Application::getConnection();\n".
-			($codePage <> '' ? "$"."connection->queryExecute(\"SET NAMES '".$codePage."'\");\n" : "").
-			($this->sqlMode !== false ? "$"."connection->queryExecute(\"SET sql_mode='".$this->sqlMode."'\");\n" : "").
-			($this->utf8 ? "$"."connection->queryExecute('SET collation_connection = \"utf8_unicode_ci\"');\n" : "")
+			($codePage <> '' ? "$"."this->queryExecute(\"SET NAMES '".$codePage."'\");\n" : "").
+			($this->sqlMode !== false ? "$"."this->queryExecute(\"SET sql_mode='".$this->sqlMode."'\");\n" : "").
+			($this->utf8 ? "$"."this->queryExecute('SET collation_connection = \"utf8_unicode_ci\"');\n" : "")
 		;
 
 		$filePathNew = $_SERVER["DOCUMENT_ROOT"].BX_PERSONAL_ROOT."/php_interface/after_connect_d7.php";
@@ -2704,9 +2703,7 @@ class CreateAdminStep extends CWizardStep
 		{
 			if (BXInstallServices::CreateWizardIndex($wizardName, $errorMessageTmp))
 			{
-				BXInstallServices::DeleteDirRec($_SERVER["DOCUMENT_ROOT"]."/license.php");
 				BXInstallServices::DeleteDirRec($_SERVER["DOCUMENT_ROOT"]."/readme.php");
-				BXInstallServices::DeleteDirRec($_SERVER["DOCUMENT_ROOT"]."/license.html");
 				BXInstallServices::DeleteDirRec($_SERVER["DOCUMENT_ROOT"]."/readme.html");
 				BXInstallServices::DeleteDirRec($_SERVER["DOCUMENT_ROOT"]."/install.config");
 				BXInstallServices::DeleteDirRec($_SERVER["DOCUMENT_ROOT"]."/restore.php");
@@ -2866,10 +2863,8 @@ class SelectWizardStep extends CWizardStep
 			}
 			else
 			{
-				BXInstallServices::DeleteDirRec($_SERVER["DOCUMENT_ROOT"]."/license.php");
 				BXInstallServices::DeleteDirRec($_SERVER["DOCUMENT_ROOT"]."/readme.php");
-				BXInstallServices::DeleteDirRec($_SERVER["DOCUMENT_ROOT"]."/license.html");
-				BXInstallServices::DeleteDirRec($_SERVER["DOCUMENT_ROOT"]."/readme.html"); 
+				BXInstallServices::DeleteDirRec($_SERVER["DOCUMENT_ROOT"]."/readme.html");
 				BXInstallServices::DeleteDirRec($_SERVER["DOCUMENT_ROOT"]."/install.config");
 				BXInstallServices::DeleteDirRec($_SERVER["DOCUMENT_ROOT"]."/restore.php");
 				BXInstallServices::DeleteDirRec($_SERVER["DOCUMENT_ROOT"]."/bitrixsetup.php");
@@ -3227,9 +3222,7 @@ class LoadModuleActionStep extends CWizardStep
 					}
 					else
 					{
-						BXInstallServices::DeleteDirRec($_SERVER["DOCUMENT_ROOT"]."/license.php");
 						BXInstallServices::DeleteDirRec($_SERVER["DOCUMENT_ROOT"]."/readme.php");
-						BXInstallServices::DeleteDirRec($_SERVER["DOCUMENT_ROOT"]."/license.html");
 						BXInstallServices::DeleteDirRec($_SERVER["DOCUMENT_ROOT"]."/readme.html");
 						BXInstallServices::DeleteDirRec($_SERVER["DOCUMENT_ROOT"]."/install.config");
 						BXInstallServices::DeleteDirRec($_SERVER["DOCUMENT_ROOT"]."/restore.php");
@@ -3522,9 +3515,7 @@ class SelectWizard1Step extends SelectWizardStep
 			}
 			else
 			{
-				BXInstallServices::DeleteDirRec($_SERVER["DOCUMENT_ROOT"]."/license.php");
 				BXInstallServices::DeleteDirRec($_SERVER["DOCUMENT_ROOT"]."/readme.php");
-				BXInstallServices::DeleteDirRec($_SERVER["DOCUMENT_ROOT"]."/license.html");
 				BXInstallServices::DeleteDirRec($_SERVER["DOCUMENT_ROOT"]."/readme.html");
 				BXInstallServices::DeleteDirRec($_SERVER["DOCUMENT_ROOT"]."/install.config");
 				BXInstallServices::DeleteDirRec($_SERVER["DOCUMENT_ROOT"]."/restore.php");
