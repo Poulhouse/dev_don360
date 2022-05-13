@@ -77,7 +77,8 @@ $this->addExternalCss($templateFolder."/libs/owlcarousel/assets/owl.theme.defaul
 
 										<div class="banners-big__title switcher-title banners-big__title--middle">
 
-											<?echo $arParams["TITLE_PORTFOLIO"];?>
+											<?//echo $arParams["TITLE_PORTFOLIO"];?>
+											<h1>Мы делаем <span class="color-green-element">профессиональный 3D-тур</span> под ключ</h1>
 
 										</div>
 										<div class="banners-big__text-wrapper">
@@ -260,45 +261,5 @@ $this->addExternalCss($templateFolder."/libs/owlcarousel/assets/owl.theme.defaul
 </div>
 
 <?php $this->addExternalJS($templateFolder."/libs/owlcarousel/owl.carousel.js"); ?>
-
-<script type="text/javascript">
-    $(document).ready(function(){
-
-        var owl = $('.owl-carousel');
-
-        owl.owlCarousel({
-            loop: true,
-            animateIn:'fadeIn',
-            animateOut: 'fadeOut',
-            mouseDrag: false,
-            margin: 0,
-            nav: true,
-	        items: 1
-        });
-
-// Go to the next item
-        $('.project__item-part.next.active').click(function() {
-            owl.trigger('next.owl.carousel');
-        })
-// Go to the previous item
-        $('.project__item-part.prev.active').click(function() {
-            // With optional speed parameter
-            // Parameters has to be in square bracket '[]'
-            owl.trigger('prev.owl.carousel', [300]);
-        });
-		$('.project-example__icon').on('click', function(e){
-		    e.preventDefault();
-            $('.banners-big').addClass('project-active');
-            setTimeout(function(){
-                $('.project-active .banners-big__img-wrapper iframe').css('width','100%');
-            },300);
-		});
-        $('.banners-close__icon').on('click', function(e){
-            e.preventDefault();
-            $('.banners-big').removeClass('project-active');
-
-        })
-
-    });
-</script>
+<?php $this->addExternalJS($templateFolder."/libs/js/script.js"); ?>
 
