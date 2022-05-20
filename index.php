@@ -481,7 +481,7 @@ $APPLICATION -> SetTitle("Главная"); ?>
 										</div>
 										<div class="calc-quantity__inner grid-list__item item-w100">
 											<div class="calc-quantity__slider mt-10">
-												<input type="range" min="3" max="100" value="3" class="rounded-4" oninput="rangeValue.innerText = this.value; rangeSumValue.innerText = this.value*900">
+												<input type="range" min="3" max="100" value="3" class="rounded-4" oninput="rangeValue.innerText = this.value; rangeSumValue.innerText = this.value*900;">
 											</div>
 										</div>
 										<div class="calc-quantity__inner grid-list__item item-w100">
@@ -490,43 +490,6 @@ $APPLICATION -> SetTitle("Главная"); ?>
 											</div>
 										</div>
 									</div>
-									<!--
-									<div class="tab-pane grid-list--no-grid" id="square">
-										<div class="calc-quantity__inner grid-list__item item-w25">
-											<div class="calc-quantity__item active">
-												<span class="calc-quantity__item-price switcher-title line font_32"><span id="sumValue_1">900</span><span class="font_17">₽</span></span>
-												<span class="calc-quantity__item-title line font_17">Тариф «Стандарт»</span>
-											</div>
-										</div>
-										<div class="calc-quantity__inner grid-list__item item-w12-5"><span class="font_b color-green-element">или</span></div>
-										<div class="calc-quantity__inner grid-list__item item-w25">
-											<div class="calc-quantity__item">
-												<span class="calc-quantity__item-price switcher-title line font_32"><span id="sumValue_2">1600</span><span class="font_17">₽</span></span>
-												<span class="calc-quantity__item-title line font_17">Тариф «Премиум»</span>
-											</div>
-										</div>
-										<div class="calc-quantity__inner grid-list__item item-w12-5"><span class="font_b color-green-element">или</span></div>
-										<div class="calc-quantity__inner grid-list__item item-w25">
-											<div class="calc-quantity__item">
-												<span class="calc-quantity__item-price switcher-title line font_32"><span id="sumValue_3">2300</span><span class="font_17">₽</span></span>
-												<span class="calc-quantity__item-title line font_17">Тариф «VIP»</span>
-											</div>
-										</div>
-										<div class="calc-quantity__inner grid-list__item item-w100">
-											<span class="label bg-theme font_17"><span id="rangeValue2">10</span> = <span id="rangeSumValue2">2700</span><span class="font_17">₽</span></span>
-										</div>
-										<div class="calc-quantity__inner grid-list__item item-w100">
-											<div class="calc-quantity__slider mt-10">
-												<input type="range" min="10" max="200" value="3" class="rounded-4" oninput="rangeValue2.innerText = this.value; rangeSumValue2.innerText = this.value*900">
-											</div>
-										</div>
-										<div class="calc-quantity__inner grid-list__item item-w100">
-											<div class="calc-quantity__slider-pin">
-												<span id="rangeMin" class="font_17 font_b">10</span><span class="font_14" style="opacity:0.5">Колличество, м<sup>2</sup></span><span id="rangeMax" class="font_17 font_b">200</span>
-											</div>
-										</div>
-									</div>
-									-->
 								</div>
 
 							</div>
@@ -538,13 +501,118 @@ $APPLICATION -> SetTitle("Главная"); ?>
 									</ul>
 								</div>
 								<div class="tab-content">
-									<div class="tab-pane active" id="variant_public"></div>
+									<div class="tab-pane active grid-list--no-grid" id="variant_public">
+										<div class="variant_block form-checkbox grid-list__item item-w100">
+											<h5>Размещение тура на Картах</h5>
+										</div>
+
+										<div class="variant_block form-checkbox grid-list__item item-w33">
+											<input type="checkbox" id="google_pub" name="google_pub" required="" value="Y" class="form-checkbox__input" aria-required="true">
+											<label for="google_pub" class="form-checkbox__label">
+												<span>Google Карты (+2000 ₽)</span>
+												<span class="form-checkbox__box"></span>
+											</label>
+										</div>
+										<div class="variant_block form-checkbox grid-list__item item-w33">
+											<input type="checkbox" id="yandex_pub" name="yandex_pub" required="" value="Y" class="form-checkbox__input" aria-required="true">
+											<label for="yandex_pub" class="form-checkbox__label">
+												<span>Яндекс Карты (+2000 ₽)</span>
+												<span class="form-checkbox__box"></span>
+											</label>
+										</div>
+										<div class="variant_block form-checkbox grid-list__item item-w100">
+											<h5>Видеотур из панорам</h5>
+										</div>
+										<div class="variant_block form-checkbox grid-list__item item-w33">
+											<input type="checkbox" id="nedv_pub" name="nedv_pub" required="" value="Y" class="form-checkbox__input" aria-required="true">
+											<label for="nedv_pub" class="form-checkbox__label">
+												<span>YouTube, Avito/Циан (+1000 ₽)</span>
+												<span class="form-checkbox__box"></span>
+											</label>
+										</div>
+										<div class="variant_block form-checkbox grid-list__item item-w100">
+											<h5>Классический (на сайт) (от 5000 ₽)</h5>
+										</div>
+
+										<div class="variant_block form-checkbox grid-list__item item-w50">
+											<input type="checkbox" id="classic1_pub" name="classic1_pub" required="" value="Y" class="form-checkbox__input" aria-required="true">
+											<label for="classic1_pub" class="form-checkbox__label">
+												<span>План помещения с точками переходов на панорамы (+500 руб.)</span>
+												<span class="form-checkbox__box"></span>
+											</label>
+										</div>
+
+										<div class="variant_block form-checkbox grid-list__item item-w50">
+											<input type="checkbox" id="classic2_pub" name="classic2_pub" required="" value="Y" class="form-checkbox__input" aria-required="true">
+											<label for="classic2_pub" class="form-checkbox__label">
+												<span>Логотип компании в виртуальном туре со ссылкой на сайт или соцсети (+300 руб.)</span>
+												<span class="form-checkbox__box"></span>
+											</label>
+										</div>
+
+										<div class="variant_block form-checkbox grid-list__item item-w50">
+											<input type="checkbox" id="classic3_pub" name="classic3_pub" required="" value="Y" class="form-checkbox__input" aria-required="true">
+											<label for="classic3_pub" class="form-checkbox__label">
+												<span>Всплывающее окно с сайтом компании внутри тура(+500 руб.)</span>
+												<span class="form-checkbox__box"></span>
+											</label>
+										</div>
+
+										<div class="variant_block form-checkbox grid-list__item item-w50">
+											<input type="checkbox" id="classic4_pub" name="classic4_pub" required="" value="Y" class="form-checkbox__input" aria-required="true">
+											<label for="classic4_pub" class="form-checkbox__label">
+												<span>Видеоролик встроенный в телевизор внутри тура (+500 руб.)</span>
+												<span class="form-checkbox__box"></span>
+											</label>
+										</div>
+
+										<div class="variant_block form-checkbox grid-list__item item-w50">
+											<input type="checkbox" id="classic5_pub" name="classic5_pub" required="" value="Y" class="form-checkbox__input" aria-required="true">
+											<label for="classic5_pub" class="form-checkbox__label">
+												<span>Информационные точки внутри тура содержащие полезный текст (10 штук) (+500 руб.)</span>
+												<span class="form-checkbox__box"></span>
+											</label>
+										</div>
+
+										<div class="variant_block form-checkbox grid-list__item item-w50">
+											<input type="checkbox" id="classic6_pub" name="classic6_pub" required="" value="Y" class="form-checkbox__input" aria-required="true">
+											<label for="classic6_pub" class="form-checkbox__label">
+												<span>Google или Яндекс Карта с расположением объекта (+500 руб.)</span>
+												<span class="form-checkbox__box"></span>
+											</label>
+										</div>
+
+										<div class="variant_block form-checkbox grid-list__item item-w50">
+											<input type="checkbox" id="classic7_pub" name="classic7_pub" required="" value="Y" class="form-checkbox__input" aria-required="true">
+											<label for="classic7_pub" class="form-checkbox__label">
+												<span>Галерея фотографий внутри тура (10 фотографий) (+500 руб.)</span>
+												<span class="form-checkbox__box"></span>
+											</label>
+										</div>
+
+										<div class="variant_block form-checkbox grid-list__item item-w50">
+											<input type="checkbox" id="classic8_pub" name="classic8_pub" required="" value="Y" class="form-checkbox__input" aria-required="true">
+											<label for="classic8_pub" class="form-checkbox__label">
+												<span>Добавление фоновой музыки/аудиогида в тур (+300 руб.)</span>
+												<span class="form-checkbox__box"></span>
+											</label>
+										</div>
+									</div>
 								</div>
 
 							</div>
 						</div>
 						<div class="calc-block__inner grid-list__item item-w33">
-							<div class="calc-block__item index-block__item--big-padding bordered rounded-4  bg-theme"></div>
+							<div class="calc-block__item calc-result index-block__item--big-padding bordered rounded-4  bg-theme sticky-block sticky-block--show-Y">
+								<div class="calc-result__title">
+									Итого:
+								</div>
+								<div class="calc-result__inner">
+									<div class="calc-result__totalsum font_64">
+										<span id="totalsum">0</span><span class="font_26">₽</span>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 
@@ -553,6 +621,87 @@ $APPLICATION -> SetTitle("Главная"); ?>
 
 		</div>
 	</div>
+
+	<script type="text/javascript">
+        $totalSum = 0;
+        $rangeSum = $('#rangeSumValue').text();
+		$g = 2000;
+        $y = 2000;
+        $gyFlag = false;
+        $gySum = 3000;
+        $('input[name="google_pub"]').on('click', function() {
+
+            if(!$('input[name="yandex_pub"]').is(':checked')) {
+                $gyFlag = false;
+                $gySum = $g - $y;
+            }
+            else if ($('input[name="yandex_pub"]').is(':checked')) {
+                $gyFlag = true;
+                $gySum = $g + $y;
+            }
+            if ($(this).is(':checked') && !$gyFlag)
+            {
+                $totalSum=$totalSum+$g;
+                $('#totalsum').text($totalSum);
+            }
+            else if (!$(this).is(':checked') && !$gyFlag)
+            {
+	            $totalSum=$totalSum-$g;
+	            $('#totalsum').text($totalSum);
+            }
+            else if ($(this).is(':checked') && $gyFlag)
+            {
+                $totalSum=$totalSum+$gySum;
+                $('#totalsum').text($totalSum);
+            }
+            else if (!$(this).is(':checked') && $gyFlag)
+            {
+                $totalSum=$totalSum-$gySum;
+                $('#totalsum').text($totalSum);
+            }
+
+                if ($(this).is(':checked'))
+	            {
+                    $totalSum=$totalSum+$gy;
+                    $('#totalsum').text($totalSum);
+	            }
+                else if (!$(this).is(':checked'))
+                {
+                    $totalSum=$totalSum-$gy;
+                    $('#totalsum').text($totalSum);
+                }
+
+                $totalSum=$totalSum-$y;
+                $totalSum=$totalSum-$g;
+                $totalSum=$totalSum+$gy;
+                $('#totalsum').text($totalSum);
+            }
+        });
+
+        /*$('input[name="yandex_pub"]').on('click', function() {
+            if ($(this).is(':checked') && !$('input[name="google_pub"]').is(':checked'))
+            {
+                $totalSum=$totalSum+$y;
+                $('#totalsum').text($totalSum);
+            }
+            else if (!$(this).is(':checked') && !$('input[name="google_pub"]').is(':checked'))
+            {
+                $totalSum=$totalSum-$y;
+                $('#totalsum').text($totalSum);
+            }
+        });*/
+
+        $n = 1000;
+        $('input[name="nedv_pub"]').on('click', function() {
+            if ($(this).is(':checked')) {
+                $totalSum=$totalSum+$n;
+                $('#totalsum').text($totalSum);
+            } else if (!$(this).is(':checked')) {
+                $totalSum=$totalSum-$n;
+                $('#totalsum').text($totalSum);
+            }
+        });
+	</script>
 	<!-- КОНЕЦ КАЛЬКУЛЯТОР -->
 
 	<!-- ЭТАПЫ_СОТРУДНИЧЕСТВА -->
@@ -721,7 +870,8 @@ $APPLICATION -> SetTitle("Главная"); ?>
 												<path fill-rule="evenodd" clip-rule="evenodd" d="M10 6C8.34315 6 7 7.34314 7 9V46C7 47.6569 8.34315 49 10 49H16.9888V22C16.9888 20.3431 18.332 19 19.9888 19H39V9C39 7.34315 37.6569 6 36 6H10Z" fill="#3761E9" fill-opacity="0.1"></path>
 												<path fill-rule="evenodd" clip-rule="evenodd" d="M0 4C0 1.79086 1.79086 0 4 0H36C38.2091 0 40 1.79086 40 4V18C40 18.5523 39.5523 19 39 19C38.4477 19 38 18.5523 38 18V4C38 2.89543 37.1046 2 36 2H4C2.89543 2 2 2.89543 2 4V46C2 47.1046 2.89543 48 4 48H16C16.5523 48 17 48.4477 17 49C17 49.5523 16.5523 50 16 50H4C1.79086 50 0 48.2091 0 46V4ZM8.93027 6C8.39078 6 7.95346 6.43729 7.95346 6.97676C7.95346 7.51622 8.39078 7.95351 8.93027 7.95351H9.90708V15.7676C9.90708 16.307 10.3444 16.7443 10.8839 16.7443C11.4234 16.7443 11.8607 16.307 11.8607 15.7676V6.97676C11.8607 6.43729 11.4234 6 10.8839 6H8.93027ZM6 9.90702C6 9.36756 6.43724 8.93027 6.9766 8.93027H7.95321C8.49259 8.93027 8.92982 9.36756 8.92982 9.90702V15.7676C8.92982 16.307 8.49259 16.7443 7.95321 16.7443C7.41384 16.7443 6.9766 16.307 6.9766 15.7676V10.8838C6.43724 10.8838 6 10.4465 6 9.90702ZM14.7914 11.3722C14.7914 9.48409 16.3221 7.95351 18.2102 7.95351C19.6973 7.95351 20.965 8.90341 21.4348 10.2325C21.6145 10.7412 22.1727 11.0077 22.6813 10.8279C23.1899 10.6482 23.4565 10.0902 23.2768 9.58157C22.5396 7.49629 20.551 6 18.2102 6C15.2431 6 12.8378 8.40517 12.8378 11.3722C12.8378 14.3392 15.2431 16.7443 18.2102 16.7443H29.4435C29.983 16.7443 30.4203 16.307 30.4203 15.7676C30.4203 15.2281 29.983 14.7908 29.4435 14.7908H18.2102C16.3221 14.7908 14.7914 13.2602 14.7914 11.3722ZM17.7221 11.3722C17.7221 11.1025 17.9408 10.8838 18.2105 10.8838H18.6989C19.2384 10.8838 19.6757 10.4465 19.6757 9.90702C19.6757 9.36756 19.2384 8.93027 18.6989 8.93027H18.2105C16.8618 8.93027 15.7685 10.0235 15.7685 11.3722C15.7685 12.7208 16.8618 13.814 18.2105 13.814H29.4438C29.9833 13.814 30.4206 13.3768 30.4206 12.8373C30.4206 12.2978 29.9833 11.8605 29.4438 11.8605H18.2105C17.9408 11.8605 17.7221 11.6418 17.7221 11.3722ZM47 21C48.6569 21 50 22.3431 50 24V47C50 48.6569 48.6569 50 47 50H22C20.3431 50 19 48.6569 19 47V24C19 22.3431 20.3431 21 22 21H47ZM48 24C48 23.4477 47.5523 23 47 23H22C21.4477 23 21 23.4477 21 24V47C21 47.5523 21.4477 48 22 48H47C47.5523 48 48 47.5523 48 47V24ZM26 27C25.4477 27 25 27.4477 25 28C25 28.5523 25.4477 29 26 29H28.2373L30.7775 38.2644C30.8966 38.6988 31.2915 39 31.7419 39H39.629C40.1813 39 40.629 38.5523 40.629 38C40.629 37.4477 40.1813 37 39.629 37H32.5047L32.2305 36H40C40.4089 36 40.7766 35.751 40.9285 35.3714L42.9285 30.3714C43.0517 30.0633 43.0141 29.7141 42.8281 29.4394C42.642 29.1646 42.3318 29 42 29H32.5C31.9477 29 31.5 29.4477 31.5 30C31.5 30.5523 31.9477 31 32.5 31H40.523L39.323 34H31.6821L29.9644 27.7356C29.8453 27.3012 29.4504 27 29 27H26ZM34 41.5C34 42.3284 33.3284 43 32.5 43C31.6716 43 31 42.3284 31 41.5C31 40.6716 31.6716 40 32.5 40C33.3284 40 34 40.6716 34 41.5ZM38.5 43C39.3284 43 40 42.3284 40 41.5C40 40.6716 39.3284 40 38.5 40C37.6716 40 37 40.6716 37 41.5C37 42.3284 37.6716 43 38.5 43ZM6 38C6 37.4477 6.44772 37 7 37H12C12.5523 37 13 37.4477 13 38C13 38.5523 12.5523 39 12 39H7C6.44772 39 6 38.5523 6 38ZM7 40C6.44772 40 6 40.4477 6 41C6 41.5523 6.44772 42 7 42H10C10.5523 42 11 41.5523 11 41C11 40.4477 10.5523 40 10 40H7Z" fill="#3761E9"></path>
 											</svg>
-										</i>																										</a>
+										</i>
+									</a>
 								</div>
 
 								<div class="tizers-list__item-text-wrapper color_333">
