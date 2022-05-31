@@ -1,0 +1,198 @@
+.py-50 {
+  padding-top: 50px !important;
+  padding-bottom: 50px !important;
+}
+
+.py-60 {
+  padding-top: 60px !important;
+  padding-bottom: 60px !important;
+}
+
+.py-70 {
+  padding-top: 70px !important;
+  padding-bottom: 70px !important;
+}
+
+.py-80 {
+  padding-top: 80px !important;
+  padding-bottom: 80px !important;
+}
+
+.py-90 {
+  padding-top: 90px !important;
+  padding-bottom: 90px !important;
+}
+
+.py-100 {
+  padding-top: 100px !important;
+  padding-bottom: 100px !important;
+}
+
+.bg-gradient {
+  background: linear-gradient(92.8deg, #4889F8 -7.16%, #5ACA87 106.18%) !important;
+}
+
+.header__top {
+  /*height: 43px*/
+  background-color: #F0F6FF;
+}
+
+.nav_menu_top .nav-item {
+  margin: 0;
+}
+.nav_menu_top .nav-item:first-child .nav-link {
+  padding-left: 0px;
+}
+.nav_menu_top .nav-item:last-child .nav-link {
+  padding-right: 0px;
+}
+.nav_menu_top .nav-item .nav-link {
+  font-family: "Montserrat";
+  font-weight: 500;
+  color: #212121;
+  padding: 14px 20px;
+  font-size: 12px;
+  line-height: 15px;
+}
+
+.header__main {
+  /*height: 88px*/
+}
+
+.nav_menu_main {
+  float: right;
+}
+.nav_menu_main .nav-item {
+  margin: 0;
+}
+.nav_menu_main .nav-item:first-child .nav-link {
+  padding-left: 0px;
+}
+.nav_menu_main .nav-item:last-child .nav-link {
+  padding-right: 0px;
+}
+.nav_menu_main .nav-item .nav-link {
+  font-family: "Montserrat";
+  font-weight: 500;
+  color: #212121;
+  padding: 33px 20px;
+  font-size: 18px;
+  line-height: 22px;
+}
+
+.logo svg {
+  width: 53px;
+  height: 51.8px;
+  margin-right: 40px;
+}
+.logo__slogan {
+  font-family: "Montserrat";
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 12px;
+  color: #000000;
+}
+
+.contact-info a {
+  font-family: "Montserrat";
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 15px;
+}
+.contact-info button {
+  font-family: "Montserrat";
+  padding: 6px 18px;
+  font-weight: 800;
+  font-size: 12px;
+  line-height: 15px;
+  margin-left: 40px;
+  border-radius: 12px;
+}
+
+.slider-block .left-column .slider-block__title {
+  font-family: "Manrope";
+  font-weight: 500;
+  font-size: 52px;
+  line-height: 62px;
+  text-transform: uppercase;
+  color: #4889F8;
+  padding-bottom: 40px;
+}
+.slider-block .left-column .slider-block__description {
+  font-family: "Manrope";
+  font-weight: 300;
+  font-size: 24px;
+  line-height: 33px;
+  padding-bottom: 72px;
+}
+.slider-block .left-column a.btn {
+  font-family: "Manrope";
+  padding-top: 12px;
+  padding-bottom: 15px;
+  padding-left: 25px;
+  padding-right: 25px;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 25px;
+  border-radius: 12px;
+  border: 0;
+}
+.slider-block .right-column {
+  padding: 0;
+  position: absolute;
+  right: 0;
+}
+.slider-block .right-column .carousel-inner {
+  border-radius: 240px 0px 0px 240px;
+}
+
+/*------------SVG-------------*/
+.bg-gradient .svg.inline {
+  margin-left: 30px;
+}
+.bg-gradient .svg.inline.fill svg {
+  fill: white;
+}
+.bg-gradient .svg.inline.stroke svg {
+  stroke: white;
+}
+
+.bg-primary .svg.inline {
+  margin-left: 30px;
+}
+.bg-primary .svg.inline.fill svg {
+  fill: white;
+}
+.bg-primary .svg.inline.stroke svg {
+  stroke: white;
+}
+
+.bg-transparent .svg.inline {
+  margin-left: 30px;
+}
+.bg-transparent .svg.inline.fill svg {
+  fill: black;
+}
+.bg-transparent .svg.inline.stroke svg {
+  stroke: black;
+}
+
+.stroke-theme-hover:hover *,
+.stroke-theme-use-svg-hover:hover *,
+.stroke-theme-parent:hover > .stroke-theme-target,
+.stroke-theme-parent-all:hover .stroke-theme-target * {
+  stroke: #9e9e9e;
+  stroke: var(--theme-base-color);
+}
+
+.fill-theme-hover:hover *,
+.fill-theme-use-svg-hover:hover *,
+.fill-theme-parent:hover > .fill-theme-target,
+.fill-theme-parent-all:hover .fill-theme-target * {
+  fill: #9e9e9e;
+  fill: var(--theme-base-color);
+}
+
+/*******************/
+
+/*# sourceMappingURL=kp_styles.css.map */

@@ -85,6 +85,7 @@ body .owl-carousel .owl-item img {
 .owl-carousel--with-shadow .owl-stage-outer {
   padding: 15px;
   margin: -15px;
+  overflow: hidden;
 }
 .owl-carousel--with-shadow-20 .owl-stage-outer {
   padding: 21px;
@@ -267,6 +268,8 @@ body .owl-carousel__button:hover {
 .owl-carousel--with-shadow .owl-nav .owl-prev,
 .owl-carousel--with-shadow .owl-nav .owl-next {
   z-index: 2;
+  border: 0;
+  background: none;
 }
 
 .owl-carousel--button-wide .owl-carousel__button--left {
