@@ -16,7 +16,7 @@ $IsMainPage = \CSite::InDir(SITE_DIR.'index.php');
 	<title><?$APPLICATION->ShowTitle();?></title>
 <!--	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">-->
 
-	<?$APPLICATION->SetAdditionalCss(SITE_TEMPLATE_PATH . "/assets/bootstrap/dist/css/bootstrap.min.css"); ?>
+	<?$APPLICATION->SetAdditionalCss(SITE_TEMPLATE_PATH . "/assets/bs/css/bootstrap.min.css"); ?>
 	<?//$APPLICATION->SetAdditionalCss(SITE_TEMPLATE_PATH . "/assets/css/buttons.css"); ?>
 	<?$APPLICATION->SetAdditionalCss(SITE_TEMPLATE_PATH . "/assets/css/flexbox.css"); ?>
 	<?$APPLICATION->SetAdditionalCss(SITE_TEMPLATE_PATH . "/assets/css/owl-styles.css"); ?>
