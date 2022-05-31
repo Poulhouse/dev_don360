@@ -1,60 +1,12 @@
 * {
     outline: none !important;
 }
-html {
-    --theme-base-color: #34A853;
-    --theme-base-opacity-color: #34A8531a;
-    --theme-more-color: #34A853;
-    --theme-border-radius: 26px;
-    --theme-text-transform: none;
-    --theme-letter-spacing: normal;
-    --theme-button-font-size: 0%;
-    --theme-button-padding-2px: 0%;
-    --theme-button-padding-1px: 0%;
-    --theme-more-color-hue: 131;
-    --theme-more-color-saturation: 91%;
-    --theme-more-color-lightness: 35%;
-    --theme-base-color-hue: 131;
-    --theme-base-color-saturation: 91%;
-    --theme-base-color-lightness: 35%;
-    --theme-lightness-hover-diff: 6%;
-}
-body {
-    --white_text_black: var(--light, #333);
-    --white_text_black_reverse: var(--light, #fff);
-    --basic_text_black: var(--light, #555);
-    --light_basic_text_black: var(--light, #666);
-    --black_bg_black: var(--light, #fff);
-    --darkerblack_bg_black: var(--light, #f8f8f8);
-    --stroke_black: var(--light, #e5e5e5);
-    --stroke_black_hover: var(--light, #fff);
-    --card_bg_black: var(--light, #fff);
-    --card_bg_hover_black: var(--light, #fff);
-    --arrows_bg_black: var(--light, #fff);
-    --light_bg_black: var(--light, #fafafa);
-    --light2_bg_black: var(--light, #fafafa);
-    --green-element: var(--light, #34A853);
-    --gray_bg_black: var(--light, #ccc);
-    --white_bg_ccc: var(--light, #fff);
-    --fill_dark_light: var(--light, #333);
-    --fill_dark_light_ccc: var(--light, #333);
-    --fill_dark_light_hover: var(--light, var(--theme-base-color));
-    --fill_dark_light_white_hover: var(--light, var(--theme-base-color));
-    --dark_light-wtheme-hue: var(--light, var(--theme-base-color-hue));
-    --dark_light-wtheme-saturation: var(--light, var(--theme-base-color-saturation));
-    --dark_light-wtheme-lightness: var(--light, var(--theme-base-color-lightness));
-    --dark_light-hue: var(--light, 0);
-    --dark_light-saturation: var(--light, 0%);
-    --dark_light-lightness: var(--light, 97%);
-    --checkbox_dark_light: var(--light, #afafaf);
-    --opacity_dark_light_hover: var(--light, var(--theme-base-opacity-color));
-    --dff_dark_light: var(--light, #fff);
-}
+
 html {
     font-size: 15px;
 }
 body{
-    font: 15px/25px "Montserrat", Arial, sans-serif;
+    /*font: 15px/25px "Montserrat", Arial, sans-serif;*/
     color: var(--basic_text_black);
 }
 .body {
@@ -501,10 +453,7 @@ input[type=radio]:disabled + label:before {
 .index-block__item--big-padding {
     padding:40px;
 }
-.index-block--delimiter > div {
-    border-bottom: 1px solid #e5e5e5;
-    border-bottom: 1px solid var(--stroke_black);
-}
+
 .index-block__title {
     font-size: 40px;
     line-height: 50px;
@@ -575,21 +524,7 @@ input[type=radio]:disabled + label:before {
     height: 60px;
 }
 
-.maxwidth-theme {
-    margin-left: auto !important;
-    margin-right: auto !important;
-    max-width: 1396px;
-    width: 100%;
-}
-.maxwidth-theme:before, .maxwidth-theme:after {
-    content: "";
-    display: block;
-    clear: both;
-}
 
-body .maxwidth-theme {
-    max-width: 1412px;
-}
 .header-top__inner {
     display: flex;
     align-items: center;
@@ -703,29 +638,8 @@ body .maxwidth-theme {
     padding-left: 20px;
     padding-right: 20px;
 }
-.logo {
-    max-width: 182px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-}
-.logo a {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-}
-.slogan {
-    font-size: 15px;
-    line-height: 18px;
-}
-.slogan__text {
-    opacity: 0.5;
-    max-width: 250px;
-    font-size: 13px;
-}
 
-.container {
+/*.container {
     width: 100% !important;
     max-width: 100% !important;
     padding: 0;
@@ -733,7 +647,7 @@ body .maxwidth-theme {
 .container:before, .container:after {
     content: " ";
     display: table;
-}
+}*/
 
 .index-block--fon {
     background: #f8f8f8;
@@ -1037,11 +951,7 @@ span.count.count-general {
     gap: 20px;
     flex-direction: column;
 }
-.price {
-    font-weight: 600;
-    line-height: 20px;
-    font-size: 1rem;
-}
+
 
 
 /* STEPS */
@@ -1070,6 +980,7 @@ span.count.count-general {
 
 .reviews.owl-carousel {
     min-height: 250px;
+    position: relative;
 }
 .reviews .owl-stage {
     display: flex;
@@ -1238,16 +1149,4 @@ span.count.count-general {
     justify-content: space-between;
     padding-left: 15px;
     padding-right: 7.5px;
-}
-
-
-
-
-
-
-@media (min-width: 992px) {
-    body .maxwidth-theme {
-        padding-left: 32px;
-        padding-right: 32px;
-    }
 }
