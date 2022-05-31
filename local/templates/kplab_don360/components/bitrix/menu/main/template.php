@@ -4,96 +4,77 @@
 <!--</pre>-->
 <?if(!empty($arResult)) : ?>
 
-	<div class="header__main-item header-menu ">
+	<ul class="nav nav_menu_main">
 
-		<nav class="header-menu--centered">
+        <? foreach($arResult as $arItem) : ?>
 
-			<div class="header-menu__wrapper">
+            <?if($arItem["SELECTED"]){$classActive = 'active';} else {$classActive ='';	}?>
 
-				<? foreach($arResult as $arItem) : ?>
+	        <? if(!empty($arItem["subitems"])){
+	            $subItemClass = 'nav_menu_main__item_dropdown dropdown';
+                $subLinkClass =  'dropdown-toggle';
+	        } else {
+	            $subItemClass = '';
+                $subLinkClass =  '';
+	        } ?>
 
-				<?if($arItem["SELECTED"]){$classActive = 'active';} else {$classActive ='';	}?>
-				<? if(!empty($arItem["subitems"])){
-					$subItemClass = 'header-menu__item--dropdown';
-				} else {
-					$subItemClass = '';
-				} ?>
+			<li class="nav-item <?=$subItemClass?>">
+				<a href="<?=$arItem["LINK"];?>" class="nav-link link-dark <?=$classActive.' '.$subLinkClass?>">
+					<?=$arItem["TEXT"]?>
+				</a>
 
+	            <?if(!empty($arItem["subitems"])) : ?>
 
-				<div class="header-menu__item <?=$subItemClass?>">
+					<ul class="dropdown-menu">
 
-					<a href="<?=$arItem["LINK"]?>" class="header-menu__link dark_link <?=$classActive?>">
-						<span class="header-menu__title"><?=$arItem["TEXT"]?></span>
-					</a>
+		            <?foreach($arItem["subitems"] as $arSubItem) : ?>
 
-					<?if(!empty($arItem["subitems"])) : ?>
+		                <? if($arSubItem["SELECTED"]){ $subclassActive = 'active'; } else { $subclassActive =''; }?>
 
-						<div class="header-menu__dropdown-menu">
+		                <? if(!empty($arSubItem["subitems"])){
+		                    $subSubItemClass = 'nav_menu_main__dropdown-item--with-dropdown';
+		                    $shevronHtml = '<i class="svg inline nav_menu_main__dropdown-item-right-arrow" aria-hidden="true"><svg width="3" height="5" viewBox="0 0 3 5" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 2.5L0 5L0 0L3 2.5Z" fill="#333333"></path></svg></i>';
+		                } else {
+		                    $subSubItemClass ='';
+		                    $shevronHtml = '';
+		                } ?>
 
-							<div class="dropdown">
+						<li class="dropdown-item <?=$subSubItemClass;?>">
+							<a href="<?=$arSubItem["LINK"];?>" class="">
+		                        <?=$arSubItem["TEXT"];?>
+		                        <?=$shevronHtml;?>
+							</a>
 
-								<ul class="header-menu__dropdown-menu-inner">
+							<? if(!empty($arSubItem["subitems"])) : ?>
 
-									<?foreach($arItem["subitems"] as $arSubItem) : ?>
+								<ul class="dropdown">
 
-										<? if($arSubItem["SELECTED"]){ $subclassActive = 'active'; } else {
-											$subclassActive =''; }?>
+								<?foreach($arSubItem["subitems"] as $arSubSubItem) : ?>
 
-										<? if(!empty($arSubItem["subitems"])){
-											$subSubItemClass = 'header-menu__dropdown-item--with-dropdown';
-											$shevronHtml = '<i class="svg inline  svg-inline- header-menu__dropdown-right-arrow fill-dark-light-block" aria-hidden="true"><svg width="3" height="5" viewBox="0 0 3 5" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 2.5L0 5L0 0L3 2.5Z" fill="#333333"></path></svg></i>';
-										} else {
-											$subSubItemClass ='';
-											$shevronHtml = '';
-										} ?>
+									<li class="nav_menu_main__dropdown-item">
+										<a href="<?=$arSubSubItem["LINK"];?>" class="">
+											<?=$arSubSubItem["TEXT"];?>
+										</a>
+									</li>
 
-										<li class="header-menu__dropdown-item <?=$subSubItemClass;?>">
-											<a href="<?=$arSubItem["LINK"];?>" class="font_15 dark_link
-											fill-theme-hover1 menu-light-text1 fill-dark-light-block svg">
-												<?=$arSubItem["TEXT"];?>
-												<?=$shevronHtml;?>
-
-											</a>
-
-											<? if(!empty($arSubItem["subitems"])) : ?>
-
-												<div class="header-menu__dropdown-menu header-menu__dropdown-menu--submenu">
-													<ul class="dropdown">
-
-													<?foreach($arSubItem["subitems"] as $arSubSubItem) : ?>
-
-														<li class="header-menu__dropdown-item">
-															<a href="<?=$arSubSubItem["LINK"];?>" class="font_15
-															dark_link fill-dark-light-block svg"><?=$arSubSubItem["TEXT"];?></a>
-														</li>
-
-													<? endforeach; ?>
-
-													</ul>
-												</div>
-
-											<?endif;?>
-
-										</li>
-
-									<? endforeach; ?>
+								<? endforeach; ?>
 
 								</ul>
 
-							</div>
+		                    <?endif;?>
 
-						</div>
+						</li>
 
-					<?endif;?>
+		            <? endforeach; ?>
 
-				</div>
+					</ul>
 
-				<?endforeach;?>
+	            <?endif;?>
 
-			</div>
+			</li>
 
-		</nav>
+        <? endforeach; ?>
 
-	</div>
+	</ul>
 
 <?endif;?>

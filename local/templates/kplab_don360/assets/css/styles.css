@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope&display=swap');
+html {
+    --theme-base-color: #34A853;
+}
+body {
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+}
+
+
+h1 {
+    font-family: "Manrope";
+    font-weight: 400;
+    font-size: 64px;
+    line-height: 87px;
+    text-transform: uppercase;
+}
+h2 {
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 64px;
+    line-height: 87px;
+}
+
+p, span.text {
+    font-family: 'Manrope';
+    font-style: normal;
+    line-height: 22px;
+    display: block;
+}
+.maxwidth-theme {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    max-width: 1200px;
+    width: 100%;
+}
+.maxwidth-theme:before, .maxwidth-theme:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+body .maxwidth-theme {
+    max-width: 1440px;
+}
+@media (min-width: 992px) {
+    body .maxwidth-theme {
+        padding-left: 32px;
+        padding-right: 32px;
+    }
+}
+@media (min-width: 768px) {
+    .col-md-1_5 {
+        flex: 0 0 auto;
+        width: 12.5%;
+    }
+}
+.fs-18 {
+    font-size: 18px!important;
+}
+.pb-30 {
+    padding-bottom: 30px!important;
+}
+.fw-500 {
+    font-weight: 500!important;
+}
+.margin-left-20 {
+    margin-left:20px;
+}
+
+.kp-shadow{
+    box-shadow: 3px 4px 25px rgba(0,0,0,0.15)!important;
+}
+.kp-rounded{
+    border-radius: 30px!important;
+}
+.rounded-12{
+    border-radius: 12px!important;
+}
+.link-dark.right-link:focus,
+.link-dark.right-link:hover {
+    color: var(--theme-base-color);
+}
+
+
+/*****SVG ******/
+
+
+
+
+/******** TABS *********/
+.nav-tabs {
+    border: 0;
+}
+.nav-tabs .nav-item {
+    margin-right: 36px;
+    margin-bottom: 50px;
+}
+
+.nav-tabs .nav-link {
+    margin:0;
+    border-radius: 12px;
+    border: 2px solid #000000;
+    background-color: transparent;
+}
+.nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link.active {
+    color: #ffffff;
+    background-color: var(--theme-base-color);
+    border-color: var(--theme-base-color);
+}
+.nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
+    border-color: #e9ecef #e9ecef #dee2e6;
+    isolation: isolate;
+}
+
+
+
+.index-block {
+    display: flex;
+    --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 0;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.index-block>* {
+    flex-shrink: 0;
+    /*width: 100%;*/
+    max-width: 100%;
+    padding-right: calc(var(--bs-gutter-x) * .5);
+    padding-left: calc(var(--bs-gutter-x) * .5);
+    margin-top: var(--bs-gutter-y);
+}
+
+.index-block--arrow {
+    margin-right: 16px;
+}
+.index-block--delimiter {
+    border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid var(--stroke_black);
+}
+
+/******SLIDER****/
+
+
+
+
+
+
+
+.offers-block--item .svg svg{
+    fill: #4889F8;
+}

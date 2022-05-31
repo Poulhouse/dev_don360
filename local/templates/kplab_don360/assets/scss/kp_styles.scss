@@ -1,0 +1,227 @@
+$nav_menu: (
+        'top',
+        'main'
+)!default;
+
+$menu_fs: (
+        'top':12px,
+        'main':18px
+)!default;
+
+$menu_flh: (
+        'top':15px,
+        'main':22px
+)!default;
+$row-padding-y: (
+        50:50px,
+        60:60px,
+        70:70px,
+        80:80px,
+        90:90px,
+        100:100px
+);
+@each $key, $value in $row-padding-y {
+  .py-#{$key}{
+    padding-top: $value !important;
+    padding-bottom: $value !important;
+  }
+}
+
+$primary_color: #4889F8;
+$bg-gradient: linear-gradient(92.8deg, #4889F8 -7.16%, #5ACA87 106.18%)!default;
+
+.bg-gradient {
+  background: $bg-gradient !important;
+}
+
+$font-family: 'Montserrat';
+
+@each $key1, $value1 in $nav_menu {
+  .header__#{$key1} {
+    @if ($key1 == "top") {
+      /*height: 43px*/
+      background-color: #F0F6FF;
+    }
+    @if ($key1 == "main") {
+      /*height: 88px*/
+    }
+  }
+  .nav_menu_#{$key1} {
+    @if ($key1 == "main") {
+      float: right
+    }
+    .nav-item {
+      margin: 0;
+      &:first-child {
+        .nav-link {
+          padding-left: 0px;
+        }
+      }
+      &:last-child {
+        .nav-link {
+          padding-right: 0px;
+        }
+      }
+      .nav-link {
+        font-family: $font-family;
+        font-weight: 500;
+        color: #212121;
+
+        @if ($key1 == "top") {
+          padding: 14px 20px;
+          font-size: map_get($menu_fs, "top");
+          line-height: map_get($menu_flh, "top");
+        }
+
+        @if ($key1 == "main") {
+          padding: 33px 20px;
+          font-size: map_get($menu_fs, "main");
+          line-height: map_get($menu_flh, "main");
+        }
+
+      }
+    }
+  }
+}
+
+
+.logo {
+  svg {
+    width: 53px;
+    height: 51.8px;
+    margin-right: 40px;
+  }
+  &__slogan{
+    font-family: $font-family;
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 12px;
+    color: #000000;
+  }
+}
+
+
+.contact-info {
+  a {
+    font-family: $font-family;
+    font-weight: 700;
+    font-size: map_get($menu_fs, "top");
+    line-height: map_get($menu_flh, "top");
+  }
+  button{
+    font-family: $font-family;
+    padding: 6px 18px;
+    font-weight: 800;
+    font-size: 12px;
+    line-height: 15px;
+    margin-left:40px;
+    border-radius: 12px;
+  }
+}
+
+
+.slider-block {
+  .left-column {
+    .slider-block__title {
+      font-family: 'Manrope';
+      font-weight: 500;
+      font-size: 52px;
+      line-height: 62px;
+
+      text-transform: uppercase;
+
+      color: $primary_color;
+      padding-bottom: 40px;
+    }
+    .slider-block__description {
+      font-family: 'Manrope';
+      font-weight: 300;
+      font-size: 24px;
+      line-height: 33px;
+      padding-bottom: 72px;
+    }
+    a.btn {
+      font-family: 'Manrope';
+      padding-top: 12px;
+      padding-bottom: 15px;
+      padding-left: 25px;
+      padding-right: 25px;
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 25px;
+      border-radius: 12px;
+      border:0;
+    }
+  }
+  .right-column {
+    padding: 0;
+    position: absolute;
+    right: 0;
+
+    .carousel-inner {
+      border-radius: 240px 0px 0px 240px;
+    }
+  }
+}
+
+
+
+
+/*------------SVG-------------*/
+.bg-gradient {
+  .svg.inline {
+    margin-left: 30px;
+
+    &.fill svg {
+      fill: white;
+    }
+
+    &.stroke svg{
+      stroke: white;
+    }
+  }
+}
+
+.bg-primary {
+  .svg.inline {
+    margin-left: 30px;
+
+    &.fill svg {
+      fill: white;
+    }
+
+    &.stroke svg{
+      stroke: white;
+    }
+  }
+}
+.bg-transparent {
+  .svg.inline {
+    margin-left: 30px;
+
+    &.fill svg {
+      fill: black;
+    }
+
+    &.stroke svg{
+      stroke: black;
+    }
+  }
+}
+
+
+.stroke-theme-hover:hover *,
+.stroke-theme-use-svg-hover:hover *,
+.stroke-theme-parent:hover > .stroke-theme-target,
+.stroke-theme-parent-all:hover .stroke-theme-target * {
+  stroke: #9e9e9e;
+  stroke: var(--theme-base-color);
+}
+.fill-theme-hover:hover *,
+.fill-theme-use-svg-hover:hover *,
+.fill-theme-parent:hover > .fill-theme-target,
+.fill-theme-parent-all:hover .fill-theme-target * {
+  fill: #9e9e9e;
+  fill: var(--theme-base-color);
+}
+/*******************/
