@@ -3,9 +3,25 @@
   padding-bottom: 50px !important;
 }
 
+.pby-50 {
+  padding-bottom: 50px !important;
+}
+
+.pty-50 {
+  padding-top: 50px !important;
+}
+
 .py-60 {
   padding-top: 60px !important;
   padding-bottom: 60px !important;
+}
+
+.pby-60 {
+  padding-bottom: 60px !important;
+}
+
+.pty-60 {
+  padding-top: 60px !important;
 }
 
 .py-70 {
@@ -13,9 +29,25 @@
   padding-bottom: 70px !important;
 }
 
+.pby-70 {
+  padding-bottom: 70px !important;
+}
+
+.pty-70 {
+  padding-top: 70px !important;
+}
+
 .py-80 {
   padding-top: 80px !important;
   padding-bottom: 80px !important;
+}
+
+.pby-80 {
+  padding-bottom: 80px !important;
+}
+
+.pty-80 {
+  padding-top: 80px !important;
 }
 
 .py-90 {
@@ -23,9 +55,33 @@
   padding-bottom: 90px !important;
 }
 
+.pby-90 {
+  padding-bottom: 90px !important;
+}
+
+.pty-90 {
+  padding-top: 90px !important;
+}
+
 .py-100 {
   padding-top: 100px !important;
   padding-bottom: 100px !important;
+}
+
+.pby-100 {
+  padding-bottom: 100px !important;
+}
+
+.pty-100 {
+  padding-top: 100px !important;
+}
+
+.kp-shadow {
+  box-shadow: 3px 4px 25px rgba(0, 0, 0, 0.15) !important;
+}
+
+.kp-rounded {
+  border-radius: 30px !important;
 }
 
 .bg-gradient {
@@ -109,6 +165,9 @@
   border-radius: 12px;
 }
 
+.slider-block .themed-grid-col {
+  padding: 0;
+}
 .slider-block .left-column .slider-block__title {
   font-family: "Manrope";
   font-weight: 500;
@@ -147,6 +206,7 @@
 }
 
 /*------------SVG-------------*/
+/*background*/
 .bg-gradient .svg.inline {
   margin-left: 30px;
 }
@@ -177,6 +237,13 @@
   stroke: black;
 }
 
+.svg.inline.fill svg {
+  fill: #4889F8;
+}
+.svg.inline.stroke svg {
+  stroke: #4889F8;
+}
+
 .stroke-theme-hover:hover *,
 .stroke-theme-use-svg-hover:hover *,
 .stroke-theme-parent:hover > .stroke-theme-target,
@@ -194,5 +261,47 @@
 }
 
 /*******************/
+.index-block--OFFERS .col-md-6:nth-child(2) {
+  margin-bottom: 42px;
+}
+.index-block--OFFERS .offers-block__inner.card {
+  padding: 50px;
+  height: 100%;
+  min-height: 100%;
+  justify-content: center;
+}
+.index-block--OFFERS .offers-block__inner .offers-block__item {
+  gap: 42px;
+}
+.index-block--OFFERS .offers-block__inner .offers-block__item .offers-item__inner h2.index-block__title {
+  font-family: "Manrope";
+  font-weight: 400;
+  font-size: 52px;
+  line-height: 71px;
+}
+.index-block--OFFERS .offers-block__inner .offers-block__item .offers-item__inner .offers-item__title {
+  display: block;
+  font-family: "Manrope";
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 22px;
+  padding-bottom: 18px;
+}
+.index-block--OFFERS .offers-block__inner .offers-block__item .offers-item__inner .offers-item__description {
+  font-family: "Manrope";
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+}
+
+.index-block--SERVICES .services-block__inner .services-block__item .services-item__inner {
+  display: flex;
+}
+.index-block--SERVICES .services-block__inner .services-block__item .services-item__inner h2.index-block__title {
+  font-family: "Manrope";
+  font-weight: 400;
+  font-size: 52px;
+  line-height: 71px;
+}
 
 /*# sourceMappingURL=kp_styles.css.map */

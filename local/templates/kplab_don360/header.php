@@ -62,7 +62,7 @@ $IsMainPage = \CSite::InDir(SITE_DIR.'index.php');
 					</div>
 					<div class="col-md-6 text-end contact-info ">
 						<a class="text-decoration-none" href="tel:+79996110360">+7(999) 611-03-60</a>
-						<button class="btn btn-subcolor btn__callback text-white">Заказать звонок</button>
+						<button class="btn bg-gradient btn__callback text-white border-0">Заказать звонок</button>
 					</div>
 				</div>
 			</div>
@@ -142,7 +142,7 @@ $IsMainPage = \CSite::InDir(SITE_DIR.'index.php');
                     "",
                     Array(
                         "AREA_FILE_SHOW" => "file",
-                        "PATH" => SITE_TEMPLATE_PATH."/page_templates/mainpage/index.php",
+                        "PATH" => SITE_TEMPLATE_PATH."/page_templates/mainpage_index.php",
                         "EDIT_TEMPLATE" => ""
                     )
                 );
