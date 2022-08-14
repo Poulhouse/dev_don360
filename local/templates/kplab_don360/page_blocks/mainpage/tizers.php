@@ -1,36 +1,32 @@
-<div class="container TIZERS index-block--delimiter">
-    <div class="index-block py-80">
 
-        <div class="tizers-list  tizers-list--narrow">
-            <div class="maxwidth-theme">
-                <div class="index-block__subtitle">Отзывы</div>
-                <div class="index-block__title-wrapper   ">
-                    <div class="index-block__part--left">
-                        <h3 class="switcher-title line font_64">Нам <span class="color-green-element">доверяют</span></h3>
-                    </div>
+<div class="container index-block">
+    <div class="row index-block--TIZERS">
 
+	    <div class="tizers-block--inner col-md-12">
+		    <div class="tizers-block--item">
+			    <div class="tizers-item__inner justify-content-between align-items-start">
+				    <h2 class="index-block__title">Отзывы</h2>
+				    <a class="index-block__link" href="/reviews/" title="Перейти в раздел">
+						<span class="index-block__arrow">
+							<i class="svg inline fill" aria-hidden="true">
+								<svg width="41" height="23" viewBox="0 0 41 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path d="M40.7071 8.70711C41.0976 8.31658 41.0976 7.68342 40.7071 7.29289L34.3432 0.928932C33.9526 0.538408 33.3195 0.538408 32.9289 0.928932C32.5384 1.31946 32.5384 1.95262 32.9289 2.34315L38.5858 8L32.9289 13.6569C32.5384 14.0474 32.5384 14.6805 32.9289 15.0711C33.3195 15.4616 33.9526 15.4616 34.3432 15.0711L40.7071 8.70711ZM0 9H40V7H0V9Z"/>
+								</svg>
+							</i>
+						</span>
+					    Все отзывы
+				    </a>
+			    </div>
+			    <div class="index-block__preview">
+				    <p>Обратная связь помогает развиваться в нужном направлении. Мы прислушиваемся к отзывам, ищем новые точки роста и корректируем рабочие процессы. Благодарим всех, кто выразил свое мнение. Для нас это ценно!</p>
+			    </div>
+		    </div>
+	    </div>
 
-                    <div class="index-block__part--right">
-                        <a class="index-block__link dark_link stroke-theme-hover right_link_block" href="/reviews/"
-                           title="Перейти в раздел">
-                            Все отзывы
-                            <span class="index-block__arrow">
-									<i class="svg inline  svg-inline- stroke_999" aria-hidden="true">
-										<svg width="5" height="8" viewBox="0 0 5 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-											<path d="M1 1L4 4L1 7" stroke="#CACACA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-										</svg>
-									</i>
-								</span>
-                        </a>
-                    </div>
-                </div>
-                <div class="index-block__preview   index-block__preview--mb-66">
-                    <p>Обратная связь помогает развиваться в нужном направлении. Мы прислушиваемся к отзывам, ищем новые точки роста и корректируем рабочие процессы. Благодарим всех, кто выразил свое мнение. Для нас это ценно!</p>
-                </div>
-            </div>
+	    <div class="tizers-block--inner col-md-12 themed-grid-col">
             <div class="maxwidth-theme ">
 
-                <div class="tizers-list__items-wrapper grid-list grid-list--items-3  tizers-list__items-wrapper--offset mobile-scrolled mobile-offset mobile-scrolled--items-2">
+                <div class="tizers-list__items-wrapper grid-list tizers-list__items-wrapper--offset mobile-scrolled mobile-offset mobile-scrolled--items-2">
                     <div class="tizers-list__item-wrapper  grid-list__item tizers-list__item-wrapper-offset">
                         <div class="tizers-list__item  tizers-list__item--images-ICONS tizers-list__item--images-position-TOP tizers-list__item--column" id="bx_651765591_1">
 
