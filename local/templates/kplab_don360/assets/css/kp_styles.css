@@ -417,4 +417,39 @@
   line-height: 22px;
 }
 
+.index-block--TIZERS {
+  padding-bottom: 100px;
+}
+.index-block--TIZERS .tizers-block--inner .tizers-block--item .index-block__preview {
+  margin-top: 0px;
+  margin-bottom: 39px;
+}
+.index-block--TIZERS .tizers-block--inner .tizers-block--item .tizers-item__inner {
+  display: flex;
+}
+.index-block--TIZERS .tizers-block--inner .tizers-block--item .tizers-item__inner h2.index-block__title {
+  font-family: "Manrope";
+  font-weight: 400;
+  font-size: 52px;
+  line-height: 71px;
+}
+.index-block--TIZERS .tizers-block--inner .tizers-block--item .tizers-item__inner a.index-block__link {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 25px;
+  color: var(--bs-primary);
+}
+.index-block--TIZERS .tizers-block--inner .tizers-block--item .tizers-item__inner a.index-block__link:hover {
+  color: var(--theme-base-color);
+}
+.index-block--TIZERS .tizers-block--inner .tizers-block--item .tizers-item__inner a.index-block__link:hover .index-block__arrow .svg.inline.fill svg {
+  fill: var(--theme-base-color);
+}
+.index-block--TIZERS .tizers-block--inner .tizers-block--item .tizers-item__inner a.index-block__link .index-block__arrow {
+  margin-left: 0;
+  margin-right: 15px;
+}
+
 /*# sourceMappingURL=kp_styles.css.map */

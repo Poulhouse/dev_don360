@@ -432,3 +432,50 @@ $font-family: 'Montserrat';
     }
   }
 }
+
+.index-block--TIZERS {
+  padding-bottom: 100px;
+
+  .tizers-block--inner {
+    .tizers-block--item {
+
+      .index-block__preview {
+        margin-top: 0px;
+        margin-bottom: 39px;
+      }
+
+      .tizers-item__inner {
+        display: flex;
+
+        h2.index-block__title {
+          font-family: 'Manrope';
+          font-weight: 400;
+          font-size: 52px;
+          line-height: 71px;
+        }
+
+        a.index-block__link {
+          font-family: 'Manrope';
+          font-style: normal;
+          font-weight: 700;
+          font-size: 18px;
+          line-height: 25px;
+          color: var(--bs-primary);
+
+          &:hover {
+            color: var(--theme-base-color);
+
+            .index-block__arrow .svg.inline.fill svg {
+              fill: var(--theme-base-color);
+            }
+          }
+
+          .index-block__arrow {
+            margin-left: 0;
+            margin-right: 15px;
+          }
+        }
+      }
+    }
+  }
+}
