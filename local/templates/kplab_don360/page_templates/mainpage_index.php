@@ -74,7 +74,7 @@ $APPLICATION -> SetTitle("Главная"); ?>
             "",
             Array(
                 "AREA_FILE_SHOW" => "file",
-                "PATH" => SITE_TEMPLATE_PATH."/page_blocks/mainpage/SERVICES.php",
+                "PATH" => SITE_TEMPLATE_PATH."/page_blocks/mainpage/services.php",
                 "EDIT_TEMPLATE" => ""
             )
         );
@@ -88,7 +88,7 @@ $APPLICATION -> SetTitle("Главная"); ?>
             "",
             Array(
                 "AREA_FILE_SHOW" => "file",
-                "PATH" => SITE_TEMPLATE_PATH."/page_blocks/mainpage/CALCULATOR-TARIFFS.php",
+                "PATH" => SITE_TEMPLATE_PATH."/page_blocks/mainpage/calculator-tariffs.php",
                 "EDIT_TEMPLATE" => ""
             )
         );
@@ -102,7 +102,7 @@ $APPLICATION -> SetTitle("Главная"); ?>
             "",
             Array(
                 "AREA_FILE_SHOW" => "file",
-                "PATH" => SITE_TEMPLATE_PATH."/page_blocks/mainpage/STEPS.php",
+                "PATH" => SITE_TEMPLATE_PATH."/page_blocks/mainpage/steps.php",
                 "EDIT_TEMPLATE" => ""
             )
         );
@@ -116,7 +116,7 @@ $APPLICATION -> SetTitle("Главная"); ?>
             "",
             Array(
                 "AREA_FILE_SHOW" => "file",
-                "PATH" => SITE_TEMPLATE_PATH."/page_blocks/mainpage/TIZERS.php",
+                "PATH" => SITE_TEMPLATE_PATH."/page_blocks/mainpage/tizers.php",
                 "EDIT_TEMPLATE" => ""
             )
         );
@@ -130,7 +130,7 @@ $APPLICATION -> SetTitle("Главная"); ?>
             "",
             Array(
                 "AREA_FILE_SHOW" => "file",
-                "PATH" => SITE_TEMPLATE_PATH."/page_blocks/mainpage/FAQ.php",
+                "PATH" => SITE_TEMPLATE_PATH."/page_blocks/mainpage/faq.php",
                 "EDIT_TEMPLATE" => ""
             )
         );

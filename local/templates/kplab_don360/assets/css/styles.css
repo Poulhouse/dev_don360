@@ -72,12 +72,6 @@ body .maxwidth-theme {
     margin-left:20px;
 }
 
-.kp-shadow{
-    box-shadow: 3px 4px 25px rgba(0,0,0,0.15)!important;
-}
-.kp-rounded{
-    border-radius: 30px!important;
-}
 .rounded-12{
     border-radius: 12px!important;
 }

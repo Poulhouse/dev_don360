@@ -1,5 +1,5 @@
 <div class="container index-block">
-	<div class="row slider-block index-block__SLIDER py-70">
+	<div class="row slider-block index-block__SLIDER py-80 align-items-center">
 	    <div class="slider-block__inner col-md-6 themed-grid-col left-column">
 	        <div class="pl-5">
 		        <h1 class="slider-block__title">Мы делаем профессиональный 3D-тур под ключ</h1>
@@ -35,21 +35,21 @@
 	                </div>
 	                <div class="carousel-inner">
 	                    <div class="carousel-item active">
-	                        <img src="<?=SITE_TEMPLATE_PATH.'/assets/images/2022-05-19.jpg';?>" class="d-block w-100" alt="...">
+	                        <img src="<?=SITE_TEMPLATE_PATH.'/assets/images/2022-05-19.jpg';?>" class="d-block" alt="...">
 	                        <div class="carousel-caption d-none d-md-block">
 	                            <h5>First slide label</h5>
 	                            <p>Some representative placeholder content for the first slide.</p>
 	                        </div>
 	                    </div>
 	                    <div class="carousel-item">
-	                        <img src="<?=SITE_TEMPLATE_PATH.'/assets/images/2022-05-19.jpg';?>" class="d-block w-100" alt="...">
+	                        <img src="<?=SITE_TEMPLATE_PATH.'/assets/images/2022-05-19.jpg';?>" class="d-block" alt="...">
 	                        <div class="carousel-caption d-none d-md-block">
 	                            <h5>Second slide label</h5>
 	                            <p>Some representative placeholder content for the second slide.</p>
 	                        </div>
 	                    </div>
 	                    <div class="carousel-item">
-	                        <img src="<?=SITE_TEMPLATE_PATH.'/assets/images/2022-05-19.jpg';?>" class="d-block w-100" alt="...">
+	                        <img src="<?=SITE_TEMPLATE_PATH.'/assets/images/2022-05-19.jpg';?>" class="d-block" alt="...">
 	                        <div class="carousel-caption d-none d-md-block">
 	                            <h5>Third slide label</h5>
 	                            <p>Some representative placeholder content for the third slide.</p>
