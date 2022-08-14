@@ -1,8 +1,8 @@
 <div class="container index-block">
-    <div class="row index-block--SERVICES pby-70">
+    <div class="row index-block--SERVICES">
 
-        <div class="services-block__inner col-md-12">
-            <div class="services-block__item">
+        <div class="services-block--inner col-md-12">
+            <div class="services-block--item">
 	            <div class="services-item__inner justify-content-between align-items-start">
 	                <h2 class="index-block__title">Услуги</h2>
 	                <a class="index-block__link" href="/services/" title="Перейти в раздел">
@@ -17,7 +17,7 @@
 	                </a>
 	            </div>
 	            <div class="index-block__preview">
-	                <p>Мы используем две основные составляющие ценообразования</p>
+<!--	                <p>Мы используем две основные составляющие ценообразования</p>-->
 	            </div>
             </div>
         </div>
@@ -30,7 +30,7 @@
                             <a class="nav-link active" data-bs-toggle="tab" data-bs-target="#photo" type="button" role="tab" aria-controls="photo" aria-selected="true">Фотосъемка</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#public" type="button" role="tab" aria-controls="public" aria-selected="true">Размещение</a>
+                            <a class="nav-link " data-bs-toggle="tab" data-bs-target="#public" type="button" role="tab" aria-controls="public" aria-selected="true">Размещение</a>
                         </li>
                     </ul>
                 </div>
@@ -38,7 +38,7 @@
                     <div class="tab-pane active" id="photo" role="tabpanel" aria-labelledby="photo-tab">
                         <div class="row">
                             <div class="col-md-3 ">
-                                <div class="kp-shadow p-5 mb-3 bg-body kp-rounded">
+                                <div class="kp-shadow service-card mb-3 bg-body kp-rounded">
 
                                     <div class="fs-4 pb-3">
                                         <span class="color-green-element">Эконом</span>
@@ -59,15 +59,15 @@
                                         <span class="fs-6 text">Стандартная обработка фотографий без удаления посторонних предметов</span>
                                     </div>
 
-                                    <div class="d-grid gap-2">
-                                        <a class="btn bg-custom rounded-12 border-0" href="#">Выбрать</a>
-                                        <a class="btn bg-transparent rounded-12 border-2" href="#">Подробнее</a>
+                                    <div class="d-grid gap-4">
+                                        <a class="btn btn-primary rounded-12 border-0" href="#">Выбрать</a>
+                                        <a class="btn btn-transparent rounded-12 border-2" href="#">Подробнее</a>
                                     </div>
 
                                 </div>
                             </div>
                             <div class="col-md-3 ">
-                                <div class="kp-shadow p-5 mb-3 bg-body kp-rounded">
+                                <div class="kp-shadow service-card mb-3 bg-body kp-rounded">
 
                                     <div class="fs-4 pb-3">
                                         <span class="color-green-element">Стандарт</span>
@@ -88,15 +88,15 @@
                                         <span class="fs-6 text">Стандартная обработка фотографий без удаления посторонних предметов</span>
                                     </div>
 
-                                    <div class="d-grid gap-2">
-                                        <a class="btn bg-custom rounded-12 border-0" href="#">Выбрать</a>
-                                        <a class="btn bg-transparent rounded-12 border-2" href="#">Подробнее</a>
+                                    <div class="d-grid gap-4">
+                                        <a class="btn btn-primary rounded-12 border-0" href="#">Выбрать</a>
+                                        <a class="btn btn-transparent rounded-12 border-2" href="#">Подробнее</a>
                                     </div>
 
                                 </div>
                             </div>
                             <div class="col-md-3 ">
-                                <div class="kp-shadow p-5 mb-3 bg-body kp-rounded">
+                                <div class="kp-shadow service-card mb-3 bg-body kp-rounded">
 
                                     <div class="fs-4 pb-3">
                                         <span class="color-green-element">Премиум</span>
@@ -117,15 +117,15 @@
                                         <span class="fs-6 text">HDR, легкая коррекция, ретушь, удаление посторонних предметов</span>
                                     </div>
 
-                                    <div class="d-grid gap-2">
-                                        <a class="btn bg-custom rounded-12 border-0" href="#">Выбрать</a>
-                                        <a class="btn bg-transparent rounded-12 border-2" href="#">Подробнее</a>
+                                    <div class="d-grid gap-4">
+                                        <a class="btn btn-primary rounded-12 border-0" href="#">Выбрать</a>
+                                        <a class="btn btn-transparent rounded-12 border-2" href="#">Подробнее</a>
                                     </div>
 
                                 </div>
                             </div>
                             <div class="col-md-3 ">
-                                <div class="kp-shadow p-5 mb-3 bg-body kp-rounded">
+                                <div class="kp-shadow service-card mb-3 bg-body kp-rounded">
 
                                     <div class="fs-4 pb-3">
                                         <span class="color-green-element">VIP</span>
@@ -143,12 +143,12 @@
                                     </div>
 
                                     <div class="pb-4">
-                                        <span class="fs-6 text">HDR, цветокоррекция, ретушь, удаление посторонних предметов и отражений</span>
+                                        <span class="fs-6 text">HDR, коррекция, ретушь, удаление посторонних предметов</span>
                                     </div>
 
-                                    <div class="d-grid gap-2">
-                                        <a class="btn bg-custom rounded-12 border-0" href="#">Выбрать</a>
-                                        <a class="btn bg-transparent rounded-12 border-2" href="#">Подробнее</a>
+                                    <div class="d-grid gap-4">
+                                        <a class="btn btn-primary rounded-12 border-0" href="#">Выбрать</a>
+                                        <a class="btn btn-transparent rounded-12 border-2" href="#">Подробнее</a>
                                     </div>
 
                                 </div>
@@ -163,8 +163,8 @@
                     <div class="tab-pane" id="public" role="tabpanel" aria-labelledby="public-tab">
                         <div class="row">
 
-                            <div class="col-md-4 ">
-                                <div class="kp-shadow p-5 mb-3 bg-body kp-rounded">
+                            <div class="col-md-3 ">
+                                <div class="kp-shadow service-card mb-3 bg-body kp-rounded">
 
                                     <div class="fs-4 pb-3">
                                         <span class="color-green-element">Google Карты</span>
@@ -172,7 +172,7 @@
 
                                     <div class="pb-30">
                                         <div class="row align-items-start">
-                                            <div class="col">
+                                            <div class="col-12">
                                                 <span class="fs-2 text fw-bold">2000₽</span>
                                             </div>
                                             <div class="col">
@@ -185,16 +185,16 @@
                                         <span class="fs-6 text">Размещение панорам на сервисах Google Карты/Мой бизнес.</span>
                                     </div>
 
-                                    <div class="d-grid gap-2">
-                                        <a class="btn bg-custom rounded-12 border-0" href="#">Выбрать</a>
-                                        <a class="btn bg-transparent rounded-12 border-2" href="#">Подробнее</a>
+                                    <div class="d-grid gap-4">
+                                        <a class="btn btn-primary rounded-12 border-0" href="#">Выбрать</a>
+                                        <a class="btn btn-transparent rounded-12 border-2" href="#">Подробнее</a>
                                     </div>
 
                                 </div>
                             </div>
 
-                            <div class="col-md-4 ">
-                                <div class="kp-shadow p-5 mb-3 bg-body kp-rounded">
+                            <div class="col-md-3 ">
+                                <div class="kp-shadow service-card mb-3 bg-body kp-rounded">
 
                                     <div class="fs-4 pb-3">
                                         <span class="color-green-element">Яндекс Карты</span>
@@ -202,7 +202,7 @@
 
                                     <div class="pb-30">
                                         <div class="row align-items-start">
-                                            <div class="col">
+                                            <div class="col-12">
                                                 <span class="fs-2 text fw-bold">2000₽</span>
                                             </div>
                                             <div class="col">
@@ -215,16 +215,16 @@
                                         <span class="fs-6 text">Размещение панорам на сервисах Яндекс Карты/Яндекс Справочник.</span>
                                     </div>
 
-                                    <div class="d-grid gap-2">
-                                        <a class="btn bg-custom rounded-12 border-0" href="#">Выбрать</a>
-                                        <a class="btn bg-transparent rounded-12 border-2" href="#">Подробнее</a>
+                                    <div class="d-grid gap-4">
+                                        <a class="btn btn-primary rounded-12 border-0" href="#">Выбрать</a>
+                                        <a class="btn btn-transparent rounded-12 border-2" href="#">Подробнее</a>
                                     </div>
 
                                 </div>
                             </div>
-
-                            <div class="col-md-4 ">
-                                <div class="kp-shadow p-5 mb-3 bg-body kp-rounded">
+<!--
+                            <div class="col-md-3 ">
+                                <div class="kp-shadow p-5 service-card bg-body kp-rounded">
 
                                     <div class="fs-4 pb-3">
                                         <span class="color-green-element">Google + Яндекс Карты</span>
@@ -245,16 +245,16 @@
                                         <span class="fs-6 text">Комплексное размещение панорам в поисковых системах</span>
                                     </div>
 
-                                    <div class="d-grid gap-2">
-                                        <a class="btn bg-custom rounded-12 border-0" href="#">Выбрать</a>
-                                        <a class="btn bg-transparent rounded-12 border-2" href="#">Подробнее</a>
+                                    <div class="d-grid gap-4">
+                                        <a class="btn btn-primary rounded-12 border-0" href="#">Выбрать</a>
+                                        <a class="btn btn-transparent rounded-12 border-2" href="#">Подробнее</a>
                                     </div>
 
                                 </div>
                             </div>
-
-                            <div class="col-md-4 ">
-                                <div class="kp-shadow p-5 mb-3 bg-body kp-rounded">
+-->
+                            <div class="col-md-3 ">
+                                <div class="kp-shadow service-card mb-3 bg-body kp-rounded">
 
                                     <div class="fs-4 pb-3">
                                         <span class="color-green-element">Классический (на сайт)</span>
@@ -262,7 +262,7 @@
 
                                     <div class="pb-30">
                                         <div class="row align-items-start">
-                                            <div class="col">
+                                            <div class="col-12">
                                                 <span class="fs-2 text fw-bold">от 3000₽</span>
                                             </div>
                                             <div class="col">
@@ -275,16 +275,16 @@
                                         <span class="fs-6 text">3D-тур с расширенным интерактивным	функционалом</span>
                                     </div>
 
-                                    <div class="d-grid gap-2">
-                                        <a class="btn bg-custom rounded-12 border-0" href="#">Выбрать</a>
-                                        <a class="btn bg-transparent rounded-12 border-2" href="#">Подробнее</a>
+                                    <div class="d-grid gap-4">
+                                        <a class="btn btn-primary rounded-12 border-0" href="#">Выбрать</a>
+                                        <a class="btn btn-transparent rounded-12 border-2" href="#">Подробнее</a>
                                     </div>
 
                                 </div>
                             </div>
 
-                            <div class="col-md-4 ">
-                                <div class="kp-shadow p-5 mb-3 bg-body kp-rounded">
+                            <div class="col-md-3 ">
+                                <div class="kp-shadow service-card mb-3 bg-body kp-rounded">
 
                                     <div class="fs-4 pb-3">
                                         <span class="color-green-element">Youtube (Авито/Циан)</span>
@@ -292,7 +292,7 @@
 
                                     <div class="pb-30">
                                         <div class="row align-items-start">
-                                            <div class="col">
+                                            <div class="col-12">
                                                 <span class="fs-2 text fw-bold">от 900₽</span>
                                             </div>
                                             <div class="col">
@@ -305,9 +305,9 @@
                                         <span class="fs-6 text">YouTube-видео на 360 градусов для презентации объекта недвижимости</span>
                                     </div>
 
-                                    <div class="d-grid gap-2">
-                                        <a class="btn bg-custom rounded-12 border-0" href="#">Выбрать</a>
-                                        <a class="btn bg-transparent rounded-12 border-2" href="#">Подробнее</a>
+                                    <div class="d-grid gap-4">
+                                        <a class="btn btn-primary rounded-12 border-0" href="#">Выбрать</a>
+                                        <a class="btn btn-transparent rounded-12 border-2" href="#">Подробнее</a>
                                     </div>
 
                                 </div>

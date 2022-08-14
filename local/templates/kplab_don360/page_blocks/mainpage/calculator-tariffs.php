@@ -1,6 +1,6 @@
 <div class="container index-block--delimiter">
     <div class="maxwidth-theme">
-        <div class="index-block--CALCULATOR-TARIFFS index-block py-80">
+        <div class="index-block--CALCULATOR-TARIFFS index-block">
 
             <div class="calc-block--inner col-md-12 themed-grid-col">
                 <div class="index-block--title-wrapper d-flex justify-content-between align-items-center">
