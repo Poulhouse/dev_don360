@@ -82,7 +82,7 @@ $APPLICATION -> SetTitle("Главная"); ?>
         <!-- КОНЕЦ УСЛУГИ -->
 
         <!-- КАЛЬКУЛЯТОР -->
-        <?
+        <?/*
         $APPLICATION->IncludeComponent(
             "bitrix:main.include",
             "",
@@ -91,7 +91,7 @@ $APPLICATION -> SetTitle("Главная"); ?>
                 "PATH" => SITE_TEMPLATE_PATH."/page_blocks/mainpage/calculator-tariffs.php",
                 "EDIT_TEMPLATE" => ""
             )
-        );
+        );*/
         ?>
         <!-- КОНЕЦ КАЛЬКУЛЯТОР -->
 
