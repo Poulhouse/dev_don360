@@ -1,126 +1,62 @@
-<div class="container FAQ index-block--delimiter">
-    <div class="index-block index-block--fon py-80">
-
-        <div class="faq-list  faq-list--template">
-            <div class="maxwidth-theme">
-                <div class="index-block__subtitle">Ответы на популярные вопросы</div>
-                <div class="index-block__title-wrapper   ">
-                    <div class="index-block__part--left">
-                        <h3 class="switcher-title line font_64">Вопрос<span class="color-green-element">-ответ</span></h3>
-                    </div>
-
-
-                    <div class="index-block__part--right">
-                        <a class="index-block__link dark_link stroke-theme-hover right_link_block" href="/info/faq/"
-                           title="Перейти в раздел">
-                            Все ответы
-                            <span class="index-block__arrow">
-									<i class="svg inline  svg-inline- stroke_999" aria-hidden="true">
-										<svg width="5" height="8" viewBox="0 0 5 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-											<path d="M1 1L4 4L1 7" stroke="#CACACA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-										</svg>
-									</i>
-								</span>
-                        </a>
-                    </div>
+<div class="container index-block">
+	<div class="row index-block--FAQ">
+		<div class="faq-block--inner col-md-12">
+			<div class="faq-block--item">
+				<div class="faq-item__inner justify-content-between ">
+					<h2 class="index-block__title">Частые вопросы</h2>
+					<a class="index-block__link" href="/info/faq/" title="Перейти в раздел">
+						<span class="index-block__arrow">
+							<i class="svg inline fill" aria-hidden="true">
+								<svg width="41" height="23" viewBox="0 0 41 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path d="M40.7071 8.70711C41.0976 8.31658 41.0976 7.68342 40.7071 7.29289L34.3432 0.928932C33.9526 0.538408 33.3195 0.538408 32.9289 0.928932C32.5384 1.31946 32.5384 1.95262 32.9289 2.34315L38.5858 8L32.9289 13.6569C32.5384 14.0474 32.5384 14.6805 32.9289 15.0711C33.3195 15.4616 33.9526 15.4616 34.3432 15.0711L40.7071 8.70711ZM0 9H40V7H0V9Z"/>
+								</svg>
+							</i>
+						</span>
+						Все ответы
+					</a>
+				</div>
+				<div class="col-6 index-block__preview">
+					<p>В этом разделе публикуем ответы на популярные вопросы. Не нашли ответов? Свяжитесь с нами по почте или телефону для консультации. Расскажем детали и подготовим индивидуальные условия сотрудничества.</p>
+				</div>
+			</div>
+		</div>
+		<div class="faq-block--inner col-md-12 themed-grid-col">
+            <div class="accordion" id="accordionExample">
+                <div class="accordion-item">
+	                <div class="accordion-header" id="headingOne">
+		                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+			                Что такое 3D-тур
+		                </button>
+	                </div>
+	                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+		                <div class="accordion-body">
+			                Виртуальный тур или 3D-тур это система связанных между собой панорамный фотографий, которые создают у пользователя эффект присутствия в помещении. Другими словами, пользователь может прогуляться внутри снятых панорам при помощи своего смартфона, ноутбука или очков виртуальной реальности
+		                </div>
+	                </div>
                 </div>
-                <div class="index-block__preview   index-block__preview--mb-66">
-                    <p>В этом разделе публикуем ответы на популярные вопросы. Не нашли ответов? Свяжитесь с нами по почте или телефону для консультации. Расскажем детали и подготовим индивидуальные условия сотрудничества.</p>
+                <div class="accordion-item">
+	                <div class="accordion-header" id="headingTwo">
+		                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+			                Что такое 3D-тур
+		                </button>
+	                </div>
+	                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+		                <div class="accordion-body">
+			                Виртуальный тур или 3D-тур это система связанных между собой панорамный фотографий, которые создают у пользователя эффект присутствия в помещении. Другими словами, пользователь может прогуляться внутри снятых панорам при помощи своего смартфона, ноутбука или очков виртуальной реальности
+		                </div>
+	                </div>
                 </div>
-            </div>
-            <div class="maxwidth-theme">
-                <div class="faq-container">
-                    <div class="flexbox flexbox--direction-row flexbox--column-t991">
-
-
-                        <div class="faq-items flex-grow-1">
-                            <div class="accordion accordion-type-1">
-
-                                <div class="item-accordion-wrapper shadow-hovered shadow-no-border-hovered" id="bx_565502798_910">
-                                    <a class="accordion-head stroke-theme-hover collapsed" data-toggle="collapse" data-parent="#accordion910" href="#accordion910">
-                                        <span class="switcher-title color_333 font_18">Как купить лицензию?</span>
-                                        <i class="svg inline  svg-inline-right-arrow" aria-hidden="true">
-                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M8 1V15M1 8H15" stroke="#999999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                            </svg>
-                                        </i>
-                                    </a>
-                                    <div id="accordion910" class="panel-collapse collapse">
-                                        <div class="accordion-body color_666">
-                                            <div class="accordion-preview">
-                                                Вы можете приобрести лицензию у нас на сайте, счет на оплату придет вам после оформления заказа. Работаем с физическими и юридическими лицами.													</div>
-                                            <div class="accordion-btn">
-                                                <a class="btn btn-default" href="/info/payment/" target="_blank">Подробнее об оплате</a>
-                                            </div>
-                                            <div class="bg-theme accordion-line"></div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="item-accordion-wrapper shadow-hovered shadow-no-border-hovered" id="bx_565502798_789">
-                                    <a class="accordion-head stroke-theme-hover collapsed" data-toggle="collapse" data-parent="#accordion789" href="#accordion789">
-                                        <span class="switcher-title color_333 font_18">Хочу у вас работать. Куда отправлять резюме?</span>
-                                        <i class="svg inline  svg-inline-right-arrow" aria-hidden="true">
-                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M8 1V15M1 8H15" stroke="#999999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                            </svg>
-                                        </i>
-                                    </a>
-                                    <div id="accordion789" class="panel-collapse collapse">
-                                        <div class="accordion-body color_666">
-                                            <div class="accordion-preview">
-                                                Спасибо за интерес к нашей компании. Мы всегда в поиске талантливых специалистов. Отправляйте свое резюме нам на почту <a class="txttohtmllink" href="mailto:job@digital2.ru" title="Написать письмо">job@digital2.ru</a> с указанием желаемой должности в теме письма. 													</div>
-                                            <div class="bg-theme accordion-line"></div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="item-accordion-wrapper shadow-hovered shadow-no-border-hovered" id="bx_565502798_788">
-                                    <a class="accordion-head stroke-theme-hover collapsed" data-toggle="collapse" data-parent="#accordion788" href="#accordion788">
-                                        <span class="switcher-title color_333 font_18">Можно ли поставить ваш готовый шаблон интернет-магазина на демоверсию 1С-Битрикс?</span>
-                                        <i class="svg inline  svg-inline-right-arrow" aria-hidden="true">
-                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M8 1V15M1 8H15" stroke="#999999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                            </svg>
-                                        </i>
-                                    </a>
-                                    <div id="accordion788" class="panel-collapse collapse">
-                                        <div class="accordion-body color_666">
-                                            <div class="accordion-preview">
-                                                Для использования готового решения вам необходим 1С-Битрикс с активированной лицензией. В обратном случае наше решение просто не установится. <br>
-                                                <br>
-                                                Установка платного решения невозможна на демоверсию 1С-Битрикс, потому что ключ шаблона привязывается к ключу 1С-Битрикс. Поэтому рекомендуем вам купить и активировать лицензию 1С-Битрикс, после чего приобрести лицензию на наше решение.													</div>
-                                            <div class="bg-theme accordion-line"></div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="item-accordion-wrapper shadow-hovered shadow-no-border-hovered" id="bx_565502798_137">
-                                    <a class="accordion-head stroke-theme-hover collapsed" data-toggle="collapse" data-parent="#accordion137" href="#accordion137">
-                                        <span class="switcher-title color_333 font_18">Цена продукта на сайте указана с учетом НДС?</span>
-                                        <i class="svg inline  svg-inline-right-arrow" aria-hidden="true">
-                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M8 1V15M1 8H15" stroke="#999999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                            </svg>
-                                        </i>
-                                    </a>
-                                    <div id="accordion137" class="panel-collapse collapse">
-                                        <div class="accordion-body color_666">
-                                            <div class="accordion-preview">
-                                                Электронные версии продуктов не облагаются НДС. С удовольствием проконсультируем по возможностям решения, составим план запуска и поможем в выборе по телефону +7 (000) 000-00-00 или по почте info@digital2.ru. 													</div>
-                                            <div class="bg-theme accordion-line"></div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-
+                <div class="accordion-item">
+	                <div class="accordion-header" id="headingThree">
+		                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+			                Что такое 3D-тур
+		                </button>
+	                </div>
+	                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+		                <div class="accordion-body">
+			                Виртуальный тур или 3D-тур это система связанных между собой панорамный фотографий, которые создают у пользователя эффект присутствия в помещении. Другими словами, пользователь может прогуляться внутри снятых панорам при помощи своего смартфона, ноутбука или очков виртуальной реальности
+		                </div>
+	                </div>
                 </div>
             </div>
         </div>

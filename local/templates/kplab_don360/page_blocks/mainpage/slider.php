@@ -26,46 +26,47 @@
 	        </div>
 	    </div>
 	    <div class="slider-block--inner col-md-6 themed-grid-col right-column">
-	        <div class="index-block--item-container index-block--item-slider">
-	            <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
-	                <div class="carousel-indicators">
-	                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-	                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-	                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-	                </div>
-	                <div class="carousel-inner">
-	                    <div class="carousel-item active">
-	                        <img src="<?=SITE_TEMPLATE_PATH.'/assets/images/2022-05-19.jpg';?>" class="d-block" alt="...">
-	                        <div class="carousel-caption d-none d-md-block">
-	                            <h5>First slide label</h5>
-	                            <p>Some representative placeholder content for the first slide.</p>
-	                        </div>
-	                    </div>
-	                    <div class="carousel-item">
-	                        <img src="<?=SITE_TEMPLATE_PATH.'/assets/images/2022-05-19.jpg';?>" class="d-block" alt="...">
-	                        <div class="carousel-caption d-none d-md-block">
-	                            <h5>Second slide label</h5>
-	                            <p>Some representative placeholder content for the second slide.</p>
-	                        </div>
-	                    </div>
-	                    <div class="carousel-item">
-	                        <img src="<?=SITE_TEMPLATE_PATH.'/assets/images/2022-05-19.jpg';?>" class="d-block" alt="...">
-	                        <div class="carousel-caption d-none d-md-block">
-	                            <h5>Third slide label</h5>
-	                            <p>Some representative placeholder content for the third slide.</p>
-	                        </div>
-	                    </div>
-	                </div>
-	                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-	                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-	                    <span class="visually-hidden">Previous</span>
-	                </button>
-	                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-	                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-	                    <span class="visually-hidden">Next</span>
-	                </button>
-	            </div>
-	        </div>
+
+		    <?php
+            $APPLICATION -> IncludeComponent(
+                "kplab:portfolio",
+                "main",
+                array(
+                    "COMPONENT_TEMPLATE" => "main",
+                    "CACHE_TYPE" => "A",
+                    "CACHE_TIME" => "0",
+                    "SET_TITLE" => "Y",
+                    "TITLE_PORTFOLIO" => "Мы делаем профессиональный\n3D-тур под ключ",
+                    "IBLOCK_TYPE" => "iblock_content",
+                    "IBLOCK_ID" => "1",
+                    "SHOW_ELEMENT_ON_FRONTPAGE" => "Y",
+                    "TOP_COUNT" => "5",
+                    "FIELD_CODE" => array(
+                        0 => "ID",
+                        1 => "NAME",
+                        2 => "PREVIEW_PICTURE",
+                        3 => "DETAIL_PICTURE",
+                        4 => "IBLOCK_ID",
+                        5 => "",
+                    ),
+                    "GET_EXTERNAL_ID" => "N",
+                    "GET_IBLOCK_SECTION_ID" => "Y",
+                    "PROPERTY_CODE" => array(
+                        0 => "GOOGLE_FRAME",
+                        1 => "CLASSIC_FRAME",
+                        2 => "YANDEX_FRAME",
+                        3 => "",
+                    ),
+                    "SORT_BY1" => "ID",
+                    "SORT_ORDER1" => "ASC",
+                    "DETAIL_URL" => "",
+                    "ACTIVE_DATE_FORMAT" => "d.m.Y",
+                    "LOOP_SLIDER" => "Y"
+                ),
+                false
+            );
+		    ?>
+
 	    </div>
 
 	</div>
