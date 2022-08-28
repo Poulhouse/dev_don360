@@ -1,10 +1,9 @@
-
 <div class="container index-block">
     <div class="row index-block--TIZERS">
 
 	    <div class="tizers-block--inner col-md-12">
 		    <div class="tizers-block--item">
-			    <div class="tizers-item__inner justify-content-between align-items-start">
+			    <div class="tizers-item__inner justify-content-between ">
 				    <h2 class="index-block__title">Отзывы</h2>
 				    <a class="index-block__link" href="/reviews/" title="Перейти в раздел">
 						<span class="index-block__arrow">
@@ -17,7 +16,7 @@
 					    Все отзывы
 				    </a>
 			    </div>
-			    <div class="index-block__preview">
+			    <div class="col-6 index-block__preview">
 				    <p>Обратная связь помогает развиваться в нужном направлении. Мы прислушиваемся к отзывам, ищем новые точки роста и корректируем рабочие процессы. Благодарим всех, кто выразил свое мнение. Для нас это ценно!</p>
 			    </div>
 		    </div>
@@ -32,21 +31,16 @@
 
                             <div class="tizers-list__item-image-wrapper tizers-list__item-image-wrapper--ICONS tizers-list__item-image-wrapper--position-TOP">
                                 <a class="tizers-list__item-link" href="/product/">
-                                    <i class="svg inline  svg-inline- fill-theme tizers-list__item-image-icon" aria-hidden="true"><svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10 6C8.34315 6 7 7.34314 7 9V46C7 47.6569 8.34315 49 10 49H16.9888V22C16.9888 20.3431 18.332 19 19.9888 19H39V9C39 7.34315 37.6569 6 36 6H10Z" fill="#3761E9" fill-opacity="0.1"></path>
-                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M0 4C0 1.79086 1.79086 0 4 0H36C38.2091 0 40 1.79086 40 4V18C40 18.5523 39.5523 19 39 19C38.4477 19 38 18.5523 38 18V4C38 2.89543 37.1046 2 36 2H4C2.89543 2 2 2.89543 2 4V46C2 47.1046 2.89543 48 4 48H16C16.5523 48 17 48.4477 17 49C17 49.5523 16.5523 50 16 50H4C1.79086 50 0 48.2091 0 46V4ZM8.93027 6C8.39078 6 7.95346 6.43729 7.95346 6.97676C7.95346 7.51622 8.39078 7.95351 8.93027 7.95351H9.90708V15.7676C9.90708 16.307 10.3444 16.7443 10.8839 16.7443C11.4234 16.7443 11.8607 16.307 11.8607 15.7676V6.97676C11.8607 6.43729 11.4234 6 10.8839 6H8.93027ZM6 9.90702C6 9.36756 6.43724 8.93027 6.9766 8.93027H7.95321C8.49259 8.93027 8.92982 9.36756 8.92982 9.90702V15.7676C8.92982 16.307 8.49259 16.7443 7.95321 16.7443C7.41384 16.7443 6.9766 16.307 6.9766 15.7676V10.8838C6.43724 10.8838 6 10.4465 6 9.90702ZM14.7914 11.3722C14.7914 9.48409 16.3221 7.95351 18.2102 7.95351C19.6973 7.95351 20.965 8.90341 21.4348 10.2325C21.6145 10.7412 22.1727 11.0077 22.6813 10.8279C23.1899 10.6482 23.4565 10.0902 23.2768 9.58157C22.5396 7.49629 20.551 6 18.2102 6C15.2431 6 12.8378 8.40517 12.8378 11.3722C12.8378 14.3392 15.2431 16.7443 18.2102 16.7443H29.4435C29.983 16.7443 30.4203 16.307 30.4203 15.7676C30.4203 15.2281 29.983 14.7908 29.4435 14.7908H18.2102C16.3221 14.7908 14.7914 13.2602 14.7914 11.3722ZM17.7221 11.3722C17.7221 11.1025 17.9408 10.8838 18.2105 10.8838H18.6989C19.2384 10.8838 19.6757 10.4465 19.6757 9.90702C19.6757 9.36756 19.2384 8.93027 18.6989 8.93027H18.2105C16.8618 8.93027 15.7685 10.0235 15.7685 11.3722C15.7685 12.7208 16.8618 13.814 18.2105 13.814H29.4438C29.9833 13.814 30.4206 13.3768 30.4206 12.8373C30.4206 12.2978 29.9833 11.8605 29.4438 11.8605H18.2105C17.9408 11.8605 17.7221 11.6418 17.7221 11.3722ZM47 21C48.6569 21 50 22.3431 50 24V47C50 48.6569 48.6569 50 47 50H22C20.3431 50 19 48.6569 19 47V24C19 22.3431 20.3431 21 22 21H47ZM48 24C48 23.4477 47.5523 23 47 23H22C21.4477 23 21 23.4477 21 24V47C21 47.5523 21.4477 48 22 48H47C47.5523 48 48 47.5523 48 47V24ZM26 27C25.4477 27 25 27.4477 25 28C25 28.5523 25.4477 29 26 29H28.2373L30.7775 38.2644C30.8966 38.6988 31.2915 39 31.7419 39H39.629C40.1813 39 40.629 38.5523 40.629 38C40.629 37.4477 40.1813 37 39.629 37H32.5047L32.2305 36H40C40.4089 36 40.7766 35.751 40.9285 35.3714L42.9285 30.3714C43.0517 30.0633 43.0141 29.7141 42.8281 29.4394C42.642 29.1646 42.3318 29 42 29H32.5C31.9477 29 31.5 29.4477 31.5 30C31.5 30.5523 31.9477 31 32.5 31H40.523L39.323 34H31.6821L29.9644 27.7356C29.8453 27.3012 29.4504 27 29 27H26ZM34 41.5C34 42.3284 33.3284 43 32.5 43C31.6716 43 31 42.3284 31 41.5C31 40.6716 31.6716 40 32.5 40C33.3284 40 34 40.6716 34 41.5ZM38.5 43C39.3284 43 40 42.3284 40 41.5C40 40.6716 39.3284 40 38.5 40C37.6716 40 37 40.6716 37 41.5C37 42.3284 37.6716 43 38.5 43ZM6 38C6 37.4477 6.44772 37 7 37H12C12.5523 37 13 37.4477 13 38C13 38.5523 12.5523 39 12 39H7C6.44772 39 6 38.5523 6 38ZM7 40C6.44772 40 6 40.4477 6 41C6 41.5523 6.44772 42 7 42H10C10.5523 42 11 41.5523 11 41C11 40.4477 10.5523 40 10 40H7Z" fill="#3761E9"></path>
-                                        </svg>
+                                    <i class="svg inline tizers-list__item-image-icon" aria-hidden="true">
+	                                    <svg width="50" height="50" viewBox="0 0 50 50" fill="transparent" xmlns="http://www.w3.org/2000/svg">
+		                                    <g clip-path="url(#clip0_5656_424)"><path d="M43.5485 50C44.4356 50 45.1614 49.2742 45.1614 48.3871C45.1614 47.4999 44.4356 46.7741 43.5485 46.7741H40.3227V38.129C40.3227 36.4919 39.613 34.9355 38.3873 33.8628L30.355 26.8386C29.8147 26.3708 29.5244 25.7176 29.5244 24.9999C29.5244 24.2821 29.8229 23.6289 30.355 23.1611L38.3873 16.1369C39.6212 15.0643 40.3227 13.5079 40.3227 11.8708V3.22564H43.5485C44.4356 3.22564 45.1614 2.49982 45.1614 1.61269C45.1614 0.725561 44.4355 0 43.5485 0H40.3227H9.67746H6.45169C5.56457 0 4.83875 0.725821 4.83875 1.61295C4.83875 2.50008 5.56457 3.2259 6.45169 3.2259H9.67746V12.6614C9.67746 14.3066 10.3872 15.8711 11.6372 16.9437L18.7984 23.1533C19.3388 23.6211 19.6453 24.2824 19.6453 25.0001C19.6453 25.7179 19.3468 26.3791 18.7984 26.8469L11.6372 33.0485C10.3872 34.1292 9.67746 35.6936 9.67746 37.3388V46.7744H6.45169C5.56457 46.7744 4.83875 47.5002 4.83875 48.3873C4.83875 49.2744 5.56457 50.0003 6.45169 50.0003H9.67746H40.3226H43.5485V50ZM37.0968 46.7742H12.9032V37.3387C12.9032 36.629 13.2097 35.9597 13.742 35.4919L20.9032 29.2903C22.1452 28.2097 22.863 26.6532 22.863 25.0081C22.863 23.3629 22.1533 21.7984 20.9032 20.7258L13.742 14.5162C13.2097 14.0483 12.9032 13.371 12.9032 12.6613V3.22577H37.0968V11.8709C37.0968 12.5725 36.7903 13.2418 36.258 13.7096L28.2258 20.7339C26.9999 21.8065 26.2904 23.3629 26.2904 25C26.2904 26.6371 27.0001 28.1935 28.2258 29.2661L36.2661 36.2904C36.7984 36.7582 37.0967 37.4275 37.0967 38.1291V46.7742H37.0968Z" fill="url(#paint0_linear_5656_424)"/><path d="M27.0243 29.9839C26.1613 29.2259 25.4518 28.2904 25.0646 27.2097C24.8146 26.5161 24.7097 25.8146 24.6936 25.121C24.6936 25.0807 24.6936 25 24.6936 25H24.4597V25.113C24.4275 26.9517 23.6292 28.6855 22.242 29.8953L15.0807 36.1049C14.7259 36.4195 14.5162 36.863 14.5162 37.3388V44.4436C14.5162 44.8388 14.8389 45.1614 15.234 45.1614H34.7663C35.1614 45.1614 35.4841 44.8388 35.4841 44.4436V38.1291C35.4841 37.6532 35.2825 37.2097 34.9276 36.8952L27.0243 29.9839Z" fill="url(#paint1_linear_5656_424)"/></g><defs><linearGradient id="paint0_linear_5656_424" x1="4.83875" y1="0" x2="45.1614" y2="50" gradientUnits="userSpaceOnUse"><stop stop-color="#4889F8"/><stop offset="1" stop-color="#5ACA87"/></linearGradient><linearGradient id="paint1_linear_5656_424" x1="4.78853" y1="0.500489" x2="44.7409" y2="49.5791" gradientUnits="userSpaceOnUse"><stop stop-color="#4889F8"/><stop offset="1" stop-color="#5ACA87"/></linearGradient><clipPath id="clip0_5656_424"><rect width="50" height="50" fill="white"/></clipPath></defs>
+	                                    </svg>
                                     </i>
                                 </a>
                             </div>
 
-                            <div class="tizers-list__item-text-wrapper color_333">
-                                <a class="tizers-list__item-link dark_link" href="/product/">
-                                    <span class="tizers-list__item-name font_32 switcher-title">9 лет</span>
-                                </a>
-
-                                <span class="tizers-list__item-descr font_14 color_666">В проекте<br/>Google
-										Просмотр улиц</span>
+                            <div class="tizers-list__item-text-wrapper">
+	                            <span class="tizers-list__item-descr">9 лет в проекте<br/>«Google Просмотр улиц»</span>
                             </div>
                         </div>
                     </div>
@@ -55,7 +49,12 @@
 
                             <div class="tizers-list__item-image-wrapper tizers-list__item-image-wrapper--ICONS tizers-list__item-image-wrapper--position-TOP">
                                 <a class="tizers-list__item-link" href="/product/">
-                                    <i class="svg inline  svg-inline- fill-theme tizers-list__item-image-icon" aria-hidden="true"><svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <i class="svg inline tizers-list__item-image-icon" aria-hidden="true">
+	                                    <svg width="54" height="54" viewBox="0 0 54 54" fill="transparent" xmlns="http://www.w3.org/2000/svg">
+		                                    <path fill="transparent" d="M14.3077 30.8462C16.2308 37.7692 23.9231 42 30.8462 40.0769C35.0769 38.5385 38.5385 35.0769 39.6923 30.8462M27 52C40.8073 52 52 40.8073 52 27C52 13.1929 40.8073 2 27 2C13.1929 2 2 13.1929 2 27C2 40.8073 13.1929 52 27 52ZM18.5385 21.0385C18.0074 21.0385 17.5769 20.608 17.5769 20.0769C17.5769 19.5459 18.0074 19.1154 18.5385 19.1154C19.0695 19.1154 19.4528 19.5459 19.4528 20.0769C19.4528 20.608 19.0695 21.0385 18.5385 21.0385ZM35.4615 21.0385C34.9305 21.0385 34.5 20.608 34.5 20.0769C34.5 19.5459 34.9305 19.1154 35.4615 19.1154C35.9926 19.1154 36.4231 19.5459 36.4231 20.0769C36.4231 20.608 35.9926 21.0385 35.4615 21.0385Z" stroke="url(#paint0_linear_627_2451)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><defs><linearGradient id="paint0_linear_627_2451" x1="2" y1="2" x2="47.5" y2="60" gradientUnits="userSpaceOnUse"><stop stop-color="#4889F8"/><stop offset="1" stop-color="#5ACA87"/></linearGradient></defs>
+	                                    </svg>
+	                                    <!--
+	                                    <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <circle cx="30.5" cy="9.5" r="1.5" fill="#365EDC"></circle>
                                             <circle cx="36.5" cy="9.5" r="1.5" fill="#365EDC"></circle>
                                             <circle cx="42.5" cy="9.5" r="1.5" fill="#365EDC"></circle>
@@ -66,17 +65,13 @@
                                             <rect opacity="0.1" x="1" y="46" width="19" height="2" fill="#365EDC"></rect>
                                             <rect opacity="0.1" x="30" y="46" width="19" height="2" fill="#365EDC"></rect>
                                             <path opacity="0.1" d="M18.1667 21C14.8333 21 14 24.242 14 25.8629C14.7357 26.0619 16.552 25.4797 18.1667 24.242C19.1667 26.1871 22.4722 26.1331 24 25.8629L23.5833 23.0262C23.1667 22.3508 21.5 21 18.1667 21Z" fill="#365EDC"></path>
-                                        </svg>
+                                        </svg>-->
                                     </i>
                                 </a>
                             </div>
 
-                            <div class="tizers-list__item-text-wrapper color_333">
-                                <a class="tizers-list__item-link dark_link" href="/product/">
-                                    <span class="tizers-list__item-name font_32 switcher-title">520</span>
-                                </a>
-
-                                <span class="tizers-list__item-descr font_14 color_666">Довольных<br/>клиентов</span>
+                            <div class="tizers-list__item-text-wrapper">
+	                            <span class="tizers-list__item-descr">520 клиентов<br/>довольны результатом</span>
                             </div>
                         </div>
                     </div>
@@ -85,23 +80,16 @@
 
                             <div class="tizers-list__item-image-wrapper tizers-list__item-image-wrapper--ICONS tizers-list__item-image-wrapper--position-TOP">
                                 <a class="tizers-list__item-link" href="/product/">
-                                    <i class="svg inline  svg-inline- fill-theme tizers-list__item-image-icon" aria-hidden="true"><svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M7 6C7 2.68629 9.68629 0 13 0H45C47.7614 0 50 2.23858 50 5V11C50 11.5523 49.5523 12 49 12H43V45.0001C43 47.7615 40.7615 50 38.0001 50H7C3.13401 50 0 46.866 0 43V40C0 39.4477 0.447715 39 1 39H7V37C7 36.4477 7.44772 36 8 36C8.55228 36 9 36.4477 9 37V39H34.0002C34.5525 39 35.0002 39.4477 35.0002 40V45.0001C35.0002 46.6569 36.3433 48 38.0001 48C39.6569 48 41 46.6569 41 45.0001V11C41 10.4477 41.4477 10 42 10H48V5C48 3.34315 46.6569 2 45 2H13C10.7909 2 9 3.79086 9 6V7C9 7.55228 8.55228 8 8 8C7.44772 8 7 7.55228 7 7V6ZM33.9998 48C33.3721 47.1644 33.0002 46.1257 33.0002 45.0001V41H8H2V43C2 45.7614 4.23858 48 7 48H33.9998ZM26 24C26 23.4477 26.4477 23 27 23H36C36.5523 23 37 23.4477 37 24C37 24.5523 36.5523 25 36 25H27C26.4477 25 26 24.5523 26 24ZM27 18C26.4477 18 26 18.4477 26 19C26 19.5523 26.4477 20 27 20H36C36.5523 20 37 19.5523 37 19C37 18.4477 36.5523 18 36 18H27ZM26 14C26 13.4477 26.4477 13 27 13H36C36.5523 13 37 13.4477 37 14C37 14.5523 36.5523 15 36 15H27C26.4477 15 26 14.5523 26 14ZM27 28C26.4477 28 26 28.4477 26 29C26 29.5523 26.4477 30 27 30H32C32.5523 30 33 29.5523 33 29C33 28.4477 32.5523 28 32 28H27ZM16.7071 17.2929C17.0976 17.6834 17.0976 18.3166 16.7071 18.7071L10.7071 24.7071C10.3166 25.0976 9.68342 25.0976 9.29289 24.7071L6.29289 21.7071C5.90237 21.3166 5.90237 20.6834 6.29289 20.2929C6.68342 19.9024 7.31658 19.9024 7.70711 20.2929L10 22.5858L15.2929 17.2929C15.6834 16.9024 16.3166 16.9024 16.7071 17.2929ZM11.3354 9.05793C11.1185 8.98069 10.8815 8.98069 10.6646 9.05793L0.664582 12.6184C0.266114 12.7602 0 13.1375 0 13.5604V19.0748C0 25.3788 3.48849 31.1653 9.06335 34.1084L10.5331 34.8843C10.8253 35.0386 11.1747 35.0386 11.4669 34.8843L12.9367 34.1084C18.5115 31.1653 22 25.3788 22 19.0748V13.5604C22 13.1375 21.7339 12.7602 21.3354 12.6184L11.3354 9.05793ZM2 19.0748V14.2659L11 11.0615L20 14.2659V19.0748C20 24.6372 16.9219 29.7429 12.0029 32.3397L11 32.8692L9.99707 32.3397C5.07808 29.7429 2 24.6372 2 19.0748Z" fill="#365EDC"></path>
-                                            <path opacity="0.1" fill-rule="evenodd" clip-rule="evenodd" d="M31.0454 43H0.824786C0.824786 46.346 3.53729 49.0585 6.88333 49.0585H34.3125V48.8875C32.4266 48.3515 31.0454 46.6163 31.0454 44.5585V43Z" fill="#365EDC"></path>
-                                            <path opacity="0.1" d="M43 2H36C33.2386 2 31 4.23858 31 7V39.9298H34.2542V45.7018L36.2881 49H39.9492L41.9831 46.9386V5.29825L43 2Z" fill="#365EDC"></path>
-                                            <path opacity="0.1" d="M11 34V13L21 16.3158V24.3077L16.8333 30.7692L11 34Z" fill="#365EDC"></path>
-                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M43 5C43 3.34315 44.3431 2 46 2V1H42.9995C41.7853 1.91223 41 3.3644 41 5V11C41 11.5523 41.4477 12 42 12C42.5523 12 43 11.5523 43 11V5Z" fill="#365EDC"></path>
-                                        </svg>
-                                    </i>																										</a>
+                                    <i class="svg inline tizers-list__item-image-icon" aria-hidden="true">
+	                                    <svg width="50" height="50" viewBox="0 0 50 50" fill="transparent" xmlns="http://www.w3.org/2000/svg">
+		                                    <g clip-path="url(#clip0_5659_430)"><path d="M49.141 23.9142C49.0401 23.7864 46.6174 20.7473 42.464 17.6959C36.9139 13.6182 30.8749 11.4629 24.9998 11.4629C19.125 11.4629 13.086 13.6182 7.53566 17.6959C3.38237 20.7471 0.95973 23.7864 0.8587 23.9142L0 25.0003L0.85881 26.0864C0.95984 26.2143 3.38248 29.2535 7.53577 32.3048C13.0861 36.3824 19.1251 38.5377 24.9999 38.5377C30.8749 38.5377 36.9139 36.3824 42.464 32.3048C46.6174 29.2535 49.0401 26.2143 49.141 26.0864L50 25.0003L49.141 23.9142ZM24.9998 34.4839C19.7706 34.4839 15.5162 30.2296 15.5162 25.0003C15.5162 24.181 15.6206 23.3856 15.8168 22.6268L13.6516 22.2624C13.4395 23.1408 13.327 24.0576 13.327 25.0003C13.327 28.3781 14.7699 31.425 17.0709 33.5585C14.1088 32.4643 11.5901 30.929 9.68914 29.5404C7.33403 27.8202 5.56902 26.0805 4.56277 25.0003C5.56946 23.9197 7.33425 22.1802 9.68914 20.4601C11.5901 19.0716 14.109 17.5362 17.0709 16.4419L18.5234 18.0792C20.2198 16.4907 22.4981 15.5166 24.9998 15.5166C30.2291 15.5166 34.4834 19.7709 34.4834 25.0003C34.4834 30.2296 30.2291 34.4839 24.9998 34.4839ZM40.3105 29.5404C38.4094 30.929 35.8907 32.4643 32.9288 33.5585C35.2297 31.4251 36.6726 28.3782 36.6726 25.0001C36.6726 21.622 35.2297 18.5753 32.9288 16.4418C35.8908 17.5361 38.4094 19.0714 40.3105 20.46C42.6656 22.1802 44.4307 23.9199 45.4369 25C44.4302 26.0808 42.6654 27.8204 40.3105 29.5404Z" fill="url(#paint0_linear_5659_430)"/><path d="M18.9648 23.1572C18.7869 23.7405 18.6904 24.3593 18.6904 25.0008C18.6904 28.4853 21.5152 31.3102 24.9998 31.3102C28.4843 31.3102 31.3091 28.4854 31.3091 25.0008C31.3091 21.5162 28.4843 18.6914 24.9998 18.6914C23.3026 18.6914 21.763 19.3628 20.6289 20.453L23.7411 23.9609L18.9648 23.1572Z" fill="url(#paint1_linear_5659_430)"/></g><defs><linearGradient id="paint0_linear_5659_430" x1="0" y1="11.4629" x2="50" y2="38.5371" gradientUnits="userSpaceOnUse"><stop stop-color="#4889F8"/><stop offset="1" stop-color="#5ACA87"/></linearGradient><linearGradient id="paint1_linear_5659_430" x1="0.98322" y1="13.1764" x2="49.8343" y2="11.6907" gradientUnits="userSpaceOnUse"><stop stop-color="#4889F8"/><stop offset="1" stop-color="#5ACA87"/></linearGradient><clipPath id="clip0_5659_430"><rect width="50" height="50" fill="white"/></clipPath></defs>
+	                                    </svg>
+                                    </i>
+                                </a>
                             </div>
 
-                            <div class="tizers-list__item-text-wrapper color_333">
-                                <a class="tizers-list__item-link dark_link" href="/product/">
-                                    <span class="tizers-list__item-name font_32 switcher-title">+ 8 млн.</span>
-                                </a>
-
-                                <span class="tizers-list__item-descr font_14 color_666">Просмотров<br/>наших
-										работ</span>
+                            <div class="tizers-list__item-text-wrapper">
+	                            <span class="tizers-list__item-descr">+ 8 млн.<br/>просмотров</span>
                             </div>
                         </div>
                     </div>
@@ -109,20 +97,20 @@
 
             </div>
             <div class="maxwidth-theme">
-                <div class="reviews owl-carousel  owl-carousel--light owl-carousel--outer-dots owl-carousel--static-dots owl-carousel--dots-padding-top-20 owl-carousel--margin-top-64 owl-carousel--buttons-bordered owl-carousel--button-wide owl-carousel--button-offset-half owl-carousel--buttons-size-36 owl-carousel--with-shadow owl-carousel--after-offset-1 owl-carousel--items-width-360-adaptive owl-carousel--wide-adaptive" data-i-appeared="true">
+                <div class="reviews owl-carousel  owl-carousel--light owl-carousel--outer-dots owl-carousel--static-dots owl-carousel--dots-padding-top-20 owl-carousel--margin-top-64 owl-carousel--button-wide owl-carousel--button-offset-half owl-carousel--with-shadow owl-carousel--after-offset-1 owl-carousel--items-width-360-adaptive owl-carousel--wide-adaptive" data-i-appeared="true">
 
                     <? $items =  array_fill(0, 5, index); foreach($items as $item): ?>
 
-                        <div class="reviews-list__item  bordered reviews-list__item--padding-48 reviews-list__item--last " id="bx_3302092990_182">
+                        <div class="reviews-list__item reviews-list__item--last " id="bx_3302092990_182">
                             <div class="reviews-list__item-top-part  reviews-list__item-top-part--centered-vertical reviews-list__item-top-part--row reviews-list__item-top-part--column">
                                 <div class="reviews-list__item-info-wrapper ">
                                     <div class="reviews-list__item-image-wrapper  reviews-list__item-image-wrapper--logo-center  reviews-list__item-image-wrapper--image-small">
-                                        <div class="reviews-list__item-image lazyloaded" style="background-image: url(&quot;/upload/resize_cache/iblock/685/80_80_2/685eeae8819b007c19f925e4b2884cbe.jpg&quot;);" data-bg="/upload/resize_cache/iblock/685/80_80_2/685eeae8819b007c19f925e4b2884cbe.jpg"></div>
+                                        <div class="reviews-list__item-image lazyloaded" style="background-image: url('/upload/585.jpg');" data-bg="/upload/585.jpg"></div>
                                     </div>
                                     <div class="reviews-list__item-info reviews-list__item-info--centered-vertical">
                                         <div class="reviews-list__item-text">
                                             <div class="reviews-list__item-company font_13 color_999">
-                                                <span>Генеральный директор «Дэк»</span>
+                                                <span>Директор «585»</span>
                                             </div>
                                             <div class="reviews-list__item-title switcher-title  font_22">
                                                 Илья Андреев
@@ -131,40 +119,51 @@
                                     </div>
                                 </div>
                             </div>
+	                        <!--
                             <div class="rating reviews-list__rating">
+	                            <div class="rating__star">
+		                            <i class="svg inline rating__star-svg rating__star-svg--filled" aria-hidden="true">
+			                            <svg width="18" height="17" viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+				                            <path d="M8.52447 0.562646C8.67415 0.101991 9.32585 0.101991 9.47553 0.562646L11.1329 5.66346C11.1998 5.86947 11.3918 6.00895 11.6084 6.00895H16.9717C17.4561 6.00895 17.6575 6.62876 17.2656 6.91346L12.9266 10.0659C12.7514 10.1933 12.678 10.4189 12.745 10.625L14.4023 15.7258C14.552 16.1864 14.0248 16.5695 13.6329 16.2848L9.29389 13.1323C9.11865 13.005 8.88135 13.005 8.70611 13.1323L4.3671 16.2848C3.97524 16.5695 3.448 16.1864 3.59768 15.7258L5.25503 10.625C5.32197 10.4189 5.24864 10.1933 5.07339 10.0659L0.734384 6.91346C0.342527 6.62876 0.543915 6.00895 1.02828 6.00895H6.39159C6.6082 6.00895 6.80018 5.86947 6.86712 5.66346L8.52447 0.562646Z" fill="#CCC"></path>
+			                            </svg>
+		                            </i>
+	                            </div>
+	                            <div class="rating__star">
+		                            <i class="svg inline rating__star-svg rating__star-svg--filled" aria-hidden="true">
+			                            <svg width="18" height="17" viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+				                            <path d="M8.52447 0.562646C8.67415 0.101991 9.32585 0.101991 9.47553 0.562646L11.1329 5.66346C11.1998 5.86947 11.3918 6.00895 11.6084 6.00895H16.9717C17.4561 6.00895 17.6575 6.62876 17.2656 6.91346L12.9266 10.0659C12.7514 10.1933 12.678 10.4189 12.745 10.625L14.4023 15.7258C14.552 16.1864 14.0248 16.5695 13.6329 16.2848L9.29389 13.1323C9.11865 13.005 8.88135 13.005 8.70611 13.1323L4.3671 16.2848C3.97524 16.5695 3.448 16.1864 3.59768 15.7258L5.25503 10.625C5.32197 10.4189 5.24864 10.1933 5.07339 10.0659L0.734384 6.91346C0.342527 6.62876 0.543915 6.00895 1.02828 6.00895H6.39159C6.6082 6.00895 6.80018 5.86947 6.86712 5.66346L8.52447 0.562646Z" fill="#CCC"></path>
+			                            </svg>
+		                            </i>
+	                            </div>
+	                            <div class="rating__star">
+		                            <i class="svg inline rating__star-svg rating__star-svg--filled" aria-hidden="true">
+			                            <svg width="18" height="17" viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+				                            <path d="M8.52447 0.562646C8.67415 0.101991 9.32585 0.101991 9.47553 0.562646L11.1329 5.66346C11.1998 5.86947 11.3918 6.00895 11.6084 6.00895H16.9717C17.4561 6.00895 17.6575 6.62876 17.2656 6.91346L12.9266 10.0659C12.7514 10.1933 12.678 10.4189 12.745 10.625L14.4023 15.7258C14.552 16.1864 14.0248 16.5695 13.6329 16.2848L9.29389 13.1323C9.11865 13.005 8.88135 13.005 8.70611 13.1323L4.3671 16.2848C3.97524 16.5695 3.448 16.1864 3.59768 15.7258L5.25503 10.625C5.32197 10.4189 5.24864 10.1933 5.07339 10.0659L0.734384 6.91346C0.342527 6.62876 0.543915 6.00895 1.02828 6.00895H6.39159C6.6082 6.00895 6.80018 5.86947 6.86712 5.66346L8.52447 0.562646Z" fill="#CCC"></path>
+			                            </svg>
+		                            </i>
+	                            </div>
                                 <div class="rating__star">
-                                    <i class="svg inline  svg-inline- rating__star-svg rating__star-svg--filled" aria-hidden="true"><svg width="18" height="17" viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+	                                <i class="svg inline rating__star-svg" aria-hidden="true">
+		                                <svg width="18" height="17" viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M8.52447 0.562646C8.67415 0.101991 9.32585 0.101991 9.47553 0.562646L11.1329 5.66346C11.1998 5.86947 11.3918 6.00895 11.6084 6.00895H16.9717C17.4561 6.00895 17.6575 6.62876 17.2656 6.91346L12.9266 10.0659C12.7514 10.1933 12.678 10.4189 12.745 10.625L14.4023 15.7258C14.552 16.1864 14.0248 16.5695 13.6329 16.2848L9.29389 13.1323C9.11865 13.005 8.88135 13.005 8.70611 13.1323L4.3671 16.2848C3.97524 16.5695 3.448 16.1864 3.59768 15.7258L5.25503 10.625C5.32197 10.4189 5.24864 10.1933 5.07339 10.0659L0.734384 6.91346C0.342527 6.62876 0.543915 6.00895 1.02828 6.00895H6.39159C6.6082 6.00895 6.80018 5.86947 6.86712 5.66346L8.52447 0.562646Z" fill="#CCC"></path>
                                         </svg>
-                                    </i>									</div>
-                                <div class="rating__star">
-                                    <i class="svg inline  svg-inline- rating__star-svg rating__star-svg--filled" aria-hidden="true"><svg width="18" height="17" viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M8.52447 0.562646C8.67415 0.101991 9.32585 0.101991 9.47553 0.562646L11.1329 5.66346C11.1998 5.86947 11.3918 6.00895 11.6084 6.00895H16.9717C17.4561 6.00895 17.6575 6.62876 17.2656 6.91346L12.9266 10.0659C12.7514 10.1933 12.678 10.4189 12.745 10.625L14.4023 15.7258C14.552 16.1864 14.0248 16.5695 13.6329 16.2848L9.29389 13.1323C9.11865 13.005 8.88135 13.005 8.70611 13.1323L4.3671 16.2848C3.97524 16.5695 3.448 16.1864 3.59768 15.7258L5.25503 10.625C5.32197 10.4189 5.24864 10.1933 5.07339 10.0659L0.734384 6.91346C0.342527 6.62876 0.543915 6.00895 1.02828 6.00895H6.39159C6.6082 6.00895 6.80018 5.86947 6.86712 5.66346L8.52447 0.562646Z" fill="#CCC"></path>
-                                        </svg>
-                                    </i>									</div>
-                                <div class="rating__star">
-                                    <i class="svg inline  svg-inline- rating__star-svg rating__star-svg--filled" aria-hidden="true"><svg width="18" height="17" viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M8.52447 0.562646C8.67415 0.101991 9.32585 0.101991 9.47553 0.562646L11.1329 5.66346C11.1998 5.86947 11.3918 6.00895 11.6084 6.00895H16.9717C17.4561 6.00895 17.6575 6.62876 17.2656 6.91346L12.9266 10.0659C12.7514 10.1933 12.678 10.4189 12.745 10.625L14.4023 15.7258C14.552 16.1864 14.0248 16.5695 13.6329 16.2848L9.29389 13.1323C9.11865 13.005 8.88135 13.005 8.70611 13.1323L4.3671 16.2848C3.97524 16.5695 3.448 16.1864 3.59768 15.7258L5.25503 10.625C5.32197 10.4189 5.24864 10.1933 5.07339 10.0659L0.734384 6.91346C0.342527 6.62876 0.543915 6.00895 1.02828 6.00895H6.39159C6.6082 6.00895 6.80018 5.86947 6.86712 5.66346L8.52447 0.562646Z" fill="#CCC"></path>
-                                        </svg>
-                                    </i>									</div>
-                                <div class="rating__star">
-                                    <i class="svg inline  svg-inline- rating__star-svg rating__star-svg--filled" aria-hidden="true"><svg width="18" height="17" viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M8.52447 0.562646C8.67415 0.101991 9.32585 0.101991 9.47553 0.562646L11.1329 5.66346C11.1998 5.86947 11.3918 6.00895 11.6084 6.00895H16.9717C17.4561 6.00895 17.6575 6.62876 17.2656 6.91346L12.9266 10.0659C12.7514 10.1933 12.678 10.4189 12.745 10.625L14.4023 15.7258C14.552 16.1864 14.0248 16.5695 13.6329 16.2848L9.29389 13.1323C9.11865 13.005 8.88135 13.005 8.70611 13.1323L4.3671 16.2848C3.97524 16.5695 3.448 16.1864 3.59768 15.7258L5.25503 10.625C5.32197 10.4189 5.24864 10.1933 5.07339 10.0659L0.734384 6.91346C0.342527 6.62876 0.543915 6.00895 1.02828 6.00895H6.39159C6.6082 6.00895 6.80018 5.86947 6.86712 5.66346L8.52447 0.562646Z" fill="#CCC"></path>
-                                        </svg>
-                                    </i>									</div>
-                                <div class="rating__star">
-                                    <i class="svg inline  svg-inline- rating__star-svg rating__star-svg--filled" aria-hidden="true"><svg width="18" height="17" viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M8.52447 0.562646C8.67415 0.101991 9.32585 0.101991 9.47553 0.562646L11.1329 5.66346C11.1998 5.86947 11.3918 6.00895 11.6084 6.00895H16.9717C17.4561 6.00895 17.6575 6.62876 17.2656 6.91346L12.9266 10.0659C12.7514 10.1933 12.678 10.4189 12.745 10.625L14.4023 15.7258C14.552 16.1864 14.0248 16.5695 13.6329 16.2848L9.29389 13.1323C9.11865 13.005 8.88135 13.005 8.70611 13.1323L4.3671 16.2848C3.97524 16.5695 3.448 16.1864 3.59768 15.7258L5.25503 10.625C5.32197 10.4189 5.24864 10.1933 5.07339 10.0659L0.734384 6.91346C0.342527 6.62876 0.543915 6.00895 1.02828 6.00895H6.39159C6.6082 6.00895 6.80018 5.86947 6.86712 5.66346L8.52447 0.562646Z" fill="#CCC"></path>
-                                        </svg>
-                                    </i>									</div>
-                            </div>
-
-                            <div class="reviews-list__item-preview-wrapper">
-                                <div class="reviews-list__item-preview font_15 font_large">
-                                    От лица компании «Дэк» выражаю благодарность за оперативное предоставление исследований рынков цветных и редких металлов. Данные отчеты характеризуются четкой методологией и наглядным оформлением данных. Исследования компании отли...															</div>
-                                <div class="reviews-list__item-more">
-                                    <span class="btn btn-default btn-md btn-transparent-border animate-load" data-event="jqm" data-param-id="182" data-param-type="review" data-name="review">Подробнее</span>
+                                    </i>
                                 </div>
+	                            <div class="rating__star">
+		                            <i class="svg inline rating__star-svg " aria-hidden="true">
+			                            <svg width="18" height="17" viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+				                            <path d="M8.52447 0.562646C8.67415 0.101991 9.32585 0.101991 9.47553 0.562646L11.1329 5.66346C11.1998 5.86947 11.3918 6.00895 11.6084 6.00895H16.9717C17.4561 6.00895 17.6575 6.62876 17.2656 6.91346L12.9266 10.0659C12.7514 10.1933 12.678 10.4189 12.745 10.625L14.4023 15.7258C14.552 16.1864 14.0248 16.5695 13.6329 16.2848L9.29389 13.1323C9.11865 13.005 8.88135 13.005 8.70611 13.1323L4.3671 16.2848C3.97524 16.5695 3.448 16.1864 3.59768 15.7258L5.25503 10.625C5.32197 10.4189 5.24864 10.1933 5.07339 10.0659L0.734384 6.91346C0.342527 6.62876 0.543915 6.00895 1.02828 6.00895H6.39159C6.6082 6.00895 6.80018 5.86947 6.86712 5.66346L8.52447 0.562646Z" fill="#CCC"></path>
+			                            </svg>
+		                            </i>
+	                            </div>
+                            </div>
+							-->
+                            <div class="reviews-list__item-preview-wrapper">
+                                <div class="reviews-list__item-preview">
+                                    От лица компании «Дэк» выражаю благодарность за оперативное предоставление исследований рынков цветных и редких металлов. Данные отчеты характеризуются четкой методологией и наглядным оформлением данных. Исследования компании отли...															</div>
+                                <!--<div class="reviews-list__item-more">
+                                    <span class="btn btn-default btn-md btn-transparent-border animate-load" data-event="jqm" data-param-id="182" data-param-type="review" data-name="review">Подробнее</span>
+                                </div>-->
                             </div>
                         </div>
 

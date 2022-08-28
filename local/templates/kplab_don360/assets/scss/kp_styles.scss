@@ -182,9 +182,180 @@ $font-family: 'Montserrat';
     padding: 0;
     position: absolute;
     right: 0;
+    .index-block--item-slider {
+      height: 543px;
+      .indicators {
+        margin-left: 150px;
+        justify-content: left;
+        position: absolute;
+        bottom: 44px;
+        display: flex;
+        align-items: center;
+        .owl-dot{
+          &.active {
+            .text-bg {
+              font-size: 24px;
+              line-height: 33px;
+              text-transform: uppercase;
+              background: linear-gradient(92.8deg, #4889F8 -7.16%, #5ACA87 106.18%) no-repeat;
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+              /*&:first-child::after {
+                content: url('data:image/svg+xml,<svg width="101" height="16" viewBox="0 0 101 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M99.974 4.35356C100.169 4.1583 100.169 3.84172 99.974 3.64645L96.7921 0.464472C96.5968 0.26921 96.2802 0.26921 96.085 0.464472C95.8897 0.659735 95.8897 0.976317 96.085 1.17158L98.9134 4.00001L96.085 6.82843C95.8897 7.0237 95.8897 7.34028 96.085 7.53554C96.2802 7.7308 96.5968 7.7308 96.7921 7.53554L99.974 4.35356ZM-5.80607e-08 4.5L99.6205 4.50001L99.6205 3.50001L5.80607e-08 3.5L-5.80607e-08 4.5Z" fill="white"/></svg>');
+                margin-left: 10px;
+                margin-right: 0px;
+              }*/
+            }
+            &:not(:last-child)::after {
+              content: url('data:image/svg+xml,<svg width="101" height="8" viewBox="0 0 101 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M99.974 4.35356C100.169 4.1583 100.169 3.84172 99.974 3.64645L96.7921 0.464472C96.5968 0.26921 96.2802 0.26921 96.085 0.464472C95.8897 0.659735 95.8897 0.976317 96.085 1.17158L98.9134 4.00001L96.085 6.82843C95.8897 7.0237 95.8897 7.34028 96.085 7.53554C96.2802 7.7308 96.5968 7.7308 96.7921 7.53554L99.974 4.35356ZM-5.80607e-08 4.5L99.6205 4.50001L99.6205 3.50001L5.80607e-08 3.5L-5.80607e-08 4.5Z" fill="white"/></svg>');
+              margin-left: 0px;
+              margin-right: 20px;
+            }
+          }
+          .text-bg {
+            box-sizing: content-box;
+            flex: 0 1 auto;
+            font-family: 'Manrope', sans-serif;
 
-    .carousel-inner {
-      border-radius: 240px 0px 0px 240px;
+
+            font-size: 16px;
+            line-height: 22px;
+            padding: 0;
+
+            text-transform: uppercase;
+            background: transparent;
+            color: #fff;
+
+            font-style: normal;
+            font-weight: 700;
+
+            width: 30px;
+            height: 30px;
+            margin-right: 20px;
+            margin-left: 10px;
+            text-indent: -999px;
+            cursor: pointer;
+            border: 0;
+            opacity: 1;
+            transition: opacity .6s ease;
+            vertical-align: middle;
+
+            &:first-child {
+              margin-left: 0px;
+            }
+          }
+        }
+      }
+
+      .carousel-variables-views{
+        margin-right: 20px;
+        justify-content: left;
+        position: absolute;
+        bottom: 28px;
+        right: 0;
+        h5{
+          font-family: 'Manrope', sans-serif;
+          font-style: normal;
+          font-weight: 300;
+          font-size: 15px;
+          line-height: 15px;
+          color: #FFFFFF;
+          text-align: right;
+        }
+        .point-indicators {
+          display: flex;
+          align-items: center;
+          padding-bottom: 9px;
+          justify-content: flex-end;
+          .point {
+            background: linear-gradient(92.8deg, #2C2C2C -7.16%, #2C2C2C 106.18%);
+            width: 30px;
+            height: 30px;
+            margin-left: 16px;
+            border: 0;
+            border-radius: 50%;
+            display:flex;
+            align-items: center;
+            justify-content: center;
+            transition: background .6s ease-in-out;
+            &.hidden {
+              display:none;
+            }
+            svg {
+              width:50%;
+            }
+            &.varYandex{
+              svg {
+                width:30%;
+              }
+            }
+            &:hover{
+              background: linear-gradient(92.8deg, #4889F8 -7.16%, #5ACA87 106.18%);
+
+              svg {
+                path{
+                  fill-opacity:1;
+                  stroke-opacity:1;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .inner {
+        border-radius: 240px 0px 0px 240px;
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        .owl-item {
+          float: left;
+          height: 543px;
+
+          .item {
+            position: relative;
+            height: 100%;
+
+            .carousel-caption {
+              background: linear-gradient(180deg, #333333 -35.54%, rgba(51, 51, 51, 0.2) 157.44%);
+              width: 100%;
+              padding-left: 150px;
+              left: 0;
+              bottom: 0;
+              text-align: left;
+              padding-top: 22px;
+              padding-bottom: 84px;
+
+              h5 {
+                font-family: 'Manrope';
+                font-style: normal;
+                font-weight: 700;
+                font-size: 24px;
+                line-height: 33px;
+                text-transform: capitalize;
+                margin-bottom: 6px;
+              }
+
+              .place-point {
+                font-family: 'Manrope';
+                font-style: normal;
+                font-weight: 300;
+                font-size: 10px;
+                line-height: 14px;
+                margin-bottom: 12px;
+              }
+
+              .place-category {
+                font-family: 'Manrope';
+                font-style: normal;
+                font-weight: 300;
+                font-size: 16px;
+                line-height: 22px;
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
@@ -318,7 +489,7 @@ $font-family: 'Montserrat';
 
       .services-item__inner {
         display: flex;
-
+        align-items: center;
         h2.index-block__title {
           font-family: 'Manrope';
           font-weight: 400;
@@ -419,6 +590,19 @@ $font-family: 'Montserrat';
             font-weight: 500;
             font-size: 18px;
             line-height: 22px;
+            a{
+              position: relative;
+              color: #000000;
+              &::after {
+                content: "";
+                position: absolute;
+                width: 100%;
+                height: 2px;
+                bottom: 0;
+                left: 0;
+                background: linear-gradient(92.8deg, #4889F8 -7.16%, #5ACA87 106.18%);
+              }
+            }
           }
           p {
             font-family: 'Montserrat';
@@ -434,7 +618,7 @@ $font-family: 'Montserrat';
 }
 
 .index-block--TIZERS {
-  padding-bottom: 100px;
+  padding-bottom: 76px;
 
   .tizers-block--inner {
     .tizers-block--item {
@@ -442,10 +626,20 @@ $font-family: 'Montserrat';
       .index-block__preview {
         margin-top: 0px;
         margin-bottom: 39px;
+        max-width: 100%;
+        color: #000000;
+        p {
+          font-family: "Montserrat";
+          font-style: normal;
+          font-weight: 300;
+          font-size: 18px;
+          line-height: 22px;
+        }
       }
 
       .tizers-item__inner {
         display: flex;
+        align-items: center;
 
         h2.index-block__title {
           font-family: 'Manrope';
@@ -473,6 +667,261 @@ $font-family: 'Montserrat';
           .index-block__arrow {
             margin-left: 0;
             margin-right: 15px;
+          }
+        }
+      }
+    }
+    .reviews {
+      .reviews-list__item {
+        padding:20px;
+        background: #FFFFFF;
+        box-shadow: 0px 0px 12px rgba(0,0,0,0.1);
+        border-radius: 30px;
+        .reviews-list__item-top-part {
+          display: flex;
+          margin: 0;
+          flex: auto;
+          justify-content: space-between;
+          .reviews-list__item-info-wrapper {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            .reviews-list__item-info {
+              margin-left: 24px;
+            }
+            .reviews-list__item-image-wrapper {
+              width: 100px;
+              height: 100px;
+              .reviews-list__item-image {
+                width: 100%;
+                height: 100%;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: contain;
+              }
+            }
+          }
+        }
+        .reviews-list__item-preview {
+          font-family: 'Manrope';
+          font-style: normal;
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 22px;
+        }
+      }
+      .owl-nav {
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+        button {
+          position: relative;
+          padding:0;
+          border: 0;
+          &.owl-prev {
+            transform: translateX(-21px);
+          }
+          &.owl-next {
+            transform: translateX(21px);
+          }
+          i {
+            &.owl-carousel__button {
+              transform: translateY(0%);
+              &:hover {
+                background:transparent;
+                svg * {
+                  stroke: transparent;
+                  fill: var(--theme-base-color);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.index-block--FAQ {
+  .faq-block--inner {
+    .faq-block--item {
+      h2.index-block__title {
+        font-family: "Manrope";
+        font-weight: 400;
+        font-size: 52px;
+        line-height: 71px;
+      }
+      .index-block__preview {
+        margin-top: 0px;
+        margin-bottom: 39px;
+        max-width: 100%;
+        color: #000000;
+        p {
+          font-family: "Montserrat";
+          font-style: normal;
+          font-weight: 300;
+          font-size: 18px;
+          line-height: 22px;
+        }
+      }
+      .faq-item__inner {
+        display: flex;
+        align-items: center;
+
+        a.index-block__link {
+          font-family: "Manrope";
+          font-style: normal;
+          font-weight: 700;
+          font-size: 18px;
+          line-height: 25px;
+          color: var(--bs-primary);
+          .index-block__arrow {
+            margin-left: 0;
+            margin-right: 15px;
+          }
+        }
+        a.index-block__link:hover {
+          color: var(--theme-base-color);
+          .index-block__arrow .svg.inline.fill svg {
+            fill: var(--theme-base-color);
+          }
+        }
+
+      }
+    }
+    .accordion {
+      .accordion-item {
+        background: #FFFFFF;
+        box-shadow: 0px 0px 12px rgba(0,0,0,0.1);
+        border-radius: 30px;
+        margin-bottom: 56px;
+        &:hover {
+          box-shadow: 0px 0px 12px 8px rgba(0,0,0,0.1);
+        }
+        .accordion-header {
+          border-radius: 30px;
+          .accordion-button {
+            background: #FFFFFF;
+            border: 0;
+            box-shadow: none;
+            border-radius: 30px;
+            font-family: 'Manrope';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 24px;
+            line-height: 22px;
+            padding: 28px 42px;
+
+            &:not(.collapsed) {
+              border-radius: 30px 30px 0 0;
+              background: #4889F8;
+              color: #FFFFFF;
+              &::after {
+                background-image: var(--bs-accordion-btn-icon);
+              }
+            }
+          }
+        }
+        .accordion-collapse {
+
+          &.show {
+            .accordion-body {
+              border-radius: 0px 0px 30px 30px;
+            }
+          }
+          .accordion-body {
+            border-radius: 0px 0px 30px 30px;
+            padding: 0px 42px 28px;
+            background: #4889F8;
+            color: #FFFFFF;
+          }
+        }
+      }
+    }
+  }
+}
+
+footer {
+  margin-top: 44px;
+  background: #2F2F2F;
+  .footer-block {
+    padding-top: 96px;
+    padding-bottom: 43px;
+    .footer-copyright {
+      margin-top: 80px;
+      font-family: 'Montserrat';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 10px;
+      line-height: 12px;
+      color: #FFFFFF;
+    }
+    .footer-block--inner{
+      svg {
+        margin-bottom: 52px;
+      }
+      .footer-block--text {
+        font-family: 'Manrope';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 33px;
+        color: #FFFFFF;
+        margin-bottom: 6px;
+      }
+      .footer-block--form {
+        .form-header{
+          font-family: 'Manrope';
+          font-style: normal;
+          font-weight: 400;
+          font-size: 48px;
+          line-height: 66px;
+          color: #FFFFFF;
+          padding-bottom: 24px;
+        }
+        .form-description{
+          font-family: 'Manrope';
+          font-style: normal;
+          font-weight: 300;
+          font-size: 18px;
+          line-height: 22px;
+          color: #FFFFFF;
+          padding-bottom: 32px;
+        }
+        .form-label {
+          font-family: 'Manrope';
+          font-style: normal;
+          font-weight: 600;
+          font-size: 16px;
+          line-height: 22px;
+          color: #FFFFFF;
+          padding-bottom: 10px;
+        }
+        input.form-control {
+          border-radius: 19px;
+          padding: 10px 24px;
+          font-family: 'Manrope';
+          font-style: normal;
+          font-weight: 300;
+          font-size: 16px;
+          line-height: 22px;
+          color: #000000;
+          margin-bottom: 20px;
+        }
+        button[type="submit"] {
+          margin-top: 36px;
+          background: linear-gradient(92.8deg, #4889F8 -7.16%, #5ACA87 106.18%);
+          border-radius: 12px;
+          padding: 16px;
+        }
+        .form-check {
+          label.form-check-label {
+            font-family: 'Manrope';
+            font-style: normal;
+            font-weight: 300;
+            font-size: 14px;
+            line-height: 19px;
+            color: #FFFFFF;
           }
         }
       }
