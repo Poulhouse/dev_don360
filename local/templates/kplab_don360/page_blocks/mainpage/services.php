@@ -3,7 +3,7 @@
 
         <div class="services-block--inner col-md-12">
             <div class="services-block--item">
-	            <div class="services-item__inner justify-content-between align-items-start">
+	            <div class="services-item__inner justify-content-between ">
 	                <h2 class="index-block__title">Услуги</h2>
 	                <a class="index-block__link" href="/services/" title="Перейти в раздел">
 						<span class="index-block__arrow">
