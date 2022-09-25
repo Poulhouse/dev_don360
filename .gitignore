@@ -12,3 +12,5 @@
 /gitpull/
 *.back*
 *.zip
+/bootstrap/
+!/bootstrap/dist/

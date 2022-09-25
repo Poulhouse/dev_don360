@@ -72,6 +72,7 @@ if(!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)
 	<?$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH . '/assets/js/owl.carousel.min.js');?>
 
 	<script type="text/javascript">
+
 	    $(document).ready(function() {
             $('.reviews').owlCarousel({
                 'nav': true,
