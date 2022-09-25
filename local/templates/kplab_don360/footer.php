@@ -74,63 +74,25 @@ if(!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)
 	<script type="text/javascript">
 
 	    $(document).ready(function() {
-
-
-	        $('.reviews').owlCarousel({
-		        'nav': true,
-		        'rewind': true,
-		        'dots': true,
-		        'dotsContainer': false,
-		        'navText': ['<i class="owl-carousel__button owl-carousel__button--left"><svg id="left_arrow_owl" width="39" height="24" viewBox="0 0 39 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M37 10.5C37.8284 10.5 38.5 11.1716 38.5 12C38.5 12.8284 37.8284 13.5 37 13.5L37 10.5ZM0.939339 13.0607C0.353554 12.4749 0.353554 11.5251 0.939339 10.9393L10.4853 1.3934C11.0711 0.807609 12.0208 0.807609 12.6066 1.3934C13.1924 1.97918 13.1924 2.92893 12.6066 3.51472L4.12132 12L12.6066 20.4853C13.1924 21.0711 13.1924 22.0208 12.6066 22.6066C12.0208 23.1924 11.0711 23.1924 10.4853 22.6066L0.939339 13.0607ZM37 13.5L2 13.5L2 10.5L37 10.5L37 13.5Z" fill="#4889F8"/></svg></i>','<i class="owl-carousel__button owl-carousel__button--right"><svg width="39" height="24" viewBox="0 0 39 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 10.5C1.17157 10.5 0.5 11.1716 0.5 12C0.5 12.8284 1.17157 13.5 2 13.5L2 10.5ZM38.0607 13.0607C38.6464 12.4749 38.6464 11.5251 38.0607 10.9393L28.5147 1.3934C27.9289 0.807609 26.9792 0.807609 26.3934 1.3934C25.8076 1.97918 25.8076 2.92893 26.3934 3.51472L34.8787 12L26.3934 20.4853C25.8076 21.0711 25.8076 22.0208 26.3934 22.6066C26.9792 23.1924 27.9289 23.1924 28.5147 22.6066L38.0607 13.0607ZM2 13.5L37 13.5L37 10.5L2 10.5L2 13.5Z" fill="#4889F8"/></svg></i>'],
-		        'loop': false,
-		        'autoplay': false,
-		        'marginMove': true,
-		        'margin': 32,
-		        'responsive' : {
-		            '0': {'dots': 1, 'autoWidth': true, 'lightDrag': true, 'items': 1 , 'margin': 24},
-			        '380': {'dots': 1, 'autoWidth': true, 'lightDrag': true, 'items': 1 , 'margin': 24},
-			        '768': {'dots': 0, 'autoWidth': false, 'lightDrag': false, 'items': 2 },
-			        '1200': {'dots': 0, 'items': 3}
-		        }
-	        });
-            $('#carouselWorks').owlCarousel({
-                'items':1,
-                'nav':false,
+            $('.reviews').owlCarousel({
+                'nav': true,
+                'rewind': true,
+                'dots': true,
+                'dotsContainer': false,
+                'navText': ['<i class="owl-carousel__button owl-carousel__button--left"><svg id="left_arrow_owl" width="39" height="24" viewBox="0 0 39 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M37 10.5C37.8284 10.5 38.5 11.1716 38.5 12C38.5 12.8284 37.8284 13.5 37 13.5L37 10.5ZM0.939339 13.0607C0.353554 12.4749 0.353554 11.5251 0.939339 10.9393L10.4853 1.3934C11.0711 0.807609 12.0208 0.807609 12.6066 1.3934C13.1924 1.97918 13.1924 2.92893 12.6066 3.51472L4.12132 12L12.6066 20.4853C13.1924 21.0711 13.1924 22.0208 12.6066 22.6066C12.0208 23.1924 11.0711 23.1924 10.4853 22.6066L0.939339 13.0607ZM37 13.5L2 13.5L2 10.5L37 10.5L37 13.5Z" fill="#4889F8"/></svg></i>', '<i class="owl-carousel__button owl-carousel__button--right"><svg width="39" height="24" viewBox="0 0 39 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 10.5C1.17157 10.5 0.5 11.1716 0.5 12C0.5 12.8284 1.17157 13.5 2 13.5L2 10.5ZM38.0607 13.0607C38.6464 12.4749 38.6464 11.5251 38.0607 10.9393L28.5147 1.3934C27.9289 0.807609 26.9792 0.807609 26.3934 1.3934C25.8076 1.97918 25.8076 2.92893 26.3934 3.51472L34.8787 12L26.3934 20.4853C25.8076 21.0711 25.8076 22.0208 26.3934 22.6066C26.9792 23.1924 27.9289 23.1924 28.5147 22.6066L38.0607 13.0607ZM2 13.5L37 13.5L37 10.5L2 10.5L2 13.5Z" fill="#4889F8"/></svg></i>'],
                 'loop': false,
-	            'mouseDrag':false,
-                'center': true,
-                'margin': 10,
-                'dotsContainer': '#carousel-custom-dots'
+                'autoplay': false,
+                'marginMove': true,
+                'margin': 32,
+                'responsive': {
+                    '0': {'dots': 1, 'autoWidth': true, 'lightDrag': true, 'items': 1, 'margin': 24},
+                    '380': {'dots': 1, 'autoWidth': true, 'lightDrag': true, 'items': 1, 'margin': 24},
+                    '768': {'dots': 0, 'autoWidth': false, 'lightDrag': false, 'items': 2},
+                    '1200': {'dots': 0, 'items': 3}
+                }
             });
+        });
 
-
-
-            $('#carouselWorks').on('initialize.owl.carousel', function(e) {
-                console.log($('#carouselWorks').children().children().children().children());
-            });
-
-            $('#carouselWorks').on('changed.owl.carousel', function(e) {
-                $('.point-indicators .point').addClass('hidden');
-                $item = jQuery(e.target.children[0].children[0].children[e.item.index].children[0]);
-
-                var $viewId = $item.attr('data-viewId');
-                console.log($viewId);
-
-                $('.point-indicators .point').attr('data-id', $viewId);
-
-                var $arrayVariables = $item.data('variables').split(',');
-                $.each($arrayVariables , function(index, val) {
-                    $('.point-indicators .point.'+val).removeClass('hidden');
-
-                });
-            });
-
-            $('.owl-dot').click(function () {
-                $('#carouselWorks').trigger('to.owl.carousel',
-	                [$(this).index(), 300]
-                );
-            });
-	    });
 	</script>
 
 </body>
